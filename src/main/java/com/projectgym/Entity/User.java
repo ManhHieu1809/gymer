@@ -36,7 +36,16 @@ public class User {
     private Role roles;
 
     public enum Role {
-        admin, customer, trainer
+        ADMIN, CUSTOMER, TRAINER
+    }
+
+
+    public Role getRole() {
+        return roles;
+    }
+
+    public void setRole(Role role) {
+        this.roles = role;
     }
 
     // Quan hệ một-nhiều với WorkoutPlan

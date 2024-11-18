@@ -20,4 +20,19 @@ public class ContentController {
         return "index";
     }
 
+    @GetMapping("/admin/home")
+    public String adminHome(){
+        return "admin/homeAdmin";
+    }
+
+    @GetMapping("/trainer/home")
+    public String trainerHome(){
+        return "trainer/homeTrainer";
+    }
+
+    @GetMapping("/customer/home")
+    public String customerHome(){
+        return "customer/homeCustomer";
+    }
+
 }
