@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -21,9 +22,10 @@ public class Orders {
     @Enumerated(EnumType.STRING)
     @Column(name = "statuss")
     private statuss statuss;
+    private double totalPrice;
 
     public enum statuss {
-        PENDING, SHIPPED, DELIVERED, CANCELLED
+        Pending, Shipped, Delivered, Cancelled
     }
 
     @ManyToOne
@@ -31,6 +33,10 @@ public class Orders {
     private User user;
 
     @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL)
-    private List<OrderDetail> orderDetails;
+    private List<OrderDetail> orderDetails = new ArrayList<>();
+
+    public Orders() {
+        this.orderDetails = new ArrayList<>(); // Khởi tạo danh sách trong constructor
+    }
 
 }

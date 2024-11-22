@@ -75,4 +75,5 @@ public class User {
     // Quan hệ một-nhiều với Progress
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Progress> progresses;
+
 }

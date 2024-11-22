@@ -67,6 +67,8 @@ public class RegistrationController {
         User savedUser = myAppUserRepository.save(user);
 
         // Trả về thông tin đã lưu
-        return new UserDTO(savedUser.getUserName(), savedUser.getUserPassword(), savedUser.getEmail());
+        return new UserDTO(savedUser.getUserID(), savedUser.getUserName(), savedUser.getUserPassword(),
+                savedUser.getEmail(), savedUser.getFullName(),savedUser.getAge(), savedUser.getGender(),
+                savedUser.getHeight(), savedUser.getWeight(), savedUser.getRole());
     }
 }

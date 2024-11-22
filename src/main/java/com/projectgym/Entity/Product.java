@@ -20,8 +20,10 @@ public class Product {
     @Column(name = "descriptions")
     private String descriptions;
     private double price;
+    private int quantity;
 
     @OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
     private List<OrderDetail> orderDetails;
+
 
 }

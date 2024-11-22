@@ -15,7 +15,7 @@ public class WorkoutPlan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "planID")
     private int planID;
-    @Column(name = "planName")
+    @Column(name = "plan_name")
     private String planName;
     @Column(name = "descriptions")
     private String descriptions;
