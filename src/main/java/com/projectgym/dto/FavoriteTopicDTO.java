@@ -9,10 +9,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class WorkoutPlanDTO {
-    private int planID;
-    private String planName;
-    private String descriptions;
-    private String duration;
+public class FavoriteTopicDTO {
+    private int FavoriteID;
     private int userID;
+    private int topicID;
+
 }

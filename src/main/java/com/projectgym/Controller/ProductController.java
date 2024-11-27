@@ -1,11 +1,8 @@
 package com.projectgym.Controller;
 
 import com.projectgym.Entity.Product;
-import com.projectgym.Entity.User;
 import com.projectgym.dto.ProductDTO;
-import com.projectgym.dto.UserDTO;
 import com.projectgym.service.ProductService;
-import com.projectgym.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @RestController
 @RequestMapping("/admin/home/products")
-public class AdminProductController {
+public class ProductController {
     @Autowired
     private ProductService productService;
 
@@ -61,5 +58,13 @@ public class AdminProductController {
     @GetMapping("/low-stock")
     public ResponseEntity<List<ProductDTO>> getLowStockProducts(@RequestParam int threshold) {
         return ResponseEntity.ok(productService.getLowStockProducts(threshold));
+    }
+
+    // Tìm kiếm tài khoản theo username và fullName
+    @GetMapping("/search")
+    public ResponseEntity<List<ProductDTO>> searchByProductName(
+            @RequestParam(required = false) String productName) {
+        List<ProductDTO> results = productService.searchByProductName(productName);
+        return ResponseEntity.ok(results);
     }
 }

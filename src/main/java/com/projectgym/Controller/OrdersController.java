@@ -76,7 +76,7 @@ public class OrdersController {
         Double totalRevenue = ordersService.getTotalRevenue();
         return new ResponseEntity<>(totalRevenue, HttpStatus.OK);
     }
-
+    // API xem doanh thu theo tháng
     @GetMapping("/revenue/month")
     public ResponseEntity<Double> getRevenueByMonth(@RequestParam int month, @RequestParam int year) {
         Double revenue = ordersService.getRevenueByMonth(month, year);

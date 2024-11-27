@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
     public List<UserDTO> getAllUsers() {
         List<User> users = repository.findAll();
         return users.stream()
-                .map(user -> new UserDTO(user.getUserID(), user.getUserName(), user.getUserPassword(), user.getEmail(),
+                .map(user -> new UserDTO(user.getUserID(), user.getUserName(),null, user.getEmail(),
                         user.getFullName(), user.getAge(), user.getGender(), user.getHeight(),
                         user.getWeight(),  user.getRole() != null ? UserDTO.Role.valueOf(user.getRole().name()) : null))
                 .collect(Collectors.toList());
@@ -97,6 +97,25 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(Long id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    public List<UserDTO> searchUsers(String username, String fullName) {
+        List<User> users = repository.searchByUsernameOrFullName(username, fullName);
+        return users.stream()
+                .map(user -> new UserDTO(
+                        user.getUserID(),
+                        user.getUserName(),
+                        null,
+                        user.getEmail(),
+                        user.getFullName(),
+                        user.getAge(),
+                        user.getGender(),
+                        user.getHeight(),
+                        user.getWeight(),
+                        user.getRole() != null ? UserDTO.Role.valueOf(user.getRole().name()) : null
+                ))
+                .collect(Collectors.toList());
     }
 
 }

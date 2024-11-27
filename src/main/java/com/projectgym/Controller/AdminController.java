@@ -55,4 +55,13 @@ public class AdminController {
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
     }
+
+    // Tìm kiếm tài khoản theo username và fullName
+    @GetMapping("/search")
+    public ResponseEntity<List<UserDTO>> searchUsers(
+            @RequestParam(required = false) String username,
+            @RequestParam(required = false) String fullName) {
+        List<UserDTO> results = userService.searchUsers(username, fullName);
+        return ResponseEntity.ok(results);
+    }
 }

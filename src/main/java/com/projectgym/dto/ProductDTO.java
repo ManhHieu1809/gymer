@@ -24,5 +24,6 @@ public class ProductDTO {
         this.descriptions = product.getDescriptions();
         this.price = product.getPrice();
         this.quantity = product.getQuantity();
+
     }
 }

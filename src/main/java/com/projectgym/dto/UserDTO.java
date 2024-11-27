@@ -39,6 +39,13 @@ public class UserDTO {
         this.roles = Role.valueOf(user.getRole().name());
     }
 
+    public UserDTO(int userID, String userName, String fullName, String email) {
+        this.userID = userID;
+        this.username = userName;
+        this.fullName = fullName;
+        this.email = email;
+    }
+
     public enum Role {
         ADMIN, CUSTOMER, TRAINER
     }

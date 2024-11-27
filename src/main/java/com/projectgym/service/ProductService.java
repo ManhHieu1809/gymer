@@ -19,4 +19,6 @@ public interface ProductService {
     void deleteProduct(Long id);
 
     List<ProductDTO> getLowStockProducts(int threshold); // lấy sản phầm có số lượng gần hết
+
+    List<ProductDTO> searchByProductName(String productName);
 }

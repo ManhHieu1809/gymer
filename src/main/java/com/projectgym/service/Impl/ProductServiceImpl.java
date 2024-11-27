@@ -1,7 +1,9 @@
 package com.projectgym.service.Impl;
 
 import com.projectgym.Entity.Product;
+import com.projectgym.Entity.User;
 import com.projectgym.dto.ProductDTO;
+import com.projectgym.dto.UserDTO;
 import com.projectgym.repository.ProductRepository;
 import com.projectgym.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,6 +89,21 @@ public class ProductServiceImpl implements ProductService {
                         product.getDescriptions(),
                         product.getPrice(),
                         product.getQuantity()
+                ))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ProductDTO> searchByProductName(String productName) {
+        List<Product> products = repository.searchByProductName(productName);
+        return products.stream()
+                .map(product -> new ProductDTO(
+                        product.getProductID(),
+                        product.getProductName(),
+                        product.getDescriptions(),
+                        product.getPrice(),
+                        product.getQuantity()
+
                 ))
                 .collect(Collectors.toList());
     }

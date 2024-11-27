@@ -9,10 +9,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class WorkoutPlanDTO {
-    private int planID;
-    private String planName;
+public class NutritionPlanDTO {
+    private int nutritionID;
+    private String nameNutritionPlan;
     private String descriptions;
-    private String duration;
+    private double calo;
     private int userID;
 }
