@@ -107,4 +107,17 @@ public class ProductServiceImpl implements ProductService {
                 ))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<ProductDTO> searchProductsByPriceRange(double minPrice, double maxPrice) {
+        List<Product> products = repository.findByPriceBetween(minPrice, maxPrice);
+        return products.stream()
+                .map(product -> new ProductDTO(
+                        product.getProductID(),
+                        product.getProductName(),
+                        product.getDescriptions(),
+                        product.getPrice(),
+                        product.getQuantity()))
+                .collect(Collectors.toList());
+    }
 }

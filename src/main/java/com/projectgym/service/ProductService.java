@@ -21,4 +21,6 @@ public interface ProductService {
     List<ProductDTO> getLowStockProducts(int threshold); // lấy sản phầm có số lượng gần hết
 
     List<ProductDTO> searchByProductName(String productName);
+
+    List<ProductDTO> searchProductsByPriceRange(double minPrice, double maxPrice); // Tìm kiếm sản phẩm theo khoảng giá
 }

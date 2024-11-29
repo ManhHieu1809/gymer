@@ -22,7 +22,7 @@ public class ContentController {
 
     @GetMapping("/admin/home")
     public String adminHome(){
-        return "admin/homeAdmin";
+        return "admin/index";
     }
 
     @GetMapping("/trainer/home")
@@ -35,4 +35,18 @@ public class ContentController {
         return "customer/homeCustomer";
     }
 
+    @GetMapping("/admin/home/user")
+    public String home1(){
+        return "admin/accMng";
+    }
+
+    @GetMapping("/admin/home/user/user-add")
+    public String user_add(){
+        return "admin/add-user";
+    }
+
+    @GetMapping("/admin/home/product")
+    public String product(){
+        return "admin/goodsMng";
+    }
 }

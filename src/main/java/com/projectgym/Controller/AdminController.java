@@ -3,6 +3,7 @@ package com.projectgym.Controller;
 import com.projectgym.Entity.User;
 import com.projectgym.dto.UserDTO;
 import com.projectgym.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,10 +13,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/admin/home/users")
+@Slf4j
 public class AdminController {
 
     @Autowired
     private UserService userService;
+
 
     // Lấy danh sách tất cả tài khoản
     @GetMapping
@@ -37,6 +40,7 @@ public class AdminController {
     public ResponseEntity<User> createUser(@RequestBody User user) {
         return ResponseEntity.ok(userService.createUser(user));
     }
+
 
     // Cập nhật thông tin tài khoản
     @PutMapping("/{id}")

@@ -12,4 +12,5 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "WHERE (:productName IS NULL OR LOWER(u.productName) LIKE LOWER(CONCAT('%', :productName, '%'))) " )
 
     List<Product> searchByProductName(@Param("productName") String productName);
+    List<Product> findByPriceBetween(double minPrice, double maxPrice); // Tìm kiếm sản phẩm theo khoảng giá
 }

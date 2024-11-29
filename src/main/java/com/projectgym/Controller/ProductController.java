@@ -67,4 +67,9 @@ public class ProductController {
         List<ProductDTO> results = productService.searchByProductName(productName);
         return ResponseEntity.ok(results);
     }
+    // Tìm kiếm sản phẩm theo khoảng giá
+    @GetMapping("/price-range")
+    public ResponseEntity<List<ProductDTO>> searchProductsByPriceRange(@RequestParam double minPrice, @RequestParam double maxPrice) {
+        return ResponseEntity.ok(productService.searchProductsByPriceRange(minPrice, maxPrice));
+    }
 }
