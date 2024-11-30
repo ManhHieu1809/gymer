@@ -45,8 +45,24 @@ public class ContentController {
         return "admin/add-user";
     }
 
+    @GetMapping("/admin/home/user/user-edit/{id}")
+    public String user_edit(){
+        return "admin/edit-user";
+    }
+
     @GetMapping("/admin/home/product")
     public String product(){
         return "admin/goodsMng";
     }
+
+    @GetMapping("/admin/home/product/product-add")
+    public String product_add(){
+        return "admin/add-goods";
+    }
+
+    @GetMapping("/admin/home/product/product-edit/{id}")
+    public String product_edit(){
+        return "admin/edit-goods";
+    }
+
 }

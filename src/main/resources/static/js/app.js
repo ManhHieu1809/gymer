@@ -81,7 +81,7 @@ function addGoods() {
         checkboxes.forEach(checkbox => (checkbox.checked = this.checked));
     });
     // Send the data to the backend API
-    fetch("/your-api-path/addProduct", {
+    fetch("http://localhost:8080/admin/home/products", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -125,8 +125,8 @@ function addUser() {
 
     // Create a user object to send to the server
     const user = {
-        username: inputname,
-        password: inputpassword,
+        userName: inputname,
+        userPassword: inputpassword,
         email: inputemail,
         fullName: inputfullname,
         age: parseInt(inputage, 10),
@@ -160,6 +160,7 @@ function addUser() {
                         <td><input type="checkbox" class="checkbox" data-id="${savedUser.userID}" /></td>
                         <td>${savedUser.userID}</td>
                         <td>${savedUser.username}</td>
+                        <td>${savedUser.password}</td>
                         <td>${savedUser.email}</td>
                         <td>${savedUser.fullName}</td>
                         <td>${savedUser.age}</td>
@@ -172,5 +173,5 @@ function addUser() {
         })
         .catch(error => console.error("Error adding user:", error));
 
-    return false; // Prevent form submission
+    return false; // Prevent form subm
 }

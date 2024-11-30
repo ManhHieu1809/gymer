@@ -17,6 +17,8 @@
   <link rel="stylesheet" th:href="@{/css/style.css}" />
   <script th:src="@{/js/angular.min.js}"></script>
   <script th:src="@{/js/app.js}"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -142,7 +144,7 @@
             </a>
           </li> -->
           <li>
-            <a href="goodsMng.html">
+            <a href="/admin/home/product">
               <i class="fa fa-th"></i> <span>Quản lý sản phẩm</span>
             </a>
           </li>
@@ -171,80 +173,78 @@
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
       <section class="content-header">
-        <h1>
-          Quản lý tài khoản
-        </h1>
+        <h1>Quản lý tài khoản</h1>
       </section>
 
       <!-- Main content -->
       <section class="content">
-
         <!-- Default box -->
         <div class="col-xs-12">
           <div class="box">
-            <div class="box-header">
+            <div class="box-header with-border">
+              <!-- Nút "Thêm người dùng" -->
+              <div class="pull-left">
+                <a href="/admin/home/user/user-add" class="btn btn-success btn-sm" title="Thêm người dùng">
+                  <i class="bi bi-plus-circle" style="font-size: 1.5rem;"></i>
+                  Thêm người dùng<!-- Icon thêm -->
+                </a>
+              </div>
+
+              <!-- Thanh tìm kiếm vẫn ở góc phải -->
               <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
                   <input type="text" id="searchBox1" onkeyup="filterTable('searchBox1','table1')" name="table_search"
-                    class="form-control pull-right" placeholder="Search">
-
+                         class="form-control pull-right" placeholder="Tìm kiếm...">
                   <div class="input-group-btn">
-                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                    <button type="submit" class="btn btn-default">
+                      <i class="bi bi-search" style="font-size: 1.2rem;"></i>
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
-            <!-- /.box-header -->
+
+            <!-- Bảng dữ liệu -->
             <div class="box-body table-responsive no-padding" id="userList">
               <table class="table table-hover" id="table1">
                 <thead>
-                  <tr>
-                    <th><input type="checkbox" id="user-selectAll" /></th> <!-- Select all checkbox -->
-                    <th>User ID</th>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Fullname</th>
-                    <th>Tuổi</th>
-                    <th>Giới tính</th>
-                    <th>Chiều cao</th>
-                    <th>Cân nặng</th>
-                    <th>Vai trò</th>
-                  </tr>
+                <tr>
+                  <th><input type="checkbox" id="user-selectAll" /></th> <!-- Select all checkbox -->
+                  <th>User ID</th>
+                  <th>Username</th>
+                  <th>Email</th>
+                  <th>Fullname</th>
+                  <th>Tuổi</th>
+                  <th>Giới tính</th>
+                  <th>Chiều cao</th>
+                  <th>Cân nặng</th>
+                  <th>Vai trò</th>
+                  <th>Hành động</th> <!-- Cột hành động -->
+                </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td><input type="checkbox" class="checkbox"></td>
-                    <td>1</td>
-                    <td>abc</td>
-                    <td>123</td>
-                    <td>Nguyễn Văn A</td>
-                    <td>20</td>
-                    <td>Nam</td>
-                    <td>170</td>
-                    <td>70</td>
-                    <td>Costumer</td>
-                  </tr>
+                <tr>
+                  <td><input type="checkbox" class="checkbox"></td>
+                  <td>1</td>
+                  <td>abc</td>
+                  <td>123</td>
+                  <td>Nguyễn Văn A</td>
+                  <td>20</td>
+                  <td>Nam</td>
+                  <td>170</td>
+                  <td>70</td>
+                  <td>Customer</td>
+                </tr>
                 </tbody>
               </table>
-            </div>
-            <!-- /.box-body -->
-            <div class="foot">
-              <a href="#">Hiển thị thêm</a>
-              <div class="foot1">
-                <a class="btn btn-success" href="/admin/home/user/user-add" type="btn-success">Thêm</a>
-                <a class="btn btn-success" href="edit-user.html" type="btn-success">Sửa</a>
-                <button onclick="deleteCheckedRows('table1')" class="btn btn-danger">Xóa</button>
-              </div>
+
             </div>
           </div>
-          <!-- /.box -->
         </div>
-        
-
       </section>
-      <!-- /.content -->
-      
     </div>
+
+
     <!-- /.content-wrapper -->
 
     <footer class="main-footer">

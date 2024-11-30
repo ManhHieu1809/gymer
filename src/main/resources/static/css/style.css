@@ -51,3 +51,34 @@
 .table-action a.label {
     margin-left: 5px
 }
+
+/* Căn chỉnh tiêu đề bảng */
+th {
+    text-align: center;  /* Căn giữa tiêu đề */
+    vertical-align: middle; /* Căn giữa theo chiều dọc */
+    padding: 12px;  /* Tăng khoảng cách bên trong ô */
+}
+
+/* Căn chỉnh nội dung các ô dữ liệu */
+td {
+    text-align: center; /* Căn giữa dữ liệu */
+    vertical-align: middle; /* Căn giữa theo chiều dọc */
+    padding: 8px; /* Khoảng cách giữa nội dung và viền ô */
+}
+
+/* Căn chỉnh các ô checkbox, cho đẹp mắt */
+td input[type="checkbox"] {
+    margin: 0 auto;  /* Căn giữa checkbox */
+}
+/* Đảm bảo nội dung trong ô không bị tràn */
+td {
+    word-wrap: break-word; /* Cho phép xuống dòng khi cần thiết */
+    white-space: nowrap; /* Ngăn nội dung bị cắt bớt */
+}
+
+/* Đảm bảo độ rộng cột hành động đủ lớn */
+td:last-child {
+    text-align: center;
+    width: 120px; /* Đảm bảo đủ không gian cho biểu tượng */
+    padding: 10px; /* Khoảng cách hợp lý */
+}

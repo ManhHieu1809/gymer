@@ -24,6 +24,7 @@ public class AdminController {
     @GetMapping
     public ResponseEntity<List<UserDTO>> getAllUsers() {
         List<UserDTO> users = userService.getAllUsers();
+        log.info("Danh sách tài khoản: {}", users);
         return ResponseEntity.ok(users);
     }
 
@@ -36,8 +37,9 @@ public class AdminController {
     }
 
     // Tạo mới tài khoản
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<User> createUser(@RequestBody User user) {
+        log.info("Dữ liệu nhận được: {}", user);
         return ResponseEntity.ok(userService.createUser(user));
     }
 

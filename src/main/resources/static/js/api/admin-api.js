@@ -18,6 +18,16 @@ function fetchUsers() {
             <td>${user.height.toFixed(2)}</td>
             <td>${user.weight.toFixed(2)}</td>
             <td>${user.roles}</td>
+             <td>
+                        <!-- Nút sửa -->
+                        <a href="/admin/home/user/user-edit/${user.userID}" class="btn btn-primary btn-sm" title="Sửa">
+                            <i class="bi bi-pencil-square" style="font-size: 1.5rem;"></i>
+                        </a>
+                        <!-- Nút xóa -->
+                        <button onclick="deleteUser (${user.userID})" class="btn btn-danger btn-sm" title="Xóa">
+                            <i class="bi bi-trash" style="font-size: 1.5rem;"></i>
+                        </button>
+                    </td>
           `;
                 userTableBody.appendChild(row);
             });
@@ -53,6 +63,16 @@ function fetchGoods() {
             <td>${product.descriptions}</td>
             <td>${product.price.toFixed(2)}</td>
             <td>${product.quantity}</td>
+            <td>
+                        <!-- Nút sửa -->
+                        <a href="/admin/home/product/product-edit/${product.productID}" class="btn btn-primary btn-sm" title="Sửa">
+                            <i class="bi bi-pencil-square" style="font-size: 1.5rem;"></i>
+                        </a>
+                        <!-- Nút xóa -->
+                        <button onclick="deleteProduct (${product.productID})" class="btn btn-danger btn-sm" title="Xóa">
+                            <i class="bi bi-trash" style="font-size: 1.5rem;"></i>
+                        </button>
+                    </td>
           `;
                 goodsTableBody.appendChild(row);
             });
@@ -124,3 +144,62 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
+async function deleteUser (userId) {
+    if (confirm("Bạn có chắc chắn muốn xóa người dùng này?")) {
+        try {
+            const response = await fetch(`/admin/home/users/${userId}`, {
+                method: 'DELETE',
+            });
+
+            if (response.ok) {
+                alert('Người dùng đã được xóa thành công!');
+                fetchUsers(); // Gọi lại hàm fetchUsers để làm mới danh sách người dùng
+            } else {
+                const errorData = await response.json();
+                console.error('Lỗi khi xóa user:', errorData);
+                alert('Xóa người dùng thất bại! Hãy kiểm tra lại.');
+            }
+        } catch (error) {
+            console.error('Lỗi kết nối tới API:', error);
+            alert('Không thể kết nối đến server.');
+        }
+    }
+}
+
+// Hàm xóa sản phẩm
+function deleteProduct(productId) {
+    if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này?")) {
+        // Gửi yêu cầu DELETE đến server để xóa sản phẩm
+        fetch(`/admin/home/products/${productId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        })
+            .then(response => {
+                if (response.ok) {
+                    if (response.status === 204) {
+                        // Nếu trạng thái là 204, tức là xóa thành công mà không có dữ liệu trả về
+                        // Xóa dòng sản phẩm khỏi bảng
+                        const rowToDelete = document.querySelector(`tr[data-id='${productId}']`);
+                        if (rowToDelete) {
+                            rowToDelete.remove();
+                        }
+                        alert("Sản phẩm đã được xóa thành công.");
+                        location.reload();
+                    } else {
+                        // Nếu không phải 204, xử lý theo trường hợp khác nếu cần
+                        alert("Đã có lỗi xảy ra khi xóa sản phẩm.");
+                    }
+                } else {
+                    throw new Error('Không thể xóa sản phẩm');
+                }
+            })
+            .catch(error => {
+                // Nếu có lỗi trong quá trình gửi yêu cầu
+                console.error('Error:', error);
+                alert("Đã có lỗi xảy ra. Vui lòng thử lại.");
+            });
+    }
+}

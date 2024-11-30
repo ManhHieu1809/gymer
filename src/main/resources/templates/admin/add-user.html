@@ -84,7 +84,7 @@
                                         <a href="#" class="btn btn-default btn-flat">Profile</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="#" class="btn btn-default btn-flat">Đăng xuất</a>
+                                        <a href="/req/login" class="btn btn-default btn-flat">Đăng xuất</a>
                                     </div>
                                 </li>
                             </ul>
@@ -183,80 +183,68 @@
             <section class="content">
 
                 <!-- Default box -->
-                <div class="col-md-8">
-                    <!-- general form elements -->
-                    <div class="box box-primary">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Thêm mới tài khoản</h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <!-- form start -->
-                        <form role="form" onsubmit="return addUser()">
-                            <div class="box-body">
-                                <div class="form-group">
-                                    <label for="inputname1">Tên đăng nhập</label>
-                                    <input type="text" class="form-control" id="inputname1" placeholder="Nhập tên"
-                                           required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputpassword1">Password</label>
-                                    <input type="password" class="form-control" id="inputpassword1"
-                                           placeholder="Nhập mật khẩu" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputemail1">Email</label>
-                                    <input type="text" class="form-control" id="inputemail1" placeholder="Nhập email"
-                                           required>
-                                </div>
-
-
-                                <div class="form-group">
-                                    <label for="inputfullname1">FullName</label>
-                                    <input type="text" class="form-control" id="inputfullname1"
-                                           placeholder="Nhập họ tên" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputage1">Tuổi</label>
-                                    <input type="number" class="form-control" id="inputage1" placeholder="Nhập tuổi"
-                                           required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputgender1">Giới tính</label>
-                                    <select class="form-control" name="inputgender1" id="inputgender1">
-                                        <option value="nam">Nam</option>
-                                        <option value="nu">Nữ</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputheight1">Chiều cao</label>
-                                    <input type="number" class="form-control" id="inputheight1" placeholder="Nhập chiều cao"
-                                           required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputweight1">Cân nặng</label>
-                                    <input type="number" class="form-control" id="inputweight1" placeholder="Nhập cân nặng"
-                                           required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputrole1">Role</label>
-                                    <select class="form-control" name="inputrole1" id="inputrole1">
-                                        <option value="ADMIN">ADMIN</option>
-                                        <option value="CUSTOMER">CUSTOMER</option>
-                                        <option value="TRAINER">TRAINER</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <!-- /.box-body -->
-                            <div class="box-footer">
-                                <button class="btn btn-primary" >Submit</button>
-                                <a href="/admin/home/user" type="button" class="btn btn-danger">Đóng</a>
-                            </div>
-                        </form>
-
+                <div class="card card-primary mt-4">
+                    <div class="card-header">
+                        <h3 class="card-title">Thêm Người Dùng</h3>
                     </div>
+                    <!-- Form Start -->
+                    <form id="addUserForm" class="card-body">
+                        <!-- Tên đăng nhập -->
 
-                    <!-- /.box -->
+                        <div class="form-group">
+                            <label for="username">Tên đăng nhập:</label>
+                            <input type="text" id="username" class="form-control" placeholder="Nhập tên đăng nhập" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Mật khẩu:</label>
+                            <input type="password" id="password" class="form-control" placeholder="Nhập mật khẩu">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" class="form-control" placeholder="Nhập email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="fullName">Họ tên:</label>
+                            <input type="text" id="fullName" class="form-control" placeholder="Nhập họ và tên" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="age">Tuổi:</label>
+                            <input type="number" id="age" class="form-control" placeholder="Nhập tuổi" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="gender">Giới tính:</label>
+                            <select id="gender" class="form-control" required>
+                                <option value="" disabled selected>Chọn giới tính</option>
+                                <option value="nam">Nam</option>
+                                <option value="nu">Nữ</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="height">Chiều cao (cm):</label>
+                            <input type="number" id="height" class="form-control" placeholder="Nhập chiều cao" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="weight">Cân nặng (kg):</label>
+                            <input type="number" id="weight" class="form-control" placeholder="Nhập cân nặng" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="roles">Vai trò:</label>
+                            <select id="roles" class="form-control" required>
+                                <option value="" disabled selected>Chọn vai trò</option>
+                                <option value="ADMIN">ADMIN</option>
+                                <option value="CUSTOMER">CUSTOMER</option>
+                                <option value="TRAINER">TRAINER</option>
+                            </select>
+                        </div>
+                        <!-- Submit Button -->
+                        <div class="form-group d-flex justify-content-start">
+                            <button type="submit" class="btn btn-primary me-2">Thêm người dùng</button>
+                            <button type="button" class="btn btn-primary me-2" onclick="window.location.href='/admin/home/user'">Thoát</button>
+                        </div>
+                    </form>
                 </div>
+
+
             </section>
             <!-- /.content -->
         </div>
@@ -282,6 +270,53 @@
     <script th:src="@{/tinymce/tinymce.min.js}"></script>
     <script th:src="@{/tinymce/config.js}"></script>
     <script th:src="@{/js/function.js}"></script>
+
+
+    <script>
+        // URL API Backend
+        const API_BASE_URL = 'http://localhost:8080/admin/home/users/create';
+
+        // Thêm người dùng mới
+        document.getElementById('addUserForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            // Thu thập dữ liệu từ form
+            const user = {
+                userName: document.getElementById('username').value,
+                userPassword: document.getElementById('password').value,
+                email: document.getElementById('email').value,
+                fullName: document.getElementById('fullName').value,
+                age: document.getElementById('age').value,
+                gender: document.getElementById('gender').value,
+                height: parseFloat(document.getElementById('height').value), // Parse số nguyên
+                weight: parseFloat(document.getElementById('weight').value), // Parse số nguyên
+                roles: document.getElementById('roles').value // Enum dưới dạng chuỗi
+            };
+
+            try {
+                // Gửi request POST tới API
+                const response = await fetch(API_BASE_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(user),
+                });
+
+                if (response.ok) {
+                    alert('Người dùng đã được thêm thành công!');
+                    document.getElementById('addUserForm').reset(); // Xóa dữ liệu form sau khi thêm thành công
+                } else {
+                    const errorData = await response.json();
+                    console.error('Lỗi khi thêm user:', errorData);
+                    alert('Thêm người dùng thất bại! Hãy kiểm tra lại.');
+                }
+            } catch (error) {
+                console.error('Lỗi kết nối tới API:', error);
+                alert('Không thể kết nối đến server.');
+            }
+        });
+    </script>
 </body>
 
 </html>

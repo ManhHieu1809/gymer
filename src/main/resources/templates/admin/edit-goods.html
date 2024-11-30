@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -9,14 +9,13 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/font-awesome.min.css">
-    <link rel="stylesheet" href="../css/AdminLTE.css">
-    <link rel="stylesheet" href="../css/_all-skins.min.css">
-    <link rel="stylesheet" href="../css/jquery-ui.css">
-    <link rel="stylesheet" href="../css/style.css" />
-    <script src="../js/angular.min.js"></script>
-    <script src="../js/app.js"></script>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+<link rel="stylesheet" th:href="@{/css/AdminLTE.css}">
+<link rel="stylesheet" th:href="@{/css/_all-skins.min.css}">
+<link rel="stylesheet" th:href="@{/css/jquery-ui.css}">
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+<script th:src="@{/js/angular.min.js}"></script>
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -25,7 +24,7 @@
 
         <header class="main-header">
             <!-- Logo -->
-            <a href="index.html" class="logo">
+            <a href="/admin/home" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>GYM</b></span>
                 <!-- logo for regular state and mobile devices -->
@@ -67,13 +66,13 @@
                         <!-- User Account-->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="../images/user2-160x160.jpg" class="user-image" alt="User Image">
+                                <img th:src="@{/images/user2-160x160.jpg}" class="user-image" alt="User Image">
                                 <span class="hidden-xs">Nguyễn Mạnh Hiếu</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header">
-                                    <img src="../images/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                    <img th:src="@{/images/user2-160x160.jpg}" class="img-circle" alt="User Image">
                                     <p>
                                         Nguyễn Mạnh Hiếu <br> Administrator
                                     </p>
@@ -103,7 +102,7 @@
                 <!-- Sidebar user panel -->
                 <div class="user-panel">
                     <div class="pull-left image">
-                        <img src="../images/user2-160x160.jpg" class="img-circle" alt="User Image">
+                        <img th:src="@{/images/user2-160x160.jpg}" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
                         <p>Nguyễn Mạnh Hiếu</p>
@@ -125,7 +124,7 @@
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu" data-widget="tree">
                     <li>
-                        <a href="accMng.html">
+                        <a href="/admin/home/user">
                             <i class="fa fa-th"></i> <span>Quản lý tài khoản</span>
                         </a>
                     </li>
@@ -147,12 +146,12 @@
             </a>
           </li> -->
                     <li>
-                        <a href="goodsMng.html">
+                        <a href="/admin/home/product">
                             <i class="fa fa-th"></i> <span>Quản lý sản phẩm</span>
                         </a>
                     </li>
                     <li>
-                        <a href="orderMng.html">
+                        <a href="/admin/home/odder">
                             <i class="fa fa-th"></i> <span>Quản lý đơn hàng</span>
                         </a>
                     </li>
@@ -191,38 +190,37 @@
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form role="form" onsubmit="return addGoods()">
-                            <div class="box-body">
-                                <div class="form-group">
-                                    <label for="inputname2">Tên sản phẩm</label>
-                                    <input type="text" class="form-control" id="inputname2" placeholder="Nhập tên"
-                                        required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputquantity2">Số lượng sản phẩm</label>
-                                    <input type="number" class="form-control" id="inputquantity2"
-                                        placeholder="Nhập số lượng" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputdecription2">Mô tả sản phẩm</label>
-                                    <input type="text" class="form-control" id="inputdecription2"
-                                        placeholder="Nhập mô tả" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputprice2">Giá</label>
-                                    <input type="number" class="form-control" id="inputprice2" placeholder="Nhập giá"
-                                        required>
-                                </div>
+                        <form id="addProductForm">
+                            <div class="form-group">
+                                <label for="productName">Tên Sản Phẩm</label>
+                                <input type="text" id="productName" class="form-control" placeholder="Nhập tên sản phẩm" required />
                             </div>
-                            <!-- /.box-body -->
-                            <div class="box-footer">
-                                <button class="btn btn-primary">Submit</button>
-                                <a href="goodsMng.html" type="button" class="btn btn-danger">Đóng</a>
+
+                            <div class="form-group">
+                                <label for="productDescription">Mô Tả</label>
+                                <input type="text" id="productDescription" class="form-control" placeholder="Nhập mô tả sản phẩm" required />
                             </div>
+
+                            <div class="form-group">
+                                <label for="productPrice">Giá</label>
+                                <input type="number" id="productPrice" class="form-control" placeholder="Nhập giá sản phẩm" required />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="productQuantity">Số Lượng</label>
+                                <input type="number" id="productQuantity" class="form-control" placeholder="Nhập số lượng sản phẩm" required />
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Sửa Sản Phẩm</button>
+                            <button type="button" class="btn btn-primary" onclick="window.location.href='/admin/home/product'">Thoát</button>
                         </form>
+
+                        <div id="responseMessage" class="mt-3"></div>
+
                     </div>
 
                     <!-- /.box -->
+                </div>
 
             </section>
             <!-- /.content -->
@@ -241,14 +239,55 @@
 
     <!-- jQuery 3 -->
 
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/jquery-ui.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/adminlte.min.js"></script>
-    <script src="../js/dashboard.js"></script>
-    <script src="../tinymce/tinymce.min.js"></script>
-    <script src="../tinymce/config.js"></script>
-    <script src="../js/function.js"></script>
+ <script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/jquery-ui.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/adminlte.min.js}"></script>
+<script th:src="@{/js/dashboard.js}"></script>
+<script th:src="@{/tinymce/tinymce.min.js}"></script>
+<script th:src="@{/tinymce/config.js}"></script>
+<script th:src="@{/js/function.js}"></script>
+
+    <script>
+        $(document).ready(function () {
+            var productId = window.location.href.split('/').pop();
+            $.ajax({
+                url: '/admin/home/products' + productId,
+                type: 'GET',
+                success: function (response) {
+                    $('#productName').val(response.name);
+                    $('#productDescription').val(response.description);
+                    $('#productPrice').val(response.price);
+                    $('#productQuantity').val(response.quantity);
+                }
+            });
+
+            $('#addProductForm').submit(function (e) {
+                e.preventDefault();
+                var productName = $('#productName').val();
+                var productDescription = $('#productDescription').val();
+                var productPrice = $('#productPrice').val();
+                var productQuantity = $('#productQuantity').val();
+                $.ajax({
+                    url: '/admin/home/products/' + productId,
+                    type: 'PUT',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        productName: productName,
+                        descriptions: productDescription,
+                        price: productPrice,
+                        quantity: productQuantity
+                    }),
+                    success: function (response) {
+                        $('#responseMessage').html('<div class="alert alert-success" role="alert">Sửa sản phẩm thành công</div>');
+                    },
+                    error: function (response) {
+                        $('#responseMessage').html('<div class="alert alert-danger" role="alert">Sửa sản phẩm thất bại</div>');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta lang="vi">
+    <title>The Gym | Blank Page</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/css/AdminLTE.css}">
+    <link rel="stylesheet" th:href="@{/css/_all-skins.min.css}">
+    <link rel="stylesheet" th:href="@{/css/jquery-ui.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <script th:src="@{/js/angular.min.js}"></script>
+    <script th:src="@{/js/app.js}"></script>
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+<!-- Site wrapper -->
+<div class="wrapper">
+
+    <header class="main-header">
+        <!-- Logo -->
+        <a href="/admin/home" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini"><b>GYM</b></span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg">THE GYM</span>
+        </a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <!-- Notifications-->
+                    <li class="dropdown notifications-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-bell-o"></i>
+                            <span class="label label-warning">10</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="header">Bạn có 10 thông báo</li>
+                            <li>
+                                <!-- inner menu: contains the actual data -->
+                                <ul class="menu">
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-users text-aqua"></i> 5 thành viên mới hôm nay
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="footer"><a href="#">Xem tất cả</a></li>
+                        </ul>
+                    </li>
+                    <!-- User Account-->
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img th:src="@{/images/user2-160x160.jpg}" class="user-image" alt="User Image">
+                            <span class="hidden-xs">Nguyễn Mạnh Hiếu</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- User image -->
+                            <li class="user-header">
+                                <img th:src="@{/images/user2-160x160.jpg}" class="img-circle" alt="User Image">
+                                <p>
+                                    Nguyễn Mạnh Hiếu <br> Administrator
+                                </p>
+                            </li>
+                            <!-- Menu Footer-->
+                            <li class="user-footer">
+                                <div class="pull-left">
+                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                </div>
+                                <div class="pull-right">
+                                    <a href="/req/login" class="btn btn-default btn-flat">Đăng xuất</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- =============================================== -->
+
+    <!-- Left side column. contains the sidebar -->
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <!-- Sidebar user panel -->
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img th:src="@{/images/user2-160x160.jpg}" class="img-circle" alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <p>Nguyễn Mạnh Hiếu</p>
+                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                </div>
+            </div>
+            <!-- search form -->
+            <form action="#" method="get" class="sidebar-form">
+                <div class="input-group">
+                    <input type="text" name="q" class="form-control" placeholder="Tìm kiếm...">
+                    <span class="input-group-btn">
+                            <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i
+                                    class="fa fa-search"></i>
+                            </button>
+                        </span>
+                </div>
+            </form>
+            <!-- /.search form -->
+            <!-- sidebar menu: : style can be found in sidebar.less -->
+            <ul class="sidebar-menu" data-widget="tree">
+                <li>
+                    <a href="/admin/home/user">
+                        <i class="fa fa-th"></i> <span>Quản lý tài khoản</span>
+                    </a>
+                </li>
+                <!-- <li class="treeview">
+        <a href="#">
+          <i class="fa fa-dashboard"></i> <span>Quản lý bài tập</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li><a href=""><i class="fa fa-circle-o"></i> Kế hoạch</a></li>
+          <li><a href=""><i class="fa fa-circle-o"></i> Khám phá</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">
+          <i class="fa fa-th"></i> <span>Quản lý dinh dưỡng</span>
+        </a>
+      </li> -->
+                <li>
+                    <a href="goodsMng.html">
+                        <i class="fa fa-th"></i> <span>Quản lý sản phẩm</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="orderMng.html">
+                        <i class="fa fa-th"></i> <span>Quản lý đơn hàng</span>
+                    </a>
+                </li>
+                <!-- <li>
+        <a href="">
+          <i class="fa fa-th"></i> <span>Widgets</span>
+          <span class="pull-right-container">
+            <small class="label pull-right bg-green">Hot</small>
+          </span>
+        </a>
+      </li> -->
+
+            </ul>
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+    <!-- -------------------------------------------------------- -->
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Quản lý tài khoản
+            </h1>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+            <!-- Default box -->
+            <div class="card card-primary mt-4">
+                <div class="card-header">
+                    <h3 class="card-title">Sửa Thông Tin Người Dùng</h3>
+                </div>
+                <form id="editUserForm" class="card-body">
+                    <!-- Trường ẩn để lưu ID của người dùng -->
+                    <input type="hidden" id="userId" value="1"> <!-- ID mẫu -->
+
+                    <div class="form-group">
+                        <label for="username">Tên đăng nhập:</label>
+                        <input type="text" id="username" class="form-control" placeholder="Nhập tên đăng nhập" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Mật khẩu:</label>
+                        <input type="password" id="password" class="form-control" placeholder="Nhập mật khẩu">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" class="form-control" placeholder="Nhập email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fullName">Họ tên:</label>
+                        <input type="text" id="fullName" class="form-control" placeholder="Nhập họ và tên" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="age">Tuổi:</label>
+                        <input type="number" id="age" class="form-control" placeholder="Nhập tuổi" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="gender">Giới tính:</label>
+                        <select id="gender" class="form-control" required>
+                            <option value="" disabled selected>Chọn giới tính</option>
+                            <option value="nam">Nam</option>
+                            <option value="nu">Nữ</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="height">Chiều cao (cm):</label>
+                        <input type="number" id="height" class="form-control" placeholder="Nhập chiều cao" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="weight">Cân nặng (kg):</label>
+                        <input type="number" id="weight" class="form-control" placeholder="Nhập cân nặng" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="roles">Vai trò:</label>
+                        <select id="roles" class="form-control" required>
+                            <option value="" disabled selected>Chọn vai trò</option>
+                            <option value="ADMIN">ADMIN</option>
+                            <option value="CUSTOMER">CUSTOMER</option>
+                            <option value="TRAINER">TRAINER</option>
+                        </select>
+                    </div>
+                    <div class="form-group d-flex justify-content-start">
+                        <button type="submit" class="btn btn-primary me-2">Cập nhật người dùng</button>
+                        <button type="button" class="btn btn-primary me-2" onclick="window.location.href='/admin/home/user'">Thoát</button>
+                    </div>
+                </form>
+            </div>
+
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <!-- -------------------------------------------------------- -->
+    <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+            <b>Version</b> 0.0.1
+        </div>
+        <strong>Copyright &copy; 2018 <a href="https://adminlte.io">AdminLTE</a>.</strong>
+    </footer>
+
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 3 -->
+
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/jquery-ui.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/adminlte.min.js}"></script>
+<script th:src="@{/js/dashboard.js}"></script>
+<script th:src="@{/tinymce/tinymce.min.js}"></script>
+<script th:src="@{/tinymce/config.js}"></script>
+<script th:src="@{/js/function.js}"></script>
+
+
+<script>
+    // URL API Backend
+    const API_BASE_URL = 'http://localhost:8080/admin/home/users';
+
+    // Xử lý sự kiện khi submit form sửa thông tin người dùng
+    document.getElementById('editUserForm').addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        // Lấy ID của người dùng cần sửa (giả sử được lưu trong trường ẩn hoặc lấy từ URL)
+        const userId = window.location.pathname.split('/').pop();
+
+        // Thu thập dữ liệu từ form
+        const updatedUser = {
+            userName: document.getElementById('username').value,
+            userPassword: document.getElementById('password').value,
+            email: document.getElementById('email').value,
+            fullName: document.getElementById('fullName').value,
+            age: parseInt(document.getElementById('age').value),
+            gender: document.getElementById('gender').value,
+            height: parseFloat(document.getElementById('height').value),
+            weight: parseFloat(document.getElementById('weight').value),
+            roles: document.getElementById('roles').value // Lấy vai trò dưới dạng mảng chuỗi
+        };
+
+        try {
+            // Gửi request PUT tới API
+            const response = await fetch(`${API_BASE_URL}/${userId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedUser),
+            });
+
+            if (response.ok) {
+                alert('Người dùng đã được cập nhật thành công!');
+                // Thực hiện hành động khác, ví dụ chuyển hướng hoặc làm mới trang
+            } else {
+                const errorData = await response.json();
+                console.error('Lỗi khi sửa user:', errorData);
+                alert('Cập nhật người dùng thất bại! Hãy kiểm tra lại.');
+            }
+        } catch (error) {
+            console.error('Lỗi kết nối tới API:', error);
+            alert('Không thể kết nối đến server.');
+        }
+    });
+
+</script>
+</body>
+
+</html>
