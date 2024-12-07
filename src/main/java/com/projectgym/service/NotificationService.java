@@ -10,4 +10,5 @@ public interface NotificationService {
     NotificationDTO createNotification(NotificationDTO notificationDTO);
     void deleteNotification(Long notificationID);
     NotificationDTO createOrderSuccessNotification(Long userID, String orderId);
+    List<NotificationDTO> getAllNotifications();
 }

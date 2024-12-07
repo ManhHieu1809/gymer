@@ -140,4 +140,23 @@ public class NutritionPlanServiceImpl implements NutritionPlanService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public NutritionPlanDTO getNutritionPlanById(Long nutritionID) {
+        // Tìm kế hoạch dinh dưỡng theo nutritionID
+        NutritionPlan nutritionPlan = nutritionPlanRepository.findByNutritionID(nutritionID);
+
+        // Kiểm tra nếu không tìm thấy
+        if (nutritionPlan == null) {
+            throw new RuntimeException("Kế hoạch dinh dưỡng không tồn tại");
+        }
+
+        // Chuyển từ NutritionPlan Entity sang NutritionPlanDTO
+        return new NutritionPlanDTO(
+                nutritionPlan.getNutritionID(),
+                nutritionPlan.getNameNutritionPlan(),
+                nutritionPlan.getDescriptions(),
+                nutritionPlan.getCalo(),
+                nutritionPlan.getUser().getUserID()
+        );
+    }
 }

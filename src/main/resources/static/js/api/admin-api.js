@@ -27,6 +27,11 @@ function fetchUsers() {
                         <button onclick="deleteUser (${user.userID})" class="btn btn-danger btn-sm" title="Xóa">
                             <i class="bi bi-trash" style="font-size: 1.5rem;"></i>
                         </button>
+                        
+                         <!-- Nút tạo thông báo -->
+                    <button onclick="createNotification(${user.userID})" class="btn btn-info btn-sm" title="Tạo Thông Báo">
+                        <i class="bi bi-bell" style="font-size: 1.5rem;"></i>
+                    </button>
                     </td>
           `;
                 userTableBody.appendChild(row);
@@ -86,7 +91,7 @@ function fetchGoods() {
 }
 
 function fetchOrders() {
-    fetch("/your-api-path/orders") // Replace with your backend API path
+    fetch("/admin/home/orders") // Replace with your backend API path
         .then(response => {
             if (!response.ok) {
                 throw new Error("Failed to fetch orders");
@@ -107,6 +112,18 @@ function fetchOrders() {
             <td>${order.statuss}</td>
             <td>${order.user.fullName} (${order.user.username})</td>
             <td><button onclick="viewOrderDetails(${index})">View Details</button></td>
+            <td>
+                <!-- Nút sửa trạng thái -->
+                <button onclick="editOrderStatus(${order.orderID}, '${order.statuss}')" class="btn btn-primary btn-sm" title="Sửa">
+                    <i class="bi bi-pencil-square" style="font-size: 1.5rem;"></i>
+                </button>
+            
+                <!-- Nút xóa -->
+                <button onclick="deleteOrder(${order.orderID})" class="btn btn-danger btn-sm" title="Xóa">
+                    <i class="bi bi-trash" style="font-size: 1.5rem;"></i>
+                </button>
+            
+            </td>
           `;
                 ordersTableBody.appendChild(row);
 
@@ -124,16 +141,73 @@ function fetchOrders() {
         .catch(error => console.error("Error fetching orders:", error));
 }
 
-// View details of an order
+// Hàm chỉnh sửa trạng thái đơn hàng
+function editOrderStatus(orderID, currentStatus) {
+    // Hiển thị SweetAlert2 với bảng thay đổi trạng thái
+    Swal.fire({
+        title: 'Chỉnh sửa trạng thái đơn hàng',
+        html: `
+            <label for="status">Trạng thái mới:</label>
+            <select id="status" class="form-select" required>
+                <option value="Pending" ${currentStatus === 'Pending' ? 'selected' : ''}>Pending</option>
+                <option value="Shipped" ${currentStatus === 'Shipped' ? 'selected' : ''}>Shipped</option>
+                <option value="Delivered" ${currentStatus === 'Delivered' ? 'selected' : ''}>Delivered</option>
+                <option value="Cancelled" ${currentStatus === 'Cancelled' ? 'selected' : ''}>Cancelled</option>
+            </select>
+        `,
+        showCancelButton: true,
+        confirmButtonText: 'Cập nhật',
+        cancelButtonText: 'Hủy',
+        preConfirm: () => {
+            const newStatus = document.getElementById("status").value;
+
+            // Gửi yêu cầu PUT tới backend để cập nhật trạng thái đơn hàng
+            return fetch(`/admin/home/orders/${orderID}/status?newStatus=${newStatus}`, { // Đổi endpoint này thành API của bạn
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ statuss: newStatus })
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Không thể cập nhật trạng thái");
+                    }
+                    return response.json();
+                })
+                .catch(error => {
+                    Swal.showValidationMessage(`Cập nhật thất bại: ${error}`);
+                });
+        }
+    }).then(result => {
+        if (result.isConfirmed) {
+            Swal.fire("Thành công!", "Trạng thái đơn hàng đã được cập nhật.", "success");
+            fetchOrders(); // Tải lại danh sách đơn hàng
+        }
+    });
+}
+
+
+// Hiển thị chi tiết đơn hàng
 function viewOrderDetails(orderIndex) {
     const details = window.orderDetails[orderIndex];
-    const detailsText = details.map(detail => `
-      Product: ${detail.product.productName}, 
-      Quantity: ${detail.quantity}, 
-      Price: ${detail.product.price.toFixed(2)}
-    `).join("\n");
 
-    alert(`Order Details:\n${detailsText}`);
+    // Chuẩn bị nội dung hiển thị
+    const detailsHTML = details.map(detail => `
+        <p><b>Sản phẩm:</b> ${detail.product.productName}</p>
+        <p><b>Số lượng:</b> ${detail.quantity}</p>
+        <p><b>Đơn giá:</b> ${detail.product.price.toFixed(2)} VNĐ</p>
+        <hr>
+    `).join("");
+
+    // Hiển thị với SweetAlert2
+    Swal.fire({
+        title: 'Chi tiết đơn hàng',
+        html: detailsHTML, // Dùng HTML để hiển thị đẹp
+        icon: 'info',
+        confirmButtonText: 'Đóng',
+        customClass: {
+            popup: 'swal-wide' // Nếu muốn tùy chỉnh độ rộng
+        }
+    });
 }
 
 // Fetch all data on page load
@@ -144,7 +218,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-async function deleteUser (userId) {
+async function deleteUser(userId) {
     if (confirm("Bạn có chắc chắn muốn xóa người dùng này?")) {
         try {
             const response = await fetch(`/admin/home/users/${userId}`, {
@@ -203,3 +277,125 @@ function deleteProduct(productId) {
             });
     }
 }
+
+function deleteOrder(orderID) {
+    // Hiển thị cửa sổ xác nhận SweetAlert2
+    Swal.fire({
+        title: 'Bạn có chắc chắn muốn xóa đơn hàng này?',
+        text: "Đây là hành động không thể hoàn tác!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Có, xóa!',
+        cancelButtonText: 'Hủy bỏ',
+        reverseButtons: true // Đổi vị trí của nút "Hủy bỏ" và "Xóa"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Gọi API DELETE để xóa đơn hàng
+            fetch(`/admin/home/orders/${orderID}`, {
+                method: "DELETE", // Sử dụng phương thức DELETE để xóa
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+                .then(response => {
+                    console.log("Response Status:", response.status); // Kiểm tra mã trạng thái của phản hồi
+
+                    // Kiểm tra mã trạng thái 200 hoặc 204
+                    if (response.status === 200 || response.status === 204) {
+                        // Không cần gọi response.json() nếu không có dữ liệu trả về (204)
+                        return response.status; // Trả về mã trạng thái
+                    } else {
+                        throw new Error(`Failed to delete order. Status code: ${response.status}`);
+                    }
+                })
+                .then(status => {
+                    if (status === 200 || status === 204) {
+                        // Thông báo thành công khi xóa
+                        Swal.fire(
+                            'Đã xóa!',
+                            'Đơn hàng đã được xóa thành công.',
+                            'success'
+                        );
+
+                        // Cập nhật lại giao diện sau khi xóa
+                        const row = document.querySelector(`#orderList table tbody tr[data-id='${orderID}']`);
+                        if (row) {
+                            row.remove(); // Xóa dòng này khỏi bảng
+                        }
+                        fetchOrders();
+
+                    }
+                })
+                .catch(error => {
+                    console.error("Error deleting order:", error);
+                    Swal.fire(
+                        'Lỗi!',
+                        `Có lỗi khi xóa đơn hàng: ${error.message}`,
+                        'error'
+                    );
+                });
+        }
+    });
+}
+
+// Hàm tạo thông báo cho người dùng
+function createNotification(userID) {
+    Swal.fire({
+        title: 'Nhập nội dung thông báo',
+        input: 'textarea',
+        inputPlaceholder: 'Nhập nội dung thông báo...',
+        showCancelButton: true,
+        confirmButtonText: 'Gửi Thông Báo',
+        cancelButtonText: 'Hủy',
+        preConfirm: (content) => {
+            if (!content) {
+                Swal.showValidationMessage('Vui lòng nhập nội dung thông báo');
+            }
+            return content;
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const notificationContent = result.value;
+
+            // Gửi yêu cầu tạo thông báo qua API
+            fetch('/admin/home/notifications', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    content: notificationContent, // Nội dung thông báo
+                    userID: userID,               // ID của người dùng nhận thông báo
+                }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data && data.content) {
+                        Swal.fire({
+                            title: 'Thông Báo Đã Gửi',
+                            html: `<strong>Thông báo:</strong> ${data.content}<br><strong>ID Người Nhận:</strong> ${data.userID}`,
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        });
+                    } else {
+                        Swal.fire({
+                            title: 'Lỗi',
+                            text: 'Không thể gửi thông báo.',
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error sending notification:', error);
+                    Swal.fire({
+                        title: 'Lỗi',
+                        text: 'Có lỗi xảy ra khi gửi thông báo.',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                });
+        }
+    });
+}
+

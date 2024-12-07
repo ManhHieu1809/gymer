@@ -28,4 +28,7 @@ public class WorkoutPlan {
 
     @OneToMany(mappedBy = "workoutPlan",cascade = CascadeType.ALL)
     private List<Workout> workouts;
+
+    @OneToMany(mappedBy = "workoutPlan",cascade = CascadeType.ALL)
+    private List<Progress> progresses;
 }

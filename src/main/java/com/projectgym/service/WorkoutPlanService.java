@@ -14,4 +14,8 @@ public interface WorkoutPlanService {
     List<WorkoutPlanDTO> getWorkoutPlansByUser(Long userID);
 
     WorkoutPlanDTO assignPlanToUser(Long planID, Long userID);
+
+    WorkoutPlanDTO getWorkoutPlan(Long planID);
+
+    List<WorkoutPlanDTO> getAllWorkoutPlans();
 }

@@ -16,4 +16,6 @@ public interface NutritionPlanService {
     List<NutritionPlanDTO> getNutritionPlansByUser(Long userID);
 
     List<NutritionPlanDTO> suggestNutritionPlans(Long userID);
+
+    NutritionPlanDTO getNutritionPlanById(Long nutritionID);
 }

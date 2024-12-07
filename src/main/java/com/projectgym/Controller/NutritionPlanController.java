@@ -58,4 +58,10 @@ public class NutritionPlanController {
         List<NutritionPlanDTO> suggestions = nutritionPlanService.suggestNutritionPlans(userID);
         return ResponseEntity.ok(suggestions);
     }
+
+    // Lấy thực đơn theo nutritionID
+    @GetMapping("/{nutritionID}")
+    public NutritionPlanDTO getNutritionPlan(@PathVariable Long nutritionID) {
+        return nutritionPlanService.getNutritionPlanById(nutritionID);
+    }
 }

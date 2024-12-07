@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta lang="vi">
+    <title>The Gym | Blank Page</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/css/AdminLTE.css}">
+    <link rel="stylesheet" th:href="@{/css/_all-skins.min.css}">
+    <link rel="stylesheet" th:href="@{/css/jquery-ui.css}">
+<!--    <link rel="stylesheet" th:href="@{/css/style.css}" />-->
+    <script th:src="@{/js/angular.min.js}"></script>
+    <script th:src="@{/js/app.js}"></script>
+
+    <!-- Custom CSS -->
+    <style>
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        .table th, .table td {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 150px;
+            text-align: center;
+        }
+
+        .modal-dialog {
+            max-width: 90%; /* Tăng chiều rộng modal */
+        }
+
+        .table {
+            margin-bottom: 0;
+        }
+
+        .box-header {
+            margin-bottom: 15px;
+        }
+
+        .content-wrapper {
+            min-height: auto;
+            height: auto;
+        }
+
+        /* Đảm bảo bảng tự động co dãn theo chiều rộng của container */
+        .table-responsive {
+            overflow-x: auto; /* Bảng có thể cuộn ngang nếu cần */
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Bảng sẽ co dãn tự động theo chiều rộng của màn hình */
+        .table {
+            width: 100%; /* Đảm bảo bảng sử dụng toàn bộ chiều rộng của container */
+            table-layout: auto; /* Điều chỉnh chiều rộng các cột tự động dựa trên nội dung */
+        }
+
+        /* Đảm bảo các cột trong bảng không bị cắt khi nội dung quá dài */
+        .table th, .table td {
+            word-wrap: break-word; /* Cắt từ và chuyển xuống dòng nếu từ quá dài */
+        }
+
+
+    </style>
+
+
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+<!-- Site wrapper -->
+<div class="wrapper">
+
+    <header class="main-header">
+        <!-- Logo -->
+        <a href="/trainer/home" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini"><b>GYM</b></span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg">THE GYM</span>
+        </a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <!-- Notifications-->
+                    <li class="dropdown notifications-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-bell-o"></i>
+                            <span class="label label-warning">10</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="header">Bạn có 10 thông báo</li>
+                            <li>
+                                <!-- inner menu: contains the actual data -->
+                                <ul class="menu">
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-users text-aqua"></i> 5 thành viên mới hôm nay
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="footer"><a href="#">Xem tất cả</a></li>
+                        </ul>
+                    </li>
+                    <!-- User Account-->
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img th:src="@{/images/user2-160x160.jpg}" class="user-image" alt="User Image">
+                            <span class="hidden-xs">Alexander Pierce</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- User image -->
+                            <li class="user-header">
+                                <img th:src="@{/images/user2-160x160.jpg}" class="img-circle" alt="User Image">
+                                <p>
+                                    Alexander Pierce <br> Administrator
+                                </p>
+                            </li>
+                            <!-- Menu Footer-->
+                            <li class="user-footer">
+                                <div class="pull-left">
+                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                </div>
+                                <div class="pull-right">
+                                    <a href="/req/login" class="btn btn-default btn-flat">Đăng xuất</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- =============================================== -->
+
+    <!-- Left side column. contains the sidebar -->
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <!-- Sidebar user panel -->
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img th:src="@{/images/user2-160x160.jpg}" class="img-circle" alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <p>Alexander Pierce</p>
+                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                </div>
+            </div>
+            <!-- search form -->
+            <form action="#" method="get" class="sidebar-form">
+                <div class="input-group">
+                    <input type="text" name="q" class="form-control" placeholder="Tìm kiếm...">
+                    <span class="input-group-btn">
+              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+              </button>
+            </span>
+                </div>
+            </form>
+            <!-- /.search form -->
+            <!-- sidebar menu: : style can be found in sidebar.less -->
+            <ul class="sidebar-menu" data-widget="tree">
+                <li>
+                    <a href="/trainer/home">
+                        <i class="fa fa-th"></i> <span>Quản lý khách hàng</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/trainer/home/nutrition-plan">
+                        <i class="fa fa-th"></i> <span>Quản lý kế hoạch dinh dưỡng</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/trainer/home/topic">
+                        <i class="fa fa-th"></i> <span>Quản lý chủ đề</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/trainer/home/workout-plan">
+                        <i class="fa fa-th"></i> <span>Quản lý kế hoạch luyện tập</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/trainer/home/Progress">
+                        <i class="fa fa-th"></i> <span>Quản lý tiến trình</span>
+                    </a>
+                </li>
+
+            </ul>
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- =============================================== -->
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1>Quản lý kế hoạch dinh dưỡng</h1>
+                </section>
+
+                <!-- Main content -->
+                <section class="content">
+                    <!-- Default box -->
+                    <div class="col-xs-12">
+                        <div class="box">
+                            <div class="box-header with-border">
+
+                                <!-- Thanh tìm kiếm vẫn ở góc phải -->
+                                <div class="box-tools">
+                                    <div class="input-group input-group-sm" style="width: 150px;">
+                                        <input type="text" id="searchBox1" onkeyup="filterTable('searchBox1','table1')" name="table_search"
+                                               class="form-control pull-right" placeholder="Tìm kiếm...">
+                                        <div class="input-group-btn">
+                                            <button type="submit" class="btn btn-default">
+                                                <i class="bi bi-search" style="font-size: 1.2rem;"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Bảng dữ liệu -->
+                            <div class="box-body table-responsive no-padding" id="menuList">
+                                <table class="table table-hover" id="table1">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Tên thực đơn</th>
+                                        <th>Mô tả</th>
+                                        <th>Calo</th>
+                                        <th>Thông tin người dùng</th> <!-- Cột mới cho thông tin thực đơn -->
+                                        <th>Hành động</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <!-- Thêm dữ liệu vào các ô bảng tương ứng -->
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+            </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+
+        </div>
+        <strong></a>.</strong>
+    </footer>
+
+
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 3 -->
+<!-- Bootstrap JS -->
+<!-- Bootstrap 3.3.7 JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/jquery-ui.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/adminlte.min.js}"></script>
+<script th:src="@{/js/dashboard.js}"></script>
+<script th:src="@{/tinymce/tinymce.min.js}"></script>
+<script th:src="@{/tinymce/config.js}"></script>
+<script th:src="@{/js/function.js}"></script>
+<script th:src="@{/js/api/admin-api.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    function fetchNutrition () {
+        // Fetch dữ liệu từ API /trainer/home/nutrition-plans và hiển thị lên bảng
+        fetch('/trainer/home/nutrition-plans')  // Thay đổi URL nếu cần thiết
+            .then(response => {
+                // Kiểm tra xem phản hồi có thành công hay không
+                if (!response.ok) {
+                    throw new Error('Lỗi khi tải dữ liệu từ API');
+                }
+                return response.json();  // Chuyển dữ liệu trả về thành JSON
+            })
+            .then(data => {
+                // Xử lý dữ liệu nhận được từ API
+                const tableBody = document.querySelector('#table1 tbody');
+                tableBody.innerHTML = '';  // Xóa dữ liệu cũ trước khi thêm mới
+
+                // Duyệt qua từng thực đơn và thêm vào bảng
+                data.forEach(item => {
+                    const row = document.createElement('tr');
+
+                    // Tạo các cột dữ liệu trong bảng
+                    row.innerHTML = `
+                <td>${item.nutritionID}</td>
+                <td>${item.nameNutritionPlan}</td>
+                <td>${item.descriptions}</td>
+                <td>${item.calo}</td>
+                <td>
+                    <a href="javascript:void(0);" onclick="viewUserDetail(${item.userID})" class="btn btn-info btn-sm" title="Xem chi tiết thông tin người dùng">
+                        Xem chi tiết
+                    </a>
+                </td>
+                <td>
+                   <a href="javascript:void(0);" onclick="openEditNutritionPlanModal(${item.nutritionID})" class="btn btn-warning btn-sm">
+                        Sửa
+                    </a>
+
+                    <button class="btn btn-danger btn-sm" onclick="deleteNutritionPlan(${item.nutritionID})">Xóa</button>
+                </td>
+            `;
+
+                    // Thêm hàng mới vào bảng
+                    tableBody.appendChild(row);
+                });
+            })
+            .catch(error => {
+                console.error('Có lỗi khi lấy dữ liệu:', error);
+            });
+    }
+    document.addEventListener("DOMContentLoaded", function () {
+        fetchNutrition();    // Populate user table (from previous implementation)
+    });
+
+    function deleteNutritionPlan(id) {
+        Swal.fire({
+            title: 'Bạn có chắc chắn muốn xóa kế hoạch dinh dưỡng này?',
+            text: "Bạn không thể khôi phục sau khi xóa!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Xóa',
+            cancelButtonText: 'Hủy'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`/trainer/home/nutrition-plans/${id}`, {
+                    method: 'DELETE',
+                })
+                    .then(response => {
+                        console.log("Response Status:", response.status); // Kiểm tra mã trạng thái của phản hồi
+
+                        // Kiểm tra mã trạng thái 200 hoặc 204
+                        if (response.status === 200 || response.status === 204) {
+                            // Không cần gọi response.json() nếu không có dữ liệu trả về (204)
+                            return response.status; // Trả về mã trạng thái
+                        } else {
+                            throw new Error(`Failed to delete order. Status code: ${response.status}`);
+                        }
+                    })
+                    .then(status => {
+                        if (status === 200 || status === 204) {
+                            // Thông báo thành công khi xóa
+                            Swal.fire(
+                                'Đã xóa!',
+                                'Kế hoạch luyện tập đã được xóa thành công.',
+                                'success'
+                            );
+                            fetchNutrition();
+                        } else {
+                            // Nếu có lỗi trong quá trình xóa
+                            return response.json();  // Trả về lỗi JSON để xử lý
+                        }
+                    })
+                    .then(data => {
+                        if (data) {
+                            Swal.fire(
+                                'Lỗi!',
+                                'Có lỗi khi xóa kế hoạch dinh dưỡng: ' + data.message,
+                                'error'
+                            );
+                        }
+                    })
+                    .catch(error => {
+                        Swal.fire(
+                            'Lỗi!',
+                            'Có lỗi khi xóa kế hoạch dinh dưỡng.',
+                            'error'
+                        );
+                        console.error('Có lỗi khi xóa kế hoạch dinh dưỡng:', error);
+                    });
+            }
+        });
+    }
+
+    // Hàm để hiển thị thông tin chi tiết người dùng
+    function viewUserDetail(userID) {
+        // Fetch thông tin người dùng chi tiết
+        fetch(`/admin/home/users/${userID}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Không thể lấy thông tin người dùng');
+                }
+                return response.json(); // Chuyển đổi thành JSON
+            })
+            .then(data => {
+                // Sử dụng SweetAlert2 để hiển thị thông tin chi tiết
+                Swal.fire({
+                    title: 'Thông tin người dùng',
+                    html: `
+                    <strong>Tên:</strong> ${data.fullName} <br>
+                    <strong>Email:</strong> ${data.email} <br>
+                    <strong>Giới tính:</strong> ${data.gender} <br>
+                    <strong>Chiều Cao:</strong> ${data.height} <br>
+                    <strong>Cân Nặng:</strong> ${data.weight}
+                `,
+                    icon: 'info',
+                    confirmButtonText: 'Đóng'
+                });
+            })
+            .catch(error => {
+                console.error('Có lỗi khi lấy thông tin người dùng:', error);
+                Swal.fire(
+                    'Lỗi!',
+                    'Không thể tải thông tin người dùng.',
+                    'error'
+                );
+            });
+    }
+    function openEditNutritionPlanModal(nutritionID) {
+        // Gọi API để lấy thông tin kế hoạch hiện tại
+        fetch(`/trainer/home/nutrition-plans/${nutritionID}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Không tìm thấy kế hoạch dinh dưỡng!');
+                }
+                return response.json();
+            })
+            .then(plan => {
+                // Hiển thị SweetAlert2 với dữ liệu hiện tại
+                Swal.fire({
+                    title: 'Sửa kế hoạch dinh dưỡng',
+                    html: `
+                    <input id="nameNutritionPlan" class="swal2-input" placeholder="Tên kế hoạch" value="${plan.nameNutritionPlan}">
+                    <input id="descriptions" class="swal2-input" placeholder="Mô tả" value="${plan.descriptions}">
+                    <input id="calo" type="number" step="0.1" class="swal2-input" placeholder="Calo (kcal)" value="${plan.calo}">
+                `,
+                    showCancelButton: true,
+                    confirmButtonText: 'Lưu',
+                    cancelButtonText: 'Hủy',
+                    preConfirm: () => {
+                        const nameNutritionPlan = document.getElementById('nameNutritionPlan').value;
+                        const descriptions = document.getElementById('descriptions').value;
+                        const calo = parseFloat(document.getElementById('calo').value);
+
+                        if (!nameNutritionPlan || !descriptions || isNaN(calo)) {
+                            Swal.showValidationMessage('Vui lòng điền đầy đủ thông tin!');
+                            return null;
+                        }
+
+                        return { nameNutritionPlan, descriptions, calo };
+                    }
+                }).then(result => {
+                    if (result.isConfirmed) {
+                        // Dữ liệu mới để cập nhật
+                        const updatedData = result.value;
+
+                        // Gọi Fetch API để cập nhật kế hoạch dinh dưỡng
+                        fetch(`/trainer/home/nutrition-plans/${nutritionID}`, {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(updatedData)
+                        })
+                            .then(response => {
+                                if (response.ok) {
+                                    Swal.fire('Thành công', 'Kế hoạch đã được cập nhật!', 'success');
+                                    fetchNutrition();
+                                } else {
+                                    return response.json().then(err => {
+                                        throw new Error(err.message || 'Đã xảy ra lỗi khi cập nhật.');
+                                    });
+                                }
+                            })
+                            .catch(error => {
+                                Swal.fire('Lỗi', error.message, 'error');
+                            });
+                    }
+                });
+            })
+            .catch(error => {
+                Swal.fire('Lỗi', error.message, 'error');
+            });
+    }
+
+</script>
+
+</body>
+
+</html>

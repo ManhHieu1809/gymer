@@ -9,6 +9,8 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,8 +19,9 @@ import org.springframework.security.web.SecurityFilterChain;
 import com.projectgym.service.MyAppUserService;
 
 import lombok.AllArgsConstructor;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+
+import java.util.Arrays;
 
 @Configuration
 @AllArgsConstructor
@@ -50,25 +53,25 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
-
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
-                .formLogin(httpForm ->{
+                .formLogin(httpForm -> {
                     httpForm.loginPage("/req/login").permitAll();
                     httpForm.defaultSuccessUrl("/index");
                     httpForm.successHandler(customAuthenticationSuccessHandler);
                 })
-
-
-                .authorizeHttpRequests(registry ->{
+                .authorizeHttpRequests(registry -> {
+                    registry.requestMatchers("/admin/home/users/**").hasAnyRole("ADMIN", "TRAINER");
+                    registry.requestMatchers("/admin/home/notifications/**").hasAnyRole("ADMIN", "TRAINER");
                     registry.requestMatchers("/admin/**").hasRole("ADMIN");  // Chỉ cho phép ADMIN truy cập trang này
                     registry.requestMatchers("/trainer/**").hasRole("TRAINER");  // Chỉ cho phép TRAINER truy cập trang này
                     registry.requestMatchers("/customer/**").hasRole("CUSTOMER");  // Chỉ cho phép CUSTOMER truy cập trang này
-                    registry.requestMatchers("/req/signup","/css/**","/js/**").permitAll();
+                    registry.requestMatchers("/req/signup", "/css/**", "/js/**").permitAll();
                     registry.anyRequest().authenticated();
                 })
+
                 .build();
     }
 

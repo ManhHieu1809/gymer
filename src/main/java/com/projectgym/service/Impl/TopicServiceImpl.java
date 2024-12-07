@@ -85,4 +85,11 @@ public class TopicServiceImpl implements TopicService {
                 ))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public TopicDTO getTopicById(Long topicID) {
+        Topic topic = topicRepository.findById(topicID)
+                .orElseThrow(() -> new RuntimeException("Topic not found with ID: " + topicID));
+        return convertToDTO(topic);
+    }
 }

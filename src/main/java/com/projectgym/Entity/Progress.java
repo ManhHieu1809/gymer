@@ -28,4 +28,8 @@ public class Progress {
     @ManyToOne
     @JoinColumn(name = "userID",nullable = false)
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "planID", nullable = false)
+    private WorkoutPlan workoutPlan;
 }

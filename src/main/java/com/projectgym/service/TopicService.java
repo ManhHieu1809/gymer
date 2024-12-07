@@ -11,4 +11,5 @@ public interface TopicService {
     void deleteTopic(Long topicID);
     List<TopicDTO> getAllTopics();
     List<FavoriteTopicDTO> getUserTopics(Long userID);
+    TopicDTO getTopicById(Long topicID);
 }

@@ -17,6 +17,12 @@ public class NotificationController {
     @Autowired
     private NotificationService notificationService;
 
+    @GetMapping
+    public List<NotificationDTO> getAllNotifications() {
+        return notificationService.getAllNotifications();  // Lấy tất cả thông báo từ service
+    }
+
+
     // Lấy tất cả thông báo của một người dùng dựa trên userID
     @GetMapping("/user/{userID}")
     public ResponseEntity<List<NotificationDTO>> getNotificationsByUser(@PathVariable Long userID) {

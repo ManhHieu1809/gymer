@@ -5,6 +5,7 @@ import com.projectgym.Entity.Progress;
 import com.projectgym.Entity.User;
 import com.projectgym.repository.ProgressRepository;
 import com.projectgym.repository.MyAppUserRepository;
+import com.projectgym.repository.WorkoutPlanRepository;
 import com.projectgym.service.ProgressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,9 @@ public class ProgressServiceImpl implements ProgressService {
 
     @Autowired
     private MyAppUserRepository userRepository;
+
+    @Autowired
+    private WorkoutPlanRepository workoutPlanRepository;
 
 
     @Override
@@ -42,6 +46,7 @@ public class ProgressServiceImpl implements ProgressService {
                 progress.getProgressDate(),
                 progress.getAchievement(),
                 user.getFullName() // Giả sử User entity có trường fullName
+
         );
     }
 
@@ -105,6 +110,33 @@ public class ProgressServiceImpl implements ProgressService {
                         progress.getUser().getFullName()
                 ))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ProgressDTO> getAllProgress() {
+        return progressRepository.findAllProgress();
+    }
+
+    @Override
+    public ProgressDTO updateProgressAchievement(Long progressID, Progress.Achievement newAchievement) {
+        // Tìm tiến độ theo ID
+        Progress progress = progressRepository.findById(progressID)
+                .orElseThrow(() -> new RuntimeException("Progress not found with ID: " + progressID));
+
+        // Cập nhật thành tựu mới
+        progress.setAchievement(newAchievement);
+
+        // Lưu tiến độ
+        progressRepository.save(progress);
+
+        // Trả về DTO đã cập nhật
+        return new ProgressDTO(
+                progress.getProgressID(),
+                progress.getUser().getFullName(),
+                progress.getWorkoutPlan().getPlanName(),
+                progress.getProgressDate(),
+                progress.getAchievement()
+        );
     }
 
 }

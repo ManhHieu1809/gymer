@@ -85,7 +85,7 @@
                                         <a href="#" class="btn btn-default btn-flat">Profile</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="../login.html" class="btn btn-default btn-flat">Đăng xuất</a>
+                                        <a href="/req/login" class="btn btn-default btn-flat">Đăng xuất</a>
                                     </div>
                                 </li>
                             </ul>
@@ -153,8 +153,20 @@
                         </a>
                     </li>
                     <li>
-                        <a href="orderMng.html">
+                        <a href="/admin/home/order">
                             <i class="fa fa-th"></i> <span>Quản lý đơn hàng</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/admin/home/notification">
+                            <i class="fa fa-th"></i> <span>Quản lý thông báo</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/admin/home">
+                            <i class="fa fa-th"></i> <span>Thống kê doanh thu</span>
                         </a>
                     </li>
                     <!-- <li>
@@ -188,13 +200,22 @@
                     <div class="box">
                         <div class="box-header with-border">
                             <!-- Nút "Thêm người dùng" -->
-                            <div class="pull-left">
-                                <a href="/admin/home/product/product-add" class="btn btn-success btn-sm" title="Thêm sản phẩm">
+                            <div class="d-flex justify-content-start mb-3">
+                                <!-- Nút thêm sản phẩm -->
+                                <a href="/admin/home/product/product-add" class="btn btn-success btn-sm me-3" title="Thêm sản phẩm">
                                     <i class="bi bi-plus-circle" style="font-size: 1.5rem;"></i>
-                                    Thêm sản phẩm<!-- Icon thêm -->
+                                    <span class="ms-2">Thêm sản phẩm</span>
+                                </a>
+
+                                <!-- Nút lấy danh sách sản phẩm sắp hết hàng -->
+                                <a href="javascript:void(0)" id="getLowStockBtn" class="btn btn-warning btn-sm" title="Sản phẩm sắp hết">
+                                    <i class="bi bi-exclamation-circle" style="font-size: 1.5rem;"></i>
+                                    <span class="ms-2">Sản phẩm sắp hết</span>
                                 </a>
                             </div>
-                        <div class="box-tools">
+
+
+                            <div class="box-tools">
                             <div class="input-group input-group-sm" style="width: 150px;">
                                 <input type="text" id="searchBox2" onkeyup="filterTable('searchBox2','table2')"
                                     name="table_search" class="form-control pull-right" placeholder="Search">
@@ -238,7 +259,7 @@
                     
                 </div>
                 <!-- /.box -->
-
+            </div>
             </section>
             <!-- /.content -->
         </div>
@@ -246,9 +267,9 @@
         <!-- -------------------------------------------------------- -->
         <footer class="main-footer">
             <div class="pull-right hidden-xs">
-                <b>Version</b> 0.0.1
+
             </div>
-            <strong>Copyright &copy; 2018 <a href="https://adminlte.io">AdminLTE</a>.</strong>
+            <strong> <a></a>.</strong>
         </footer>
 
     </div>
@@ -265,6 +286,60 @@
     <script th:src="@{/tinymce/config.js}"></script>
     <script th:src="@{/js/function.js}"></script>
     <script th:src="@{/js/api/admin-api.js}"></script>
+
+    <script>
+        // Hàm lấy danh sách sản phẩm sắp hết hàng
+        function fetchLowStockProducts() {
+            fetch('/admin/home/products/low-stock?threshold=400') // Địa chỉ API lấy sản phẩm sắp hết hàng
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Không thể lấy dữ liệu sản phẩm sắp hết hàng');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const goodsTableBody = document.querySelector("#goodsList table tbody");
+                    goodsTableBody.innerHTML = ""; // Xóa các hàng hiện tại trong bảng
+
+                    // Kiểm tra nếu có dữ liệu sản phẩm sắp hết hàng
+                    if (data.length === 0) {
+                        goodsTableBody.innerHTML = "<tr><td colspan='7'>Không có sản phẩm sắp hết hàng</td></tr>";
+                        return;
+                    }
+
+                    // Duyệt qua danh sách sản phẩm sắp hết hàng và hiển thị trong bảng
+                    data.forEach((product) => {
+                        const row = document.createElement("tr");
+                        row.innerHTML = `
+                    <td><input type="checkbox" class="checkbox" data-id="${product.productID}" /></td>
+                    <td>${product.productID}</td>
+                    <td>${product.productName}</td>
+                    <td>${product.descriptions}</td>
+                    <td>${product.price.toFixed(2)}</td>
+                    <td>${product.quantity}</td>
+                    <td>
+                        <a href="/admin/home/product/product-edit/${product.productID}" class="btn btn-primary btn-sm" title="Sửa">
+                            <i class="bi bi-pencil-square" style="font-size: 1.5rem;"></i>
+                        </a>
+                        <button onclick="deleteProduct(${product.productID})" class="btn btn-danger btn-sm" title="Xóa">
+                            <i class="bi bi-trash" style="font-size: 1.5rem;"></i>
+                        </button>
+                    </td>
+                `;
+                        goodsTableBody.appendChild(row);
+                    });
+                })
+                .catch(error => {
+                    console.error("Lỗi khi lấy sản phẩm sắp hết hàng:", error);
+                    alert("Đã có lỗi xảy ra khi lấy sản phẩm sắp hết hàng.");
+                });
+        }
+
+        // Lắng nghe sự kiện khi nhấn nút "Sản phẩm sắp hết"
+        document.getElementById("getLowStockBtn").addEventListener("click", fetchLowStockProducts);
+
+    </script>
+
 </body>
 
 </html>

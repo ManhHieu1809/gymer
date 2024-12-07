@@ -44,4 +44,16 @@ public class WorkoutPlanController {
         WorkoutPlanDTO assignedPlan = workoutPlanService.assignPlanToUser(planID, userID);
         return new ResponseEntity<>(assignedPlan, HttpStatus.OK);
     }
+
+    @GetMapping("/{planID}")
+    public ResponseEntity<WorkoutPlanDTO> getWorkoutPlan(@PathVariable Long planID) {
+        WorkoutPlanDTO plan = workoutPlanService.getWorkoutPlan(planID);
+        return new ResponseEntity<>(plan, HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<WorkoutPlanDTO>> getAllWorkoutPlans() {
+        List<WorkoutPlanDTO> plans = workoutPlanService.getAllWorkoutPlans();
+        return new ResponseEntity<>(plans, HttpStatus.OK);
+    }
 }

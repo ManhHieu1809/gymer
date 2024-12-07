@@ -1,6 +1,6 @@
 function filterTable(searchBoxId, tableId) {
     const input = document.getElementById(searchBoxId);
-    const filter = input.value.toLowerCase();
+    const filter = removeVietnameseTones(input.value.toLowerCase());
     const table = document.getElementById(tableId);
     const rows = table.getElementsByTagName("tr");
 
@@ -9,7 +9,8 @@ function filterTable(searchBoxId, tableId) {
         let match = false;
 
         for (let j = 0; j < cells.length; j++) {
-            if (cells[j].textContent.toLowerCase().includes(filter)) {
+            const cellText = removeVietnameseTones(cells[j].textContent.toLowerCase());
+            if (cellText.includes(filter)) {
                 match = true;
                 break;
             }
@@ -18,6 +19,17 @@ function filterTable(searchBoxId, tableId) {
         rows[i].style.display = match ? "" : "none";
     }
 }
+
+// Hàm loại bỏ dấu tiếng Việt
+function removeVietnameseTones(str) {
+    return str
+        .normalize("NFD") // Tách các ký tự có dấu thành các ký tự cơ bản + dấu
+        .replace(/[\u0300-\u036f]/g, "") // Loại bỏ dấu
+        .replace(/đ/g, "d") // Chuyển 'đ' thành 'd'
+        .replace(/Đ/g, "D") // Chuyển 'Đ' thành 'D'
+        .replace(/[^a-zA-Z0-9 ]/g, ""); // Loại bỏ ký tự đặc biệt (nếu cần)
+}
+
 
 function deleteCheckedRows(tableId) {
     const table = document.querySelector(`#${tableId} tbody`);

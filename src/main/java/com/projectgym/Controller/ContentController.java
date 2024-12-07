@@ -27,7 +27,7 @@ public class ContentController {
 
     @GetMapping("/trainer/home")
     public String trainerHome(){
-        return "trainer/homeTrainer";
+        return "trainer/index";
     }
 
     @GetMapping("/customer/home")
@@ -65,4 +65,33 @@ public class ContentController {
         return "admin/edit-goods";
     }
 
+    @GetMapping("/admin/home/order")
+    public String order(){
+        return "admin/orderMng";
+    }
+
+    @GetMapping("/admin/home/notification")
+    public String notification(){
+        return "admin/notification";
+    }
+
+    @GetMapping("/trainer/home/nutrition-plan")
+    public String nutritionPlan(){
+        return "trainer/nutritionPlan";
+    }
+
+    @GetMapping("/trainer/home/topic")
+    public String topic(){
+        return "trainer/topic";
+    }
+
+    @GetMapping("/trainer/home/workout-plan")
+    public String workoutPlan(){
+        return "trainer/workoutPlan";
+    }
+
+    @GetMapping("/trainer/home/Progress")
+    public String progress(){
+        return "trainer/progress";
+    }
 }

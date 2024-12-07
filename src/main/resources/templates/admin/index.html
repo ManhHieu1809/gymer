@@ -15,8 +15,124 @@
   <link rel="stylesheet" th:href="@{../css/_all-skins.min.css}">
   <link rel="stylesheet" th:href="@{../css/jquery-ui.css}">
   <link rel="stylesheet" th:href="@{../css/style.css}" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script th:src="@{../js/angular.min.js}"></script>
   <script th:src="@{../js/app.js}"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<!--  <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet"/>-->
+  <style>
+    .chart-container {
+      width: 100%; /* Đặt chiều rộng thành 100% */
+      max-width: 800px; /* Bạn có thể giữ max-width nếu cần */
+      height: 400px; /* Đặt chiều cao cụ thể cho biểu đồ */
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      overflow: hidden; /* Ẩn phần bị tràn */
+      max-height: 400px; /* Đặt chiều cao tối đa */
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+
+    }
+    canvas {
+      display: block;
+      width: 100% !important; /* Đảm bảo canvas chiếm toàn bộ chiều rộng */
+      height: 100% !important; /* Đảm bảo canvas chiếm toàn bộ chiều cao */
+    }
+    /*.sidebar {*/
+    /*  height: 100vh;*/
+    /*  background-color: #343a40;*/
+    /*  color: white;*/
+    /*  padding-top: 20px;*/
+    /*}*/
+    /*.sidebar a {*/
+    /*  color: white;*/
+    /*  text-decoration: none;*/
+    /*}*/
+    /*.sidebar .nav-link.active {*/
+    /*  background-color: #007bff;*/
+    /*}*/
+    .content {
+      padding: 20px;
+    }
+    .card {
+      margin-bottom: 20px;
+    }
+    .card-header {
+      font-size: 1.25rem;
+    }
+    .card-body {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .card-body .icon {
+      font-size: 2rem;
+    }
+    .chart {
+      height: 200px;
+    }
+
+    .card.bg-info {
+      background-color: #17a2b8 !important; /* Change to desired color */
+    }
+
+    .card.bg-success {
+      background-color: #28a745 !important; /* Change to desired color */
+    }
+
+    .card.bg-warning {
+      background-color: #ffc107 !important; /* Change to desired color */
+    }
+
+    .card.bg-danger {
+      background-color: #dc3545 !important; /* Change to desired color */
+    }
+
+    .card-footer a {
+      color: #ffffff !important; /* Change link color in footer */
+    }
+
+    .card {
+      border-radius: 10px; /* Rounded corners */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+      transition: transform 0.3s; /* Smooth transition for hover effect */
+    }
+
+    .card:hover {
+      transform: translateY(-5px); /* Lift effect on hover */
+    }
+
+    .card-title {
+      font-size: 1.5rem; /* Larger title font size */
+      font-weight: bold; /* Bold title */
+      color: #ffffff; /* White text for better contrast */
+    }
+
+    .card-text {
+      font-size: 1rem; /* Standard font size for text */
+      color: #f8f9fa; /* Light text color for better readability */
+    }
+
+    .card-footer {
+      background-color: rgba(0, 0, 0, 0.1); /* Slightly darker footer */
+      border-top: 1px solid rgba(255, 255, 255, 0.2); /* Light border on top */
+    }
+
+    .card-footer a {
+      color: #ffffff; /* White text for footer links */
+      text-decoration: none; /* Remove underline */
+      font-weight: bold; /* Bold footer link */
+    }
+
+    .card-footer a:hover {
+      text-decoration: underline; /* Underline on hover for emphasis */
+    }
+  </style>
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -111,6 +227,7 @@
           </div>
         </div>
         <!-- search form -->
+        <!-- Sidebar search form -->
         <form action="#" method="get" class="sidebar-form">
           <div class="input-group">
             <input type="text" name="q" class="form-control" placeholder="Tìm kiếm...">
@@ -120,6 +237,7 @@
             </span>
           </div>
         </form>
+
         <!-- /.search form -->
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
@@ -151,8 +269,20 @@
             </a>
           </li>
           <li>
-            <a href="orderMng.html">
+            <a href="/admin/home/order">
               <i class="fa fa-th"></i> <span>Quản lý đơn hàng</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/admin/home/notification">
+              <i class="fa fa-th"></i> <span>Quản lý thông báo</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/admin/home">
+              <i class="fa fa-th"></i> <span>Thống kê doanh thu</span>
             </a>
           </li>
           <!-- <li>
@@ -172,22 +302,241 @@
     <!-- =============================================== -->
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
-      <section class="content-header">
-        <h1>
-          Administrator
-        </h1>
-      </section>
+    <div class="content-wrapper" style="min-height: auto;">
 
       <!-- Main content -->
       <section class="content">
 
-        <!-- Default box -->
-        <div class="box">
-          <p>Quản lý tài khoản, lên kệ sản phẩm và quản lý đơn hàng</p>
+        <main class="col-md-9 ml-sm-auto col-lg-10 px-4 content" role="main">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2" style=" top: 10%;">
+              Thống Kê Doanh Thu
+            </h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+              <div class="btn-group mr-2">
+                <button class="btn btn-sm btn-outline-secondary" type="button">
+                  Share
+                </button>
+                <button class="btn btn-sm btn-outline-secondary" type="button">
+                  Export
+                </button>
+              </div>
+              <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="datePickerButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-calendar-alt"></i> This week
+              </button>
+              <div class="dropdown-menu" aria-labelledby="datePickerButton">
+                <input type="date" class="form-control" id="dateInput" />
+              </div>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+              <div class="card text-white bg-info">
+                <div class="card-body">
+                  <div>
+                    <h5 class="card-title" id="totalRevenue">
+
+                    </h5>
+                    <p class="card-text">
+                      Tổng doanh thu
+                    </p>
+                  </div>
+                  <div class="icon">
+                    <i class="fas fa-shopping-cart fa-2x"></i>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <a class="text-white" href="#">
+                    More info
+                    <i class="fas fa-arrow-circle-right"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-md-3">
+              <div class="card text-white bg-success">
+                <div class="card-body">
+                  <div>
+                    <h5 class="card-title" id="bounceRate">
+                      <!-- Phần trăm thay đổi doanh thu giữa tháng hiện tại và tháng đã chọn -->
+                    </h5>
+                    <p class="card-text">
+                      Doanh thu thay đổi
+                    </p>
+                  </div>
+                  <div class="icon">
+                    <i class="fas fa-chart-line fa-2x"></i>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <a class="text-white" href="#">
+                    More info
+                    <i class="fas fa-arrow-circle-right"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="col-md-3">
+              <div class="card text-white bg-warning">
+                <div class="card-body">
+                  <div>
+                    <h5 class="card-title" id="userCount">
+                      <!-- Số lượng người dùng sẽ được hiển thị ở đây -->
+                    </h5>
+                    <p class="card-text">
+                      Tổng số tài khoản
+                    </p>
+                  </div>
+                  <div class="icon">
+                    <i class="fas fa-user-plus fa-2x"></i>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <a class="text-white" href="#">
+                    More info
+                    <i class="fas fa-arrow-circle-right"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="card text-white bg-danger">
+                <div class="card-body">
+                  <div>
+                    <h5 class="card-title">
+                      65
+                    </h5>
+                    <p class="card-text">
+                      Unique Visitors
+                    </p>
+                  </div>
+                  <div class="icon">
+                    <i class="fas fa-chart-pie fa-2x">
+                    </i>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <a class="text-white" href="#">
+                    More info
+                    <i class="fas fa-arrow-circle-right">
+                    </i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </main>
+        <div class="chart-container">
+          <canvas id="revenueChart"></canvas>
         </div>
-        <!-- /.box -->
+
+        <script>
+          const ctx = document.getElementById('revenueChart').getContext('2d');
+
+          // Tạo mảng doanh thu trống để chứa dữ liệu của từng tháng
+          let revenueData = [];
+
+          // Hàm để gọi API và lấy doanh thu từng tháng
+          function fetchRevenueData() {
+            const year = 2024;  // Thay thế bằng năm bạn muốn lấy dữ liệu
+
+            // Gọi API để lấy doanh thu cho từng tháng trong năm
+            const promises = [];
+            for (let month = 1; month <= 12; month++) {
+              promises.push(
+                      fetch(`/admin/home/orders/revenue/month?month=${month}&year=${year}`)
+                              .then(response => response.json())
+                              .catch(error => {
+                                console.error('Error fetching revenue:', error);
+                                return 0;  // Nếu có lỗi thì gán giá trị doanh thu là 0
+                              })
+              );
+            }
+
+            // Chờ cho tất cả các API trả về và sau đó cập nhật biểu đồ
+            Promise.all(promises)
+                    .then(data => {
+                      // Cập nhật dữ liệu doanh thu vào mảng
+                      revenueData = data;
+
+                      // Cập nhật biểu đồ với dữ liệu mới
+                      updateChart();
+                    })
+                    .catch(error => {
+                      console.error('Error in Promise.all:', error);
+                    });
+          }
+
+          // Hàm để cập nhật biểu đồ Chart.js với dữ liệu doanh thu
+          function updateChart() {
+            const revenueChart = new Chart(ctx, {
+              type: 'line',
+              data: {
+                labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
+                datasets: [{
+                  label: 'Doanh Thu (VNĐ)',
+                  data: revenueData,  // Dữ liệu doanh thu lấy từ API
+                  fill: true,
+                  backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                  borderColor: 'rgba(75, 192, 192, 1)',
+                  borderWidth: 2,
+                  tension: 0.4, // Tạo hiệu ứng đường cong
+                  pointRadius: 5,
+                  pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+                  pointHoverRadius: 7,
+                  pointHoverBackgroundColor: 'rgba(255, 99, 132, 1)',
+                }]
+              },
+              options: {
+                responsive: true,
+                plugins: {
+                  legend: {
+                    display: true,
+                    position: 'top',
+                  },
+                  tooltip: {
+                    mode: 'index',
+                    intersect: false,
+                  }
+                },
+                interaction: {
+                  mode: 'index',
+                  intersect: false
+                },
+                scales: {
+                  x: {
+                    title: {
+                      display: true,
+                      text: 'Tháng'
+                    }
+                  },
+                  y: {
+                    beginAtZero: true,
+                    title: {
+                      display: true,
+                      text: 'Doanh Thu (VNĐ)'
+                    }
+                  }
+                }
+              }
+            });
+          }
+
+          // Gọi hàm fetchRevenueData khi trang được tải
+          fetchRevenueData();
+        </script>
+
+
+
+
 
       </section>
       <!-- /.content -->
@@ -196,9 +545,8 @@
 
     <footer class="main-footer">
       <div class="pull-right hidden-xs">
-        <b>Version</b> 0.0.1
       </div>
-      <strong>Copyright &copy; 2018 <a href="https://adminlte.io">AdminLTE</a>.</strong>
+      <strong> <a></a>.</strong>
     </footer>
 
   </div>
@@ -214,6 +562,51 @@
   <script th:src="@{../tinymce/tinymce.min.js}"></script>
   <script th:src="@{../tinymce/config.js}"></script>
   <script th:src="@{../js/function.js}"></script>
+
+  <script>
+    // Sử dụng Fetch API để lấy tổng doanh thu từ backend
+    fetch('/admin/home/orders/total-revenue')
+            .then(response => response.json()) // Giả sử dữ liệu trả về là một số (tổng doanh thu)
+            .then(data => {
+              // Cập nhật giá trị doanh thu vào phần tử có id 'totalRevenue', thêm "VNĐ" sau số
+              document.getElementById('totalRevenue').innerText = data.toLocaleString() + ' VNĐ';
+            })
+            .catch(error => {
+              console.error('Error fetching total revenue:', error);
+            });
+  </script>
+
+
+  <script>
+    // Gọi API để lấy phần trăm thay đổi doanh thu
+    fetch('/admin/home/orders/revenue/change')
+            .then(response => response.json())
+            .then(data => {
+              // Cập nhật phần trăm vào thẻ HTML
+              document.getElementById('bounceRate').innerText = data.toFixed(2) + '%';
+            })
+            .catch(error => console.error('Error fetching revenue change:', error));
+
+  </script>
+
+  <script>
+    // Hàm lấy số lượng người dùng từ API
+    function fetchUserCount() {
+      fetch('/admin/home/users/count')
+              .then(response => response.json())
+              .then(data => {
+                // Cập nhật số lượng người dùng vào trong thẻ h5
+                document.getElementById('userCount').innerText = data;
+              })
+              .catch(error => {
+                console.error('Error fetching user count:', error);
+                document.getElementById('userCount').innerText = '0'; // Nếu có lỗi, hiển thị 0
+              });
+    }
+
+    // Gọi hàm khi trang được tải
+    fetchUserCount();
+  </script>
 </body>
 
 </html>

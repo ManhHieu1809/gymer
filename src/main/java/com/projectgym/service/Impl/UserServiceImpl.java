@@ -118,4 +118,9 @@ public class UserServiceImpl implements UserService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public long countUsers() {
+        return repository.count();  // Spring Data JPA sẽ tự động cung cấp phương thức count()
+    }
+
 }

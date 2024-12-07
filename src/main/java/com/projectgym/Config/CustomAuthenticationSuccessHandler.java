@@ -23,7 +23,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
             response.sendRedirect("/trainer/home");
         } else if (roles.contains("ROLE_CUSTOMER")) {
             response.sendRedirect("/customer/home");
-        } else {
+        }else {
             response.sendRedirect("/index");
         }
     }

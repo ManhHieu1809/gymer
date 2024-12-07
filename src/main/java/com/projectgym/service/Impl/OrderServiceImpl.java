@@ -34,7 +34,7 @@ public class OrderServiceImpl implements OrdersService {
     @Override
     public OrdersDTO createOrder(OrdersDTO ordersDTO) {
         Orders order = new Orders();
-        order.setOrderDate(ordersDTO.getOrderDate());
+        order.setOrderDate(LocalDateTime.now());  // Tự động lấy thời gian hiện tại
         order.setStatuss(Orders.statuss.Pending); // Trạng thái mặc định là PENDING
         User user = userRepository.findById((long) ordersDTO.getUser().getUserID())
                 .orElseThrow(() -> new RuntimeException("User not found"));

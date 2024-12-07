@@ -55,4 +55,11 @@ public class TopicController {
         return ResponseEntity.ok(topics); // 200 OK
     }
 
+    // Lấy thông tin chủ đề theo ID
+    @GetMapping("/{topicID}")
+    public ResponseEntity<TopicDTO> getTopicById(@PathVariable Long topicID) {
+        TopicDTO topic = topicService.getTopicById(topicID);
+        return ResponseEntity.ok(topic); // 200 OK
+    }
+
 }

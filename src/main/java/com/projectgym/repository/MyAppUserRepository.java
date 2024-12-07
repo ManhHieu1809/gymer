@@ -21,4 +21,6 @@ public interface MyAppUserRepository extends JpaRepository<User, Long>{
             "WHERE (:username IS NULL OR LOWER(u.userName) LIKE LOWER(CONCAT('%', :username, '%'))) " +
             "AND (:fullName IS NULL OR LOWER(u.fullName) LIKE LOWER(CONCAT('%', :fullName, '%')))")
     List<User> searchByUsernameOrFullName(@Param("username") String username, @Param("fullName") String fullName);
+
+    long count();
 }

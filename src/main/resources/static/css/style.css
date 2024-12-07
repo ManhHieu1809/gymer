@@ -82,3 +82,74 @@ td:last-child {
     width: 120px; /* Đảm bảo đủ không gian cho biểu tượng */
     padding: 10px; /* Khoảng cách hợp lý */
 }
+
+/*/////////////////////////////
+
+ */
+
+/* Di chuyển các nút vào góc phải trên màn hình và căn giữa theo chiều dọc */
+.btn-toolbar {
+    position: fixed;
+    top: 15%; /* Căn giữa theo chiều dọc */
+    right: 20px; /* Đặt vào góc phải */
+    transform: translateY(-50%); /* Căn chỉnh chính xác giữa */
+    z-index: 9999; /* Đảm bảo nó hiển thị trên các phần tử khác */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Thêm bóng mờ cho toolbar */
+    border-radius: 10px; /* Bo góc cho các nút */
+}
+
+/* Các nút trong nhóm */
+.btn-group .btn {
+    margin-right: 10px;
+    border-radius: 5px; /* Bo góc nhẹ cho các nút */
+    font-weight: 600; /* Tăng độ đậm của chữ */
+    transition: all 0.3s ease; /* Thêm hiệu ứng chuyển tiếp mượt mà khi hover */
+    padding: 10px 20px; /* Tăng kích thước padding để các nút to và dễ bấm */
+}
+
+/* Hiệu ứng khi hover lên nút */
+.btn-group .btn:hover {
+    background-color: #007bff; /* Màu nền khi hover */
+    color: white; /* Đổi màu chữ thành trắng */
+    transform: scale(1.05); /* Làm phóng to một chút khi hover */
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2); /* Thêm bóng mờ khi hover */
+}
+
+/* Hiệu ứng hover cho dropdown button */
+.btn-outline-secondary.dropdown-toggle:hover {
+    background-color: #007bff;
+    color: white;
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+}
+
+/* Style cho menu dropdown */
+.dropdown-menu {
+    padding: 15px;
+    background-color: #f8f9fa; /* Màu nền sáng cho menu */
+    border-radius: 10px; /* Bo góc cho menu */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Thêm bóng mờ cho dropdown */
+    min-width: 200px; /* Chiều rộng tối thiểu */
+}
+
+/* Style cho input date */
+input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    transition: border 0.3s ease;
+}
+
+/* Khi hover vào input date */
+input[type="date"]:hover {
+    border-color: #007bff;
+    outline: none; /* Tắt viền mặc định của input */
+}
+
+/* Hiệu ứng focus cho input date */
+input[type="date"]:focus {
+    border-color: #007bff; /* Đổi màu viền khi focus */
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.3); /* Thêm bóng mờ khi focus */
+}

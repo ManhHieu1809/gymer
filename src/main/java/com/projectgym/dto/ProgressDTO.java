@@ -13,8 +13,26 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProgressDTO {
+    private int progressID;
     @Temporal(TemporalType.DATE)
     private Date progressDate;
     private Progress.Achievement achievement;
     private String userName;
+    private String planName;
+
+    // Constructor
+    public ProgressDTO(Date progressDate, Progress.Achievement achievement, String userFullName) {
+        this.progressDate = progressDate;
+        this.achievement = achievement;
+        this.userName = userFullName;
+    }
+    // Constructor
+    public ProgressDTO(int progressID, String userFullName, String planName, Date progressDate, Progress.Achievement achievement) {
+        this.progressID = progressID;
+        this.userName = userFullName;
+        this.planName = planName;
+        this.progressDate = progressDate;
+        this.achievement = achievement;
+    }
+
 }

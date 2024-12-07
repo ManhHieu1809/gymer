@@ -104,4 +104,31 @@ public class WorkoutPlanServiceImpl implements WorkoutPlanService {
                 updatedPlan.getUser().getUserID()
         );
     }
+
+    @Override
+    public WorkoutPlanDTO getWorkoutPlan(Long planID) {
+        WorkoutPlan plan = workoutPlanRepository.findById(planID)
+                .orElseThrow(() -> new RuntimeException("Plan not found"));
+
+        return new WorkoutPlanDTO(
+                plan.getPlanID(),
+                plan.getPlanName(),
+                plan.getDescriptions(),
+                plan.getDuration(),
+                plan.getUser() != null ? plan.getUser().getUserID() : null
+        );
+    }
+
+    @Override
+    public List<WorkoutPlanDTO> getAllWorkoutPlans() {
+        return workoutPlanRepository.findAll().stream()
+                .map(plan -> new WorkoutPlanDTO(
+                        plan.getPlanID(),
+                        plan.getPlanName(),
+                        plan.getDescriptions(),
+                        plan.getDuration(),
+                        plan.getUser() != null ? plan.getUser().getUserID() : null
+                ))
+                .collect(Collectors.toList());
+    }
 }

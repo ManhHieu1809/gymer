@@ -81,4 +81,16 @@ public class NotificationServiceImpl implements NotificationService {
         Notification savedNotification = notificationRepository.save(notification);
         return new NotificationDTO(savedNotification); // Trả về NotificationDTO thay vì entity Notification
     }
+
+    // Lấy tất cả thông báo và trả về dưới dạng NotificationDTO
+    @Override
+    public List<NotificationDTO> getAllNotifications() {
+        List<Notification> notifications = notificationRepository.findAll();  // Truy vấn tất cả thông báo
+
+        // Chuyển đổi danh sách Notification entity sang NotificationDTO
+        return notifications.stream()
+                .map(notification -> new NotificationDTO(notification))  // Mỗi Notification được chuyển thành NotificationDTO
+                .collect(Collectors.toList());
+    }
+
 }

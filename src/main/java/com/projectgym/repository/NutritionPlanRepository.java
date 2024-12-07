@@ -8,5 +8,6 @@ import java.util.List;
 
 @Repository
 public interface NutritionPlanRepository extends JpaRepository<NutritionPlan, Long> {
-    List<NutritionPlan> findByUser_UserID(Long userID); // Lấy danh sách thực đơn theo userID
+    List<NutritionPlan> findByUser_UserID(Long userID);
+    NutritionPlan findByNutritionID(Long nutritionID);// Lấy danh sách thực đơn theo userID
 }

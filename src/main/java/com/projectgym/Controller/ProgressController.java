@@ -1,5 +1,6 @@
 package com.projectgym.Controller;
 
+import com.projectgym.Entity.Progress;
 import com.projectgym.dto.ProgressDTO;
 import com.projectgym.service.ProgressService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,20 @@ public class ProgressController {
     public ResponseEntity<Void> deleteProgress(@PathVariable Long progressID) {
         progressService.deleteProgress(progressID);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ProgressDTO>> getAllProgress() {
+        List<ProgressDTO> progressList = progressService.getAllProgress();
+        return ResponseEntity.ok(progressList);
+    }
+
+    @PutMapping("/{progressID}/update-achievement")
+    public ResponseEntity<ProgressDTO> updateProgressAchievement(
+            @PathVariable Long progressID,
+            @RequestParam Progress.Achievement newAchievement) {
+        ProgressDTO updatedProgress = progressService.updateProgressAchievement(progressID, newAchievement);
+        return new ResponseEntity<>(updatedProgress, HttpStatus.OK);
     }
 
 }
