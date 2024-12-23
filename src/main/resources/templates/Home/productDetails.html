@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="zxx" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Gym Template">
+    <meta name="keywords" content="Gym, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Gym | Template</title>
+      <!-- Favicon-->
+      <link rel="icon" type="image/x-icon" th:href="@{/assets4/favicon.ico}" />
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
+    <link th:href="@{/css4/styles.css}" rel="stylesheet" />
+<!-- Css Styles -->
+<link th:href="@{/css2/bootstrap.min.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css2/font-awesome.min.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css2/flaticon.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css2/owl.carousel.min.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css2/barfiller.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css2/magnific-popup.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css2/slicknav.min.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css2/style.css}" rel="stylesheet" type="text/css">
+
+    <style>
+        .user-icon {
+            font-size: 2rem;
+            color: white; /* Màu trắng cho icon */
+            text-decoration: none;
+            margin-right: 10px; /* Khoảng cách giữa icon và login/signup */
+        }
+
+        .user-icon:hover {
+            color: #007bff; /* Màu khi hover */
+        }
+
+        /* Căn chỉnh các liên kết login/signup */
+        .auth-links a {
+            text-decoration: none;
+            color: white; /* Màu trắng */
+            font-weight: bold;
+            margin-left: 0px;
+        }
+
+        .auth-links a:hover {
+            color: #007bff; /* Màu khi hover */
+        }
+
+        /* Thêm hiệu ứng cho các liên kết */
+        .login-btn, .signup-btn {
+            text-transform: uppercase; /* Viết hoa cho các liên kết */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Offcanvas Menu Section Begin -->
+    <div class="offcanvas-menu-overlay"></div>
+    <div class="offcanvas-menu-wrapper">
+        <div class="canvas-close">
+            <i class="fa fa-close"></i>
+        </div>
+        <div class="canvas-search search-switch">
+            <i class="fa fa-search"></i>
+        </div>
+        <nav class="canvas-menu mobile-menu">
+            <ul>
+                <li><a href="/gym/home">Home</a></li>
+                <li><a href="./about-us.html">About Us</a></li>
+                <li><a href="./class-details.html">Classes</a></li>
+                <li><a href="./services.html">Services</a></li>
+                <li><a href="./team.html">Our Team</a></li>
+                <li><a href="/gym/home/shop">Shop</a></li>
+                <li><a href="#">Pages</a>
+                    <ul class="dropdown">
+                        <li><a href="./about-us.html">About us</a></li>
+                        <li><a href="./class-timetable.html">Classes timetable</a></li>
+                        <li><a href="cart2.html">Bmi calculate</a></li>
+                        <li><a href="./team.html">Our team</a></li>
+                        <li><a href="./gallery.html">Gallery</a></li>
+                        <li><a href="./blog.html">Our blog</a></li>
+                        <li><a href="./404.html">404</a></li>
+                    </ul>
+                </li>
+                <li><a href="./contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div id="mobile-menu-wrap"></div>
+        <div class="canvas-social">
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-youtube-play"></i></a>
+            <a href="#"><i class="fa fa-instagram"></i></a>
+        </div>
+    </div>
+    <!-- Offcanvas Menu Section End -->
+
+    <!-- Header Section Begin -->
+    <header class="header-section">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="logo">
+                        <a href="/gym/home">
+                            <img th:src="@{/img/logo.png}" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <nav class="nav-menu">
+                        <ul>
+                            <li><a href="/gym/home">Home</a></li>
+                            <li><a href="./about-us.html">About Us</a></li>
+                            <li><a href="./classes.html">Classes</a></li>
+                            <li><a href="./services.html">Services</a></li>
+                            <li><a href="./team.html">Our Team</a></li>
+                            <li class="active"><a href="/gym/home/shop">Shop</a></li>
+                            <li><a href="#">Pages</a>
+                                <ul class="dropdown">
+                                    <li><a href="./about-us.html">About us</a></li>
+                                    <li><a href="./class-timetable.html">Classes timetable</a></li>
+                                    <li><a href="cart2.html">Bmi calculate</a></li>
+                                    <li><a href="./team.html">Our team</a></li>
+                                    <li><a href="./gallery.html">Gallery</a></li>
+                                    <li><a href="./blog.html">Our blog</a></li>
+                                    <li><a href="./404.html">404</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="./contact.html">Contact</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <!-- User Icon and Login/Signup Links -->
+                <div class="col-lg-3 d-flex justify-content-end align-items-center">
+                    <a href="/req/login" class="user-icon">
+                        <i class="fa fa-user"></i>
+                    </a>
+                    <div class="auth-links ml-3">
+                        <a href="/req/login" class="login-btn">Login</a> |
+                        <a href="/req/signup" class="signup-btn">Signup</a>
+                    </div>
+                </div>
+            </div>
+            <div class="canvas-open">
+                <i class="fa fa-bars"></i>
+            </div>
+        </div>
+    </header>
+    <!-- Header End -->
+
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" th:data-setbg="@{/img/breadcrumb-bg.jpg}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb-text">
+                        <h2>Shop</h2>
+                        <div class="bt-option">
+                            <a href="/gym/home">Home</a>
+                            <span>Shop</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Services Section Begin -->
+    <section class="services-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <span>What we do?</span>
+                        <h2>PUSH YOUR LIMITS FORWARD</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="container px-4 px-lg-5 my-5">
+                    <div class="row gx-4 gx-lg-5 align-items-center">
+                        <div class="col-md-6">
+                            <img class="card-img-top mb-5 mb-md-0" id="product-image" src="" alt="Product Image" />
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small mb-1 text-white" id="product-sku"></div>
+                            <h1 class="display-5 fw-bolder text-white" id="product-name"></h1>
+                            <div class="fs-5 mb-5 text-white">
+                                <span id="original-price" class="text-decoration-line-through"></span>
+                                <span id="product-price"></span>
+                            </div>
+                            <p class="lead text-white" id="product-description"></p>
+                            <div class="d-flex">
+                                <input class="form-control text-center me-3" id="inputQuantity" type="number" value="1" style="max-width: 3rem" />
+                                <button class="btn btn-light flex-shrink-0 text-dark" type="button" id="add-to-cart">
+                                    <i class="bi-cart-fill me-1"></i> Add to cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+    <!-- Services Section End -->
+    
+      <!-- Services Section Begin -->
+      <section class="services-section spad">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center" id="product-container">
+
+          <div class="col mb-5">
+                <div class="card h-100 bg-dark text-white"> <!-- Thêm lớp bg-secondary -->
+                    <!-- Product image-->
+                    <img class="card-img-top" src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-m04tp9pajiel3c" alt="..." />
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">Áo Khoác Gió Nam 2 Lớp Thể Thao</h5>
+                            <!-- Product price-->
+                            370.000VNĐ - 429.000.VNĐ
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center">
+                            <a class="btn btn-outline-dark mt-auto" href="#">View options</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+           
+                <div class="col mb-5">
+                    <div class="card h-100 bg-dark text-white">
+                        <!-- Sale badge-->
+                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                        <!-- Product image-->
+                        <img class="card-img-top" src="https://file.hstatic.net/200000602133/file/1_878da78eb5de46deb67d47f098f14dc4.jpeg" alt="..." />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">Quần Short Nam 1 Lớp Summer Cooling</h5>
+                                <!-- Product reviews-->
+                                <div class="d-flex justify-content-center small text-warning mb-2">
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                </div>
+                                <!-- Product price-->
+                                <span class="text-muted text-decoration-line-through">319.000VNĐ</span>
+                                250.000VNĐ
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                        </div>
+                    </div>
+                </div>
+                 
+                <div class="col mb-5">
+                    <div class="card h-100  bg-dark text-white">
+                        <!-- Sale badge-->
+                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                        <!-- Product image-->
+                        <img class="card-img-top" src="https://bizweb.dktcdn.net/100/491/588/products/quan-jogger-tui-hop-nu-dang-rong-the-thao-chat-lieu-gio-han-cao-cap-qj013.jpg?v=1711512106923" alt="..." />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">Quần Jogger Nữ Xếp Li Summer Cooling</h5>
+                                <!-- Product price-->
+                                <span class="text-muted text-decoration-line-through">379.000.VNĐ</span>
+                                300.000VNĐ
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                        </div>
+                    </div>
+                </div>
+    </div>
+    </section>
+    <!-- Services Section End -->
+
+    <!-- Get In Touch Section Begin -->
+    <div class="gettouch-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="gt-text">
+                        <i class="fa fa-map-marker"></i>
+                        <p>333 Middle Winchendon Rd, Rindge,<br/> NH 03461</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="gt-text">
+                        <i class="fa fa-mobile"></i>
+                        <ul>
+                            <li>125-711-811</li>
+                            <li>125-668-886</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="gt-text email">
+                        <i class="fa fa-envelope"></i>
+                        <p>Support.gymcenter@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Get In Touch Section End -->
+
+    <!-- Footer Section Begin -->
+    <section class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="fs-about">
+                        <div class="fa-logo">
+                            <a href="#"><img th:src="@{img/logo.png}" alt=""></a>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore dolore magna aliqua endisse ultrices gravida lorem.</p>
+                        <div class="fa-social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-youtube-play"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa  fa-envelope-o"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-6">
+                    <div class="fs-widget">
+                        <h4>Useful links</h4>
+                        <ul>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Classes</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-6">
+                    <div class="fs-widget">
+                        <h4>Support</h4>
+                        <ul>
+                            <li><a href="#">Login</a></li>
+                            <li><a href="#">My account</a></li>
+                            <li><a href="#">Subscribe</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="fs-widget">
+                        <h4>Tips & Guides</h4>
+                        <div class="fw-recent">
+                            <h6><a href="#">Physical fitness may help prevent depression, anxiety</a></h6>
+                            <ul>
+                                <li>3 min read</li>
+                                <li>20 Comment</li>
+                            </ul>
+                        </div>
+                        <div class="fw-recent">
+                            <h6><a href="#">Fitness: The best exercise to lose belly fat and tone up...</a></h6>
+                            <ul>
+                                <li>3 min read</li>
+                                <li>20 Comment</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="copyright-text">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer Section End -->
+
+    <!-- Search model Begin -->
+    <div class="search-model">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-switch">+</div>
+            <form class="search-model-form">
+                <input type="text" id="search-input" placeholder="Search here.....">
+            </form>
+        </div>
+    </div>
+    <!-- Search model end -->
+
+    <!-- Js Plugins -->
+<script th:src="@{/js2/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/js2/bootstrap.min.js}"></script>
+<script th:src="@{/js2/jquery.magnific-popup.min.js}"></script>
+<script th:src="@{/js2/masonry.pkgd.min.js}"></script>
+<script th:src="@{/js2/jquery.barfiller.js}"></script>
+<script th:src="@{/js2/jquery.slicknav.js}"></script>
+<script th:src="@{/js2/owl.carousel.min.js}"></script>
+<script th:src="@{/js2/main.js}"></script>
+<script th:src="@{/js4/scripts.js}"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Lấy productID từ URL (sử dụng URLSearchParams)
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id'); // id của sản phẩm từ URL
+
+            // Kiểm tra nếu có productId
+            if (!productId) {
+                alert("Product ID is missing!");
+                return;
+            }
+
+            // Fetch dữ liệu sản phẩm từ API
+            fetch(`/gym/home/products/${productId}`)  // Đường dẫn API bạn sử dụng
+                .then(response => response.json())
+                .then(product => {
+                    // Hiển thị dữ liệu lên các phần tử HTML
+                    document.getElementById('product-sku').textContent = `SKU: ${product.productID}`;
+                    document.getElementById('product-name').textContent = product.productName;
+                    document.getElementById('product-description').textContent = product.descriptions;
+                    document.getElementById('product-price').textContent = `${product.price.toLocaleString()} VNĐ`;
+
+                    // Nếu có giá gốc, hiển thị nó với dòng gạch ngang
+                    if (product.originalPrice) {
+                        document.getElementById('original-price').textContent = `${product.originalPrice.toLocaleString()} VNĐ`;
+                    } else {
+                        document.getElementById('original-price').textContent = '';
+                    }
+
+                    // Nếu có hình ảnh, hiển thị nó
+                    const productImage = product.imageUrl || 'https://dummyimage.com/600x700/dee2e6/6c757d.jpg'; // Nếu không có hình, dùng hình mặc định
+                    document.getElementById('product-image').src = productImage;
+
+                    // Bạn có thể thêm các logic khác nếu cần (ví dụ: xử lý thêm vào giỏ hàng)
+                    const addToCartButton = document.getElementById('add-to-cart');
+                    addToCartButton.addEventListener('click', () => {
+                        const quantity = document.getElementById('inputQuantity').value;
+                        // Gọi API hoặc xử lý thêm vào giỏ hàng ở đây
+                        console.log(`Product added to cart. Quantity: ${quantity}`);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching product data:', error);
+                });
+        });
+    </script>
+
+
+</body>
+
+</html>

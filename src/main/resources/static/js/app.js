@@ -187,3 +187,37 @@ function addUser() {
 
     return false; // Prevent form subm
 }
+
+async function fetchUserInfo() {
+    try {
+        // Gửi yêu cầu GET đến API để lấy thông tin người dùng
+        const response = await fetch('http://localhost:8080/customer/home/users/user-info1', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',  // Đảm bảo loại nội dung là JSON
+            },
+            credentials: 'include'  // Đảm bảo cookie session được gửi đi
+        });
+
+        // Kiểm tra mã trạng thái phản hồi
+        console.log("Response status:", response.status);  // In ra mã trạng thái
+
+        if (response.ok) {
+            // Nếu phản hồi thành công, xử lý dữ liệu JSON
+            const data = await response.json();
+            const username = data.username;  // Lấy username từ dữ liệu trả về
+            document.getElementById("user-info").innerText = "Hello, " + username;  // Hiển thị thông tin
+        } else {
+            // Nếu có lỗi, in ra mã lỗi và thông báo lỗi
+            console.error("Error fetching user info: ", response.status, response.statusText);
+            document.getElementById("user-info").innerText = "Error fetching user info";
+        }
+    } catch (error) {
+        // Nếu có lỗi khác (ví dụ lỗi mạng), hiển thị lỗi
+        console.error("Error fetching user info", error);
+        document.getElementById("user-info").innerText = "Error fetching user info";
+    }
+}
+
+// Gọi hàm khi trang được tải
+window.onload = fetchUserInfo;

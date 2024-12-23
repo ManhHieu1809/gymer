@@ -20,4 +20,8 @@ public interface UserService {
 
     long countUsers();
 
+    UserDTO getUserProfile(Long userID); // Xem thông tin cá nhân
+    UserDTO updateUserProfile(Long userID, UserDTO userDTO); // Cập nhật thông tin cá nhân
+    void changePassword(Long userID, String oldPassword, String newPassword); // Đổi mật khẩu
+
 }

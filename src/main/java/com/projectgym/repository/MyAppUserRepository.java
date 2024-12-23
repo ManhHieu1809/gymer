@@ -14,6 +14,7 @@ import java.util.Optional;
 public interface MyAppUserRepository extends JpaRepository<User, Long>{
     
     Optional<User> findByUserName(String username);
+
     List<User> findByFullNameContaining(String fullName);
 
 

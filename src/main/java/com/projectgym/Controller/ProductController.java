@@ -30,7 +30,7 @@ public class ProductController {
         return ResponseEntity.ok(products);
     }
 
-    // Tạo mới tài khoản
+    // Tạo mới sản phẩm
     @PostMapping
     public ResponseEntity<ProductDTO> createProduct(@RequestBody Product product) {
         return ResponseEntity.ok(productService.createProduct(product));
@@ -47,7 +47,7 @@ public class ProductController {
         }
     }
 
-    // Xóa tài khoản
+    // Xóa sản phẩm
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
@@ -60,7 +60,6 @@ public class ProductController {
         return ResponseEntity.ok(productService.getLowStockProducts(threshold));
     }
 
-    // Tìm kiếm tài khoản theo username và fullName
     @GetMapping("/search")
     public ResponseEntity<List<ProductDTO>> searchByProductName(
             @RequestParam(required = false) String productName) {

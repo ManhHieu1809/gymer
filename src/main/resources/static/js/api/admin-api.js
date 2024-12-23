@@ -164,8 +164,8 @@ function editOrderStatus(orderID, currentStatus) {
             // Gửi yêu cầu PUT tới backend để cập nhật trạng thái đơn hàng
             return fetch(`/admin/home/orders/${orderID}/status?newStatus=${newStatus}`, { // Đổi endpoint này thành API của bạn
                 method: "PUT",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ statuss: newStatus })
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({statuss: newStatus})
             })
                 .then(response => {
                     if (!response.ok) {
@@ -215,7 +215,7 @@ document.addEventListener("DOMContentLoaded", function () {
     fetchUsers();    // Populate user table (from previous implementation)
     fetchGoods();    // Populate goods table (from previous implementation)
     fetchOrders();
-
+    fetchAndDisplayUsernames();
 });
 
 async function deleteUser(userId) {
@@ -398,4 +398,38 @@ function createNotification(userID) {
         }
     });
 }
+async function fetchAndDisplayUsernames() {
+    try {
+    // Gửi yêu cầu GET tới API
+    const response = await fetch('http://localhost:8080/admin/home/users/user-info1', {
+    method: 'GET',
+    headers: {
+    'Content-Type': 'application/json'
+},
+    credentials: 'include' // Đảm bảo gửi cookie session
+});
+
+    if (response.ok) {
+    const data = await response.json(); // Lấy dữ liệu JSON từ phản hồi
+
+    // Danh sách các ID của thẻ cần cập nhật
+    const usernameElements = ["username1", "username2", "username3"];
+
+    // Cập nhật nội dung cho tất cả các thẻ
+    usernameElements.forEach(id => {
+    const element = document.getElementById(id);
+    if (element) {
+    element.innerText = data.username; // Cập nhật tên người dùng
+}
+});
+} else {
+    console.error("Error fetching username:", response.statusText);
+}
+} catch (error) {
+    console.error("Error fetching username:", error);
+}
+}
+
+    // Gọi hàm khi trang được tải
+    window.onload = fetchAndDisplayUsernames;
 

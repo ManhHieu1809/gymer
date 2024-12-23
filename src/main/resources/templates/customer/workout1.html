@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Gym Template">
+    <meta name="keywords" content="Gym, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Gym | Template</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
+
+   <!-- Css Styles -->
+<link rel="stylesheet" th:href="@{/css2/bootstrap.min.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css2/font-awesome.min.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css2/flaticon.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css2/owl.carousel.min.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css2/barfiller.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css2/magnific-popup.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css2/slicknav.min.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css2/style.css}" type="text/css">
+    <style>
+        .user-icon {
+            font-size: 2rem;
+            color: white; /* Màu trắng cho icon */
+            text-decoration: none;
+            margin-right: 10px; /* Khoảng cách giữa icon và login/signup */
+        }
+
+        .user-icon:hover {
+            color: #007bff; /* Màu khi hover */
+        }
+
+        /* Căn chỉnh các liên kết login/signup */
+        .auth-links a {
+            text-decoration: none;
+            color: white; /* Màu trắng */
+            font-weight: bold;
+            margin-left: 0px;
+        }
+
+        .auth-links a:hover {
+            color: #007bff; /* Màu khi hover */
+        }
+
+        /* Thêm hiệu ứng cho các liên kết */
+        .login-btn, .signup-btn {
+            text-transform: uppercase; /* Viết hoa cho các liên kết */
+        }
+    </style>
+    <style>
+        /* Loại bỏ khoảng cách giữa các ảnh */
+        .d-flex {
+            margin: 0;
+        }
+
+        .d-flex .mb-0 {
+            margin-bottom: 0; /* Loại bỏ margin giữa các phần tử */
+        }
+
+        /* Đảm bảo ảnh co lại vừa với thẻ chứa */
+        .d-flex img {
+            width: 100%; /* Chiếm toàn bộ chiều rộng */
+            max-height: 320px; /* Giới hạn chiều cao tối đa */
+            object-fit: cover; /* Giữ tỷ lệ ảnh, không bị kéo căng */
+        }
+
+        /* Xóa margin và padding cho thẻ div */
+        .col-lg-6.p-0 {
+            padding: 0;
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+ <!-- Offcanvas Menu Section Begin -->
+    <div class="offcanvas-menu-overlay"></div>
+    <div class="offcanvas-menu-wrapper">
+        <div class="canvas-close">
+            <i class="fa fa-close"></i>
+        </div>
+        <div class="canvas-search search-switch">
+            <i class="fa fa-search"></i>
+        </div>
+        <nav class="canvas-menu mobile-menu">
+            <ul>
+                <li><a href="/customer/home">Home</a></li>
+                <li><a href="/customer/home/nutrition-plan">Kế hoạch dinh dưỡng</a></li>
+                <li><a href="/customer/home/workout-plan">Kế hoạch luyện tập</a></li>
+                <li><a href="/customer/home/Progress">Tiến độ luyện tập</a></li>
+                <li><a href="/customer/home/shop">Shop</a></li>
+                <li><a href="/customer/home/users/notification">Thông báo</a></li>
+                <li><a href="/customer/home/chat">Chăm sóc khách hàng</a></li>
+            </ul>
+        </nav>
+        <div id="mobile-menu-wrap"></div>
+
+    </div>
+    <!-- Offcanvas Menu Section End -->
+
+    <!-- Header Section Begin -->
+    <header class="header-section">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="logo">
+                        <a href="/customer/home">
+                            <img th:src="@{/img/logo.png}" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <nav class="nav-menu">
+                        <ul>
+                            <li><a href="/customer/home">Home</a></li>
+                            <li><a href="/customer/home/nutrition-plan">Kế hoạch dinh dưỡng</a></li>
+                            <li class="active"><a href="/customer/home/workout-plan">Kế hoạch luyện tập</a></li>
+                            <li><a href="/customer/home/nutrition-plan">Tiến độ luyện tập</a></li>
+                            <li><a href="/customer/home/shop">Shop</a></li>
+                            <li><a href="/customer/home/users/notification">Thông báo</a></li>
+                            <li><a href="/customer/home/chat">Chăm sóc khách hàng</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-lg-3">
+                    <!-- User Icon and Login/Signup Links -->
+                    <div class="d-flex justify-content-end align-items-center">
+                        <a href="/customer/home/users" class="user-icon" id="user-icon">
+                            <i class="fa fa-user"></i>
+                        </a>
+                        <div class="auth-links ml-3" id="auth-links">
+                            <a href="/req/login" class="login-btn" id="login-btn">Login</a> |
+                            <a href="/req/signup" class="signup-btn">Signup</a>
+                        </div>
+                        <div class="user-info text-white" id="user-info" style="display: none;">
+                            <span>Welcome, <span id="username"></span>!</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="canvas-open">
+                <i class="fa fa-bars"></i>
+            </div>
+        </div>
+    </header>
+    <!-- Header End -->
+
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" th:data-setbg="@{/img/breadcrumb-bg.jpg}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb-text">
+                        <h2>About us</h2>
+                        <div class="bt-option">
+                            <a href="/customer/home">Home</a>
+                            <span>About</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- ChoseUs Section Begin -->
+    <section class="choseus-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <span>Why chose us?</span>
+                        <h2>PUSH YOUR LIMITS FORWARD</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-sm-6">
+                    <div class="cs-item">
+                        <span class="flaticon-034-stationary-bike"></span>
+                        <h4>Modern equipment</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            dolore facilisis.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="cs-item">
+                        <span class="flaticon-033-juice"></span>
+                        <h4>Healthy nutrition plan</h4>
+                        <p>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel
+                            facilisis.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="cs-item">
+                        <span class="flaticon-002-dumbell"></span>
+                        <h4>Proffesponal training plan</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            dolore facilisis.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="cs-item">
+                        <span class="flaticon-014-heart-beat"></span>
+                        <h4>Unique to your needs</h4>
+                        <p>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel
+                            facilisis.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ChoseUs Section End -->
+
+    <!-- About US Section Begin -->
+    <section class="aboutus-section">
+        <div class="container-fluid">
+            <div id="workout-detail-container" class="row">
+
+                </div>
+            </div>
+    </section>
+
+    <!-- About US Section End -->
+
+    <!-- Testimonial Section Begin -->
+    <section class="testimonial-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <span>Testimonial</span>
+                        <h2>Our cilent say</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="ts_slider owl-carousel">
+                <div class="ts_item">
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <div class="ti_pic">
+                                <img th:src="@{/img/testimonial/testimonial-1.jpg}" alt="">
+                            </div>
+                            <div class="ti_text">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                    incididunt<br /> ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices
+                                    gravida. Risus commodo<br /> viverra maecenas accumsan lacus vel facilisis.</p>
+                                <h5>Marshmello Gomez</h5>
+                                <div class="tt-rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ts_item">
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <div class="ti_pic">
+                                <img th:src="@{/img/testimonial/testimonial-2.jpg}" alt="">
+                            </div>
+                            <div class="ti_text">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                    incididunt<br /> ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices
+                                    gravida. Risus commodo<br /> viverra maecenas accumsan lacus vel facilisis.</p>
+                                <h5>Marshmello Gomez</h5>
+                                <div class="tt-rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Testimonial Section End -->
+
+    <!-- Get In Touch Section Begin -->
+    <div class="gettouch-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="gt-text">
+                        <i class="fa fa-map-marker"></i>
+                        <p>Học Viện Kĩ Thuật Mật Mã<br/> 141 Chiến Thắng, Tân Triều, Thanh Trì, Hà Nội</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="gt-text">
+                        <i class="fa fa-mobile"></i>
+                        <ul>
+                            <li>125-711-811</li>
+                            <li>125-668-886</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="gt-text email">
+                        <i class="fa fa-envelope"></i>
+                        <p>Support.gymcenter@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Get In Touch Section End -->
+
+    <!-- Footer Section Begin -->
+    <section class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="fs-about">
+                        <div class="fa-logo">
+                            <a href="#"><img th:src="@{/img/logo.png}" alt=""></a>
+                        </div>
+                        <p>“Con đường dẫn đến thành công được làm nên từ những viên gạch của sự kiên trì. Hãy là chính mình, vượt qua mọi chướng ngại và theo đuổi ước mơ của bản thân.”</p>
+                        <div class="fa-social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-youtube-play"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa  fa-envelope-o"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-6">
+                    <div class="fs-widget">
+                        <h4>Useful links</h4>
+                        <ul>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Classes</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-6">
+                    <div class="fs-widget">
+                        <h4>Support</h4>
+                        <ul>
+                            <li><a href="#">Login</a></li>
+                            <li><a href="#">My account</a></li>
+                            <li><a href="#">Subscribe</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="fs-widget">
+                        <h4>Tips & Guides</h4>
+                        <div class="fw-recent">
+                            <h6><a href="#">Physical fitness may help prevent depression, anxiety</a></h6>
+                            <ul>
+                                <li>3 min read</li>
+                                <li>20 Comment</li>
+                            </ul>
+                        </div>
+                        <div class="fw-recent">
+                            <h6><a href="#">Fitness: The best exercise to lose belly fat and tone up...</a></h6>
+                            <ul>
+                                <li>3 min read</li>
+                                <li>20 Comment</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="copyright-text">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer Section End -->
+
+    <!-- Search model Begin -->
+    <div class="search-model">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-switch">+</div>
+            <form class="search-model-form">
+                <input type="text" id="search-input" placeholder="Search here.....">
+            </form>
+        </div>
+    </div>
+    <!-- Search model end -->
+
+<!-- Js Plugins -->
+<script th:src="@{/js2/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/js2/bootstrap.min.js}"></script>
+<script th:src="@{/js2/jquery.magnific-popup.min.js}"></script>
+<script th:src="@{/js2/masonry.pkgd.min.js}"></script>
+<script th:src="@{/js2/jquery.barfiller.js}"></script>
+<script th:src="@{/js2/jquery.slicknav.js}"></script>
+<script th:src="@{/js2/owl.carousel.min.js}"></script>
+<script th:src="@{/js2/main.js}"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+            const workoutDetailContainer = document.getElementById("workout-detail-container");
+
+            // Lấy workoutId từ URL (nếu muốn hiển thị bài tập cụ thể, bạn vẫn có thể giữ phần này)
+            const urlParams = new URLSearchParams(window.location.search);
+            const workoutId = urlParams.get("workoutId");
+            console.log("Workout ID:", workoutId); // Debug giá trị workoutId
+
+            if (!workoutId) {
+                console.error("Workout ID is missing.");
+                workoutDetailContainer.innerHTML = `<p class="text-center">Không tìm thấy bài tập nào.</p>`;
+                return;
+            }
+
+            // Hàm fetch dữ liệu bài tập
+            const fetchWorkoutDetail = async () => {
+                try {
+                    const response = await fetch(`http://localhost:8080/customer/home/users/workout/${workoutId}`);
+                    if (!response.ok) {
+                        console.error(`HTTP Error! status: ${response.status}`);
+                        return null;
+                    }
+                    return await response.json();
+                } catch (error) {
+                    console.error("An error occurred:", error);
+                    return null;
+                }
+            };
+
+            // Render tất cả bài tập
+            const renderWorkoutDetails = (workouts) => {
+                if (!workouts || workouts.length === 0) {
+                    workoutDetailContainer.innerHTML = `<p class="text-center">Không tìm thấy bài tập nào.</p>`;
+                    return;
+                }
+
+                // Hiển thị tất cả bài tập
+                workoutDetailContainer.innerHTML = workouts.map(workout => `
+
+            <div class="col-lg-6 ">
+        <!-- Phần Hình ảnh -->
+        <div class="d-flex flex-column m-0">
+            <div class="mb-0">
+                <img src="${workout.imageUrl}"
+                     alt="${workout.workoutName}" class="img-fluid w-100">
+            </div>
+            <div class="mb-0">
+                <iframe width="632" height="312" src="${workout.videoUrl}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6 p-0">
+        <div class="about-text">
+            <div class="section-title">
+                <span>${workout.workoutName}</span>
+                <h2>${workout.category}</h2>
+            </div>
+            <div class="at-desc">
+                <p id="workout-description">${workout.instructions}</p>
+            </div>
+            <div class="about-bar">
+                <div class="ab-item">
+                    <p>Body building</p>
+                    <div id="bar1" class="barfiller">
+                        <span class="fill" data-percentage="80"></span>
+                        <div class="tipWrap">
+                            <span class="tip"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="ab-item">
+                    <p>Training</p>
+                    <div id="bar2" class="barfiller">
+                        <span class="fill" data-percentage="85"></span>
+                        <div class="tipWrap">
+                            <span class="tip"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="ab-item">
+                    <p>Fitness</p>
+                    <div id="bar3" class="barfiller">
+                        <span class="fill" data-percentage="75"></span>
+                        <div class="tipWrap">
+                            <span class="tip"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+        `).join('');
+            };
+
+            // Lấy dữ liệu từ API và render tất cả bài tập
+            const workoutData = await fetchWorkoutDetail();
+            if (Array.isArray(workoutData)) {
+                renderWorkoutDetails(workoutData);  // Hiển thị tất cả bài tập
+            } else {
+                workoutDetailContainer.innerHTML = `<p class="text-center">Không tìm thấy bài tập nào.</p>`;
+            }
+        });
+
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Hàm lấy và hiển thị tên người dùng
+            async function fetchAndDisplayUsernames() {
+                try {
+                    // Gửi yêu cầu GET tới API
+                    const response = await fetch('http://localhost:8080/customer/home/users/user-info1', {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        credentials: 'include' // Đảm bảo gửi cookie session
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json(); // Lấy dữ liệu JSON từ phản hồi
+                        const username = data.username;
+
+                        // Hiển thị tên người dùng và ẩn các liên kết login/signup
+                        document.getElementById("auth-links").style.display = 'none'; // Ẩn "Login" và "Signup"
+                        document.getElementById("user-info").style.display = 'block'; // Hiển thị tên người dùng
+                        document.getElementById("username").innerText = username; // Cập nhật tên người dùng
+                    } else {
+                        console.error("Error fetching username:", response.statusText);
+                    }
+                } catch (error) {
+                    console.error("Error fetching username:", error);
+                }
+            }
+
+            // Kiểm tra khi tải trang và gọi API
+            fetchAndDisplayUsernames();
+        });
+
+    </script>
+</body>
+
+</html>

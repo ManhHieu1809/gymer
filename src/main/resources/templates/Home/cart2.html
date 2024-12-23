@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Gym Template">
+    <meta name="keywords" content="Gym, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Gym | Template</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
+
+<!-- Css Styles -->
+<link rel="stylesheet" th:href="@{/css2/bootstrap.min.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css2/font-awesome.min.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css2/flaticon.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css2/owl.carousel.min.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css2/barfiller.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css2/magnific-popup.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css2/slicknav.min.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css2/style.css}" type="text/css">
+    <style>
+        .user-icon {
+            font-size: 2rem;
+            color: white; /* Màu trắng cho icon */
+            text-decoration: none;
+            margin-right: 10px; /* Khoảng cách giữa icon và login/signup */
+        }
+
+        .user-icon:hover {
+            color: #007bff; /* Màu khi hover */
+        }
+
+        /* Căn chỉnh các liên kết login/signup */
+        .auth-links a {
+            text-decoration: none;
+            color: white; /* Màu trắng */
+            font-weight: bold;
+            margin-left: 0px;
+        }
+
+        .auth-links a:hover {
+            color: #007bff; /* Màu khi hover */
+        }
+
+        /* Thêm hiệu ứng cho các liên kết */
+        .login-btn, .signup-btn {
+            text-transform: uppercase; /* Viết hoa cho các liên kết */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Offcanvas Menu Section Begin -->
+    <div class="offcanvas-menu-overlay"></div>
+    <div class="offcanvas-menu-wrapper">
+        <div class="canvas-close">
+            <i class="fa fa-close"></i>
+        </div>
+        <div class="canvas-search search-switch">
+            <i class="fa fa-search"></i>
+        </div>
+        <nav class="canvas-menu mobile-menu">
+            <ul>
+                <li><a href="/gym/home">Home</a></li>
+                <li><a href="./about-us.html">About Us</a></li>
+                <li><a href="./class-details.html">Classes</a></li>
+                <li><a href="./services.html">Services</a></li>
+                <li><a href="./team.html">Our Team</a></li>
+                <li ><a href="/gym/home/shop">Shop</a></li>
+                <li><a href="#">Pages</a>
+                    <ul class="dropdown">
+                        <li><a href="./about-us.html">About us</a></li>
+                        <li><a href="./class-timetable.html">Classes timetable</a></li>
+                        <li><a href="./cart2.html">Bmi calculate</a></li>
+                        <li><a href="./team.html">Our team</a></li>
+                        <li><a href="./gallery.html">Gallery</a></li>
+                        <li><a href="./blog.html">Our blog</a></li>
+                        <li><a href="./404.html">404</a></li>
+                    </ul>
+                </li>
+                <li><a href="./contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div id="mobile-menu-wrap"></div>
+        <div class="canvas-social">
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-youtube-play"></i></a>
+            <a href="#"><i class="fa fa-instagram"></i></a>
+        </div>
+    </div>
+    <!-- Offcanvas Menu Section End -->
+
+    <!-- Header Section Begin -->
+    <header class="header-section">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="logo">
+                        <a href="/gym/home">
+                            <img th:src="@{/img/logo.png}" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <nav class="nav-menu">
+                        <ul>
+                            <li><a href="/gym/home">Home</a></li>
+                            <li><a href="./about-us.html">About Us</a></li>
+                            <li><a href="./class-details.html">Classes</a></li>
+                            <li><a href="./services.html">Services</a></li>
+                            <li><a href="./team.html">Our Team</a></li>
+                            <li class="active"><a href="/gym/home/shop">Shop</a></li>
+                            <li><a href="#">Pages</a>
+                                <ul class="dropdown">
+                                    <li><a href="./about-us.html">About us</a></li>
+                                    <li><a href="./class-timetable.html">Classes timetable</a></li>
+                                    <li><a href="./cart2.html">Bmi calculate</a></li>
+                                    <li><a href="./team.html">Our team</a></li>
+                                    <li><a href="./gallery.html">Gallery</a></li>
+                                    <li><a href="./blog.html">Our blog</a></li>
+                                    <li><a href="./404.html">404</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="./contact.html">Contact</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <!-- User Icon and Login/Signup Links -->
+                <div class="col-lg-3 d-flex justify-content-end align-items-center">
+                    <a href="/req/login" class="user-icon">
+                        <i class="fa fa-user"></i>
+                    </a>
+                    <div class="auth-links ml-3">
+                        <a href="/req/login" class="login-btn">Login</a> |
+                        <a href="/req/signup" class="signup-btn">Signup</a>
+                    </div>
+                </div>
+            </div>
+            <div class="canvas-open">
+                <i class="fa fa-bars"></i>
+            </div>
+        </div>
+    </header>
+    <!-- Header End -->
+
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" th:data-setbg="@{/img/breadcrumb-bg.jpg}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb-text">
+                        <h2>BMI calculator</h2>
+                        <div class="bt-option">
+                            <a href="/gym/home">Home</a>
+                            <a href="#">Pages</a>
+                            <span>BMI calculator</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- BMI Calculator Section Begin -->
+    <section class="bmi-calculator-section spad">
+        <div class="container mt-4">
+            <h1 class="text-center mb-4 text-white">Giỏ hàng</h1>
+
+            <!-- Phần nút chọn -->
+            <div class="d-flex justify-content-between mb-3">
+                <button id="select-all" class="btn btn-primary">Chọn tất cả</button>
+                <button id="deselect-all" class="btn btn-secondary">Bỏ chọn tất cả</button>
+            </div>
+
+            <!-- Danh sách sản phẩm -->
+            <div id="cart-items" class="list-group bg-dark"></div>
+
+            <!-- Nút mua sản phẩm -->
+            <div class="d-flex justify-content-end mt-4">
+                <button id="purchase" class="btn btn-success">Mua sản phẩm</button>
+            </div>
+        </div>
+    </section>
+    <!-- BMI Calculator Section End -->
+
+    <!-- Get In Touch Section Begin -->
+    <div class="gettouch-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="gt-text">
+                        <i class="fa fa-map-marker"></i>
+                        <p>333 Middle Winchendon Rd, Rindge,<br/> NH 03461</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="gt-text">
+                        <i class="fa fa-mobile"></i>
+                        <ul>
+                            <li>125-711-811</li>
+                            <li>125-668-886</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="gt-text email">
+                        <i class="fa fa-envelope"></i>
+                        <p>Support.gymcenter@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Get In Touch Section End -->
+
+    <!-- Footer Section Begin -->
+    <section class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="fs-about">
+                        <div class="fa-logo">
+                            <a href="#"><img th:src="@{/img/logo.png}" alt=""></a>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore dolore magna aliqua endisse ultrices gravida lorem.</p>
+                        <div class="fa-social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-youtube-play"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa  fa-envelope-o"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-6">
+                    <div class="fs-widget">
+                        <h4>Useful links</h4>
+                        <ul>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Classes</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-6">
+                    <div class="fs-widget">
+                        <h4>Support</h4>
+                        <ul>
+                            <li><a href="#">Login</a></li>
+                            <li><a href="#">My account</a></li>
+                            <li><a href="#">Subscribe</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="fs-widget">
+                        <h4>Tips & Guides</h4>
+                        <div class="fw-recent">
+                            <h6><a href="#">Physical fitness may help prevent depression, anxiety</a></h6>
+                            <ul>
+                                <li>3 min read</li>
+                                <li>20 Comment</li>
+                            </ul>
+                        </div>
+                        <div class="fw-recent">
+                            <h6><a href="#">Fitness: The best exercise to lose belly fat and tone up...</a></h6>
+                            <ul>
+                                <li>3 min read</li>
+                                <li>20 Comment</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="copyright-text">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer Section End -->
+
+    <!-- Search model Begin -->
+    <div class="search-model">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-switch">+</div>
+            <form class="search-model-form">
+                <input type="text" id="search-input" placeholder="Search here.....">
+            </form>
+        </div>
+    </div>
+    <!-- Search model end -->
+
+<!-- Js Plugins -->
+<script th:src="@{/js2/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/js2/bootstrap.min.js}"></script>
+<script th:src="@{/js2/jquery.magnific-popup.min.js}"></script>
+<script th:src="@{/js2/masonry.pkgd.min.js}"></script>
+<script th:src="@{/js2/jquery.barfiller.js}"></script>
+<script th:src="@{/js2/jquery.slicknav.js}"></script>
+<script th:src="@{/js2/owl.carousel.min.js}"></script>
+<script th:src="@{/js2/main.js}"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const cartItemsContainer = document.getElementById("cart-items");
+            const selectAllButton = document.getElementById("select-all");
+            const deselectAllButton = document.getElementById("deselect-all");
+            const purchaseButton = document.getElementById("purchase");
+
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+            // Hàm render danh sách sản phẩm
+            const renderCart = () => {
+                cartItemsContainer.innerHTML = "";
+
+                if (cart.length === 0) {
+                    cartItemsContainer.innerHTML = `<p class="text-center">Giỏ hàng trống.</p>`;
+                    return;
+                }
+
+                cart.forEach((item, index) => {
+                    const itemHTML = `
+                             <div class="list-group-item d-flex justify-content-between bg-dark align-items-center">
+                            <div class="form-check">
+                                <input class="form-check-input select-product" type="checkbox" data-index="${index}" />
+                                <label class="form-check-label text-white">
+                                    <strong>${item.name}</strong> <br>
+                                    Giá mỗi sản phẩm: ${new Intl.NumberFormat('vi-VN').format(item.price)} VNĐ <br>
+                                    <span class="text-danger total-price">Tổng: ${new Intl.NumberFormat('vi-VN').format(item.price * item.quantity)} VNĐ</span>
+                                    <div class="d-flex align-items-center mt-2">
+                                        <button class="btn btn-outline-secondary btn-sm me-2 decrease-btn" data-index="${index}">-</button>
+                                        <span class="quantity">${item.quantity}</span>
+                                        <button class="btn btn-outline-secondary btn-sm ms-2 increase-btn" data-index="${index}">+</button>
+                                    </div>
+                                </label>
+                            </div>
+                            <button class="btn btn-danger btn-sm delete-btn" data-index="${index}">Xóa</button>
+                        </div>
+
+                    `;
+                    cartItemsContainer.innerHTML += itemHTML;
+                });
+
+                // Gán sự kiện click cho các nút tăng/giảm/xóa
+                document.querySelectorAll(".decrease-btn").forEach(button => {
+                    button.addEventListener("click", (e) => {
+                        const index = e.target.getAttribute("data-index");
+                        updateQuantity(index, -1);
+                    });
+                });
+
+                document.querySelectorAll(".increase-btn").forEach(button => {
+                    button.addEventListener("click", (e) => {
+                        const index = e.target.getAttribute("data-index");
+                        updateQuantity(index, 1);
+                    });
+                });
+
+                document.querySelectorAll(".delete-btn").forEach(button => {
+                    button.addEventListener("click", (e) => {
+                        const index = e.target.getAttribute("data-index");
+                        deleteProduct(index);
+                    });
+                });
+            };
+
+
+
+            // Hàm cập nhật số lượng sản phẩm
+            const updateQuantity = (index, delta) => {
+                const product = cart[index];
+                product.quantity = Math.max(1, product.quantity + delta); // Số lượng tối thiểu là 1
+                localStorage.setItem("cart", JSON.stringify(cart));
+                renderCart(); // Gọi lại hàm renderCart để cập nhật giao diện
+            };
+
+
+            // Hàm xóa sản phẩm
+            const deleteProduct = (index) => {
+                cart.splice(index, 1);
+                localStorage.setItem("cart", JSON.stringify(cart));
+                renderCart();
+            };
+
+            // Sự kiện chọn tất cả sản phẩm
+            selectAllButton.addEventListener("click", () => {
+                document.querySelectorAll(".select-product").forEach(checkbox => {
+                    checkbox.checked = true;
+                });
+            });
+
+            // Sự kiện bỏ chọn tất cả sản phẩm
+            deselectAllButton.addEventListener("click", () => {
+                document.querySelectorAll(".select-product").forEach(checkbox => {
+                    checkbox.checked = false;
+                });
+            });
+
+            // Sự kiện mua sản phẩm
+            purchaseButton.addEventListener("click", () => {
+                const selectedProducts = [];
+                document.querySelectorAll(".select-product").forEach((checkbox, index) => {
+                    if (checkbox.checked) {
+                        selectedProducts.push(cart[index]);
+                    }
+                });
+
+                if (selectedProducts.length === 0) {
+                    alert("Bạn chưa chọn sản phẩm nào để mua.");
+                } else {
+                    alert(`Bạn đã mua thành công ${selectedProducts.length} sản phẩm.`);
+                    console.log("Sản phẩm đã mua:", selectedProducts);
+
+                    // Có thể xóa các sản phẩm đã mua khỏi giỏ hàng nếu cần
+                    cart = cart.filter((_, index) => !selectedProducts.includes(cart[index]));
+                    localStorage.setItem("cart", JSON.stringify(cart));
+                    renderCart();
+                }
+            });
+
+            // Render giỏ hàng khi tải trang
+            renderCart();
+        });
+    </script>
+
+</body>
+
+</html>

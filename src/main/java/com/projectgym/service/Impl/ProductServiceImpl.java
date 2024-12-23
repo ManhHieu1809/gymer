@@ -26,7 +26,8 @@ public class ProductServiceImpl implements ProductService {
                         product.getProductName(),
                         product.getDescriptions(),
                         product.getPrice(),
-                        product.getQuantity()))
+                        product.getQuantity(),
+                        product.getImageUrl()))
                 .collect(Collectors.toList());
     }
 
@@ -40,7 +41,8 @@ public class ProductServiceImpl implements ProductService {
                 product.getProductName(),
                 product.getDescriptions(),
                 product.getPrice(),
-                product.getQuantity());
+                product.getQuantity(),
+                product.getImageUrl());
     }
 
     @Override
@@ -51,7 +53,8 @@ public class ProductServiceImpl implements ProductService {
                 savedProduct.getProductName(),
                 savedProduct.getDescriptions(),
                 savedProduct.getPrice(),
-                savedProduct.getQuantity());
+                savedProduct.getQuantity(),
+                savedProduct.getImageUrl());
     }
 
     @Override
@@ -71,7 +74,8 @@ public class ProductServiceImpl implements ProductService {
                 updatedProduct.getProductName(),
                 updatedProduct.getDescriptions(),
                 updatedProduct.getPrice(),
-                updatedProduct.getQuantity());
+                updatedProduct.getQuantity(),
+                updatedProduct.getImageUrl());
     }
 
     @Override
@@ -88,7 +92,8 @@ public class ProductServiceImpl implements ProductService {
                         product.getProductName(),
                         product.getDescriptions(),
                         product.getPrice(),
-                        product.getQuantity()
+                        product.getQuantity(),
+                        product.getImageUrl()
                 ))
                 .collect(Collectors.toList());
     }
@@ -102,8 +107,8 @@ public class ProductServiceImpl implements ProductService {
                         product.getProductName(),
                         product.getDescriptions(),
                         product.getPrice(),
-                        product.getQuantity()
-
+                        product.getQuantity(),
+                        product.getImageUrl()
                 ))
                 .collect(Collectors.toList());
     }
@@ -117,7 +122,8 @@ public class ProductServiceImpl implements ProductService {
                         product.getProductName(),
                         product.getDescriptions(),
                         product.getPrice(),
-                        product.getQuantity()))
+                        product.getQuantity(),
+                        product.getImageUrl()))
                 .collect(Collectors.toList());
     }
 }

@@ -38,6 +38,7 @@ public class NutritionPlanServiceImpl implements NutritionPlanService {
                 nutritionPlan.getNameNutritionPlan(),
                 nutritionPlan.getDescriptions(),
                 nutritionPlan.getCalo(),
+                nutritionPlan.getImageUrl(),
                 nutritionPlan.getUser().getUserID());
     }
 
@@ -56,6 +57,7 @@ public class NutritionPlanServiceImpl implements NutritionPlanService {
                 nutritionPlan.getNameNutritionPlan(),
                 nutritionPlan.getDescriptions(),
                 nutritionPlan.getCalo(),
+                nutritionPlan.getImageUrl(),
                 nutritionPlan.getUser().getUserID());
     }
 
@@ -74,6 +76,7 @@ public class NutritionPlanServiceImpl implements NutritionPlanService {
                         plan.getNameNutritionPlan(),
                         plan.getDescriptions(),
                         plan.getCalo(),
+                        plan.getImageUrl(),
                         plan.getUser().getUserID()
                 ))
                 .collect(Collectors.toList());
@@ -87,6 +90,7 @@ public class NutritionPlanServiceImpl implements NutritionPlanService {
                         plan.getNameNutritionPlan(),
                         plan.getDescriptions(),
                         plan.getCalo(),
+                        plan.getImageUrl(),
                         plan.getUser().getUserID()
                 ))
                 .collect(Collectors.toList());
@@ -135,6 +139,7 @@ public class NutritionPlanServiceImpl implements NutritionPlanService {
                         plan.getNameNutritionPlan(),
                         plan.getDescriptions(),
                         plan.getCalo(),
+                        plan.getImageUrl(),
                         plan.getUser().getUserID()
                 ))
                 .collect(Collectors.toList());
@@ -156,6 +161,7 @@ public class NutritionPlanServiceImpl implements NutritionPlanService {
                 nutritionPlan.getNameNutritionPlan(),
                 nutritionPlan.getDescriptions(),
                 nutritionPlan.getCalo(),
+                nutritionPlan.getImageUrl(),
                 nutritionPlan.getUser().getUserID()
         );
     }

@@ -1,5 +1,6 @@
 package com.projectgym.Config;
 
+import com.projectgym.service.CustomUserDetailsService;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -30,7 +31,6 @@ public class SecurityConfig {
 
     @Autowired
     private final MyAppUserService appUserService;
-
 
     @Bean
     public UserDetailsService userDetailsService(){
@@ -63,16 +63,26 @@ public class SecurityConfig {
                     httpForm.successHandler(customAuthenticationSuccessHandler);
                 })
                 .authorizeHttpRequests(registry -> {
+                    registry.requestMatchers("/api/vnpay/**").permitAll();
+                    registry.requestMatchers("/api/vnpay/create-payment", "/api/vnpay/return").permitAll();
+                    registry.requestMatchers("/css2/**", "/js2/**", "/images/**", "/fonts2/**","/css3/**","/css4/**","/js3/**","/js4/**","/img/**","/assets3/**","/assets4/**","/Source/**","/fonts/**").permitAll();
+                    registry.requestMatchers("/ws/**").permitAll();
+                    registry.requestMatchers("gym/home/**").permitAll();
+                    registry.requestMatchers("customer/home/users/user-info").authenticated(); // Chỉ người dùng đã đăng nhập mới có thể truy cập
                     registry.requestMatchers("/admin/home/users/**").hasAnyRole("ADMIN", "TRAINER");
                     registry.requestMatchers("/admin/home/notifications/**").hasAnyRole("ADMIN", "TRAINER");
+                    registry.requestMatchers("admin/home/users/user-info1").hasAnyRole("CUSTOMER", "ADMIN");
+                    registry.requestMatchers("/customer/home/users/user-info1").hasAnyRole("ADMIN", "CUSTOMER");
                     registry.requestMatchers("/admin/**").hasRole("ADMIN");  // Chỉ cho phép ADMIN truy cập trang này
                     registry.requestMatchers("/trainer/**").hasRole("TRAINER");  // Chỉ cho phép TRAINER truy cập trang này
                     registry.requestMatchers("/customer/**").hasRole("CUSTOMER");  // Chỉ cho phép CUSTOMER truy cập trang này
+                   // Cho phép truy cập WebSocket mà không yêu cầu đăng nhập
                     registry.requestMatchers("/req/signup", "/css/**", "/js/**").permitAll();
                     registry.anyRequest().authenticated();
                 })
 
                 .build();
     }
+
 
 }

@@ -1,16 +1,24 @@
 package com.projectgym.Controller;
 
+import com.projectgym.Entity.Conversation;
 import com.projectgym.Entity.User;
 import com.projectgym.dto.UserDTO;
+import com.projectgym.service.ConversationService;
 import com.projectgym.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/admin/home/users")
 @Slf4j
@@ -19,7 +27,8 @@ public class AdminController {
     @Autowired
     private UserService userService;
 
-
+    @Autowired
+    private ConversationService conversationService;
     // Lấy danh sách tất cả tài khoản
     @GetMapping
     public ResponseEntity<List<UserDTO>> getAllUsers() {
@@ -76,5 +85,23 @@ public class AdminController {
     public ResponseEntity<Long> getUserCount() {
         long userCount = userService.countUsers();
         return new ResponseEntity<>(userCount, HttpStatus.OK);
+    }
+
+    @GetMapping("/user-info1")
+    public ResponseEntity<Map<String, String>> getUserInfo(Authentication authentication) {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String username = userDetails.getUsername();
+
+        // Tạo một map chứa thông tin người dùng
+        Map<String, String> response = new HashMap<>();
+        response.put("username", username);
+
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/conversations")
+    public ResponseEntity<List<String>> getAllConversationIds() {
+        List<String> conversationIds = conversationService.getAllConversationIds();
+        return ResponseEntity.ok(conversationIds);
     }
 }

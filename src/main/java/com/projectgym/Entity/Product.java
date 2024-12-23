@@ -22,6 +22,9 @@ public class Product {
     private double price;
     private int quantity;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
     @OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
     private List<OrderDetail> orderDetails;
 

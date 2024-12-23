@@ -20,6 +20,13 @@ public class Workout {
     @Column(name = "instructions")
     private String instructions;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
+    @Column(name = "video_url")
+    private String videoUrl;
+
+
     @ManyToOne
     @JoinColumn(name = "planID",nullable = false)
     private WorkoutPlan workoutPlan;

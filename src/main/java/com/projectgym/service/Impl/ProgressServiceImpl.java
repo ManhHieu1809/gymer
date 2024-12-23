@@ -43,6 +43,7 @@ public class ProgressServiceImpl implements ProgressService {
 
         // Trả về ProgressDTO
         return new ProgressDTO(
+                progress.getProgressID(),
                 progress.getProgressDate(),
                 progress.getAchievement(),
                 user.getFullName() // Giả sử User entity có trường fullName
@@ -63,9 +64,11 @@ public class ProgressServiceImpl implements ProgressService {
         // Chuyển đổi sang ProgressDTO
         return progresses.stream()
                 .map(progress -> new ProgressDTO(
+                        progress.getProgressID(),
                         progress.getProgressDate(),
                         progress.getAchievement(),
-                        user.getFullName() // Hiển thị tên người dùng
+                        user.getFullName(), // Hiển thị tên người dùng
+                        progress.getWorkoutPlan().getPlanName() // Hiển thị tên kế hoạch tập luyện
                 ))
                 .collect(Collectors.toList());
     }
@@ -85,6 +88,7 @@ public class ProgressServiceImpl implements ProgressService {
 
         // Trả về DTO đã cập nhật
         return new ProgressDTO(
+                progress.getProgressID(),
                 progress.getProgressDate(),
                 progress.getAchievement(),
                 progress.getUser().getFullName()
@@ -105,6 +109,7 @@ public class ProgressServiceImpl implements ProgressService {
         // Chuyển đổi từ Progress sang ProgressDTO
         return progresses.stream()
                 .map(progress -> new ProgressDTO(
+                        progress.getProgressID(),
                         progress.getProgressDate(),
                         progress.getAchievement(),
                         progress.getUser().getFullName()

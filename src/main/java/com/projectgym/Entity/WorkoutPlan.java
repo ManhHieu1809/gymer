@@ -21,7 +21,8 @@ public class WorkoutPlan {
     private String descriptions;
     @Column(name = "duration")
     private String duration;
-
+    @Column(name="image_url")
+    private String imageUrl;
     @ManyToOne
     @JoinColumn(name = "userID",nullable = false)
     private User user;

@@ -123,4 +123,41 @@ public class UserServiceImpl implements UserService {
         return repository.count();  // Spring Data JPA sẽ tự động cung cấp phương thức count()
     }
 
+    @Override
+    public UserDTO getUserProfile(Long userID) {
+        User user = repository.findById(userID)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        return new UserDTO(user);
+    }
+
+    @Override
+    public UserDTO updateUserProfile(Long userID, UserDTO userDTO) {
+        User user = repository.findById(userID)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        user.setUserName(userDTO.getUsername());
+        user.setEmail(userDTO.getEmail());
+        user.setFullName(userDTO.getFullName());
+        user.setAge(userDTO.getAge());
+        user.setGender(userDTO.getGender());
+        user.setHeight(userDTO.getHeight());
+        user.setWeight(userDTO.getWeight());
+
+        User updatedUser = repository.save(user);
+        return new UserDTO(updatedUser);
+    }
+
+    @Override
+    public void changePassword(Long userID, String oldPassword, String newPassword) {
+        User user = repository.findById(userID)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        if (!passwordEncoder.matches(oldPassword, user.getUserPassword())) {
+            throw new RuntimeException("Old password is incorrect");
+        }
+
+        user.setUserPassword(passwordEncoder.encode(newPassword));
+        repository.save(user);
+    }
+
 }

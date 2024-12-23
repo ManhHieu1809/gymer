@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Gym Template">
+    <meta name="keywords" content="Gym, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Gym | Template</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<!-- Css Styles -->
+<link th:href="@{/css2/bootstrap.min.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css2/font-awesome.min.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css2/flaticon.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css2/owl.carousel.min.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css2/barfiller.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css2/magnific-popup.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css2/slicknav.min.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css2/style.css}" rel="stylesheet" type="text/css">
+
+    <style>
+        /* Căn chỉnh phần User icon và Login/Signup trong header */
+
+        /* Căn chỉnh biểu tượng người dùng */
+        .user-icon {
+            font-size: 2rem;
+            color: white; /* Màu trắng cho icon */
+            text-decoration: none;
+            margin-right: 10px; /* Khoảng cách giữa icon và login/signup */
+        }
+
+        .user-icon:hover {
+            color: #007bff; /* Màu khi hover */
+        }
+
+        /* Căn chỉnh các liên kết login/signup */
+        .auth-links a {
+            text-decoration: none;
+            color: white; /* Màu trắng */
+            font-weight: bold;
+            margin-left: 0px;
+        }
+
+        .auth-links a:hover {
+            color: #007bff; /* Màu khi hover */
+        }
+
+        /* Thêm hiệu ứng cho các liên kết */
+        .login-btn, .signup-btn {
+            text-transform: uppercase; /* Viết hoa cho các liên kết */
+        }
+    </style>
+
+    <style>
+        body {
+            background-color: #f4f6f9;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        .conversation-list {
+            border-right: 1px solid #ddd;
+            height: 500px;
+            overflow-y: auto;
+            background-color: #fff;
+            padding: 0; /* Xóa padding mặc định */
+        }
+        .conversation-item {
+            padding: 8px; /* Giảm padding */
+            font-size: 12px; /* Giảm cỡ chữ */
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+        }
+        .conversation-item:hover {
+            background-color: #f0f8ff;
+        }
+        .conversation-item.active {
+            background-color: #d9edf7;
+        }
+        .chat-box {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            height: 400px;
+            overflow-y: scroll;
+            background-color: #f9f9f9;
+            padding: 10px;
+        }
+        .message {
+            margin-bottom: 10px;
+        }
+        .message-left {
+            text-align: left;
+        }
+        .message-right {
+            text-align: right;
+        }
+        .message-content {
+            display: inline-block;
+            padding: 8px 12px;
+            border-radius: 15px;
+            max-width: 80%;
+        }
+        .message-left .message-content {
+            background-color: #d2d6de;
+            color: #444;
+        }
+        .message-right .message-content {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .chat-footer {
+            display: flex;
+            margin-top: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Offcanvas Menu Section Begin -->
+    <div class="offcanvas-menu-overlay"></div>
+    <div class="offcanvas-menu-wrapper">
+        <div class="canvas-close">
+            <i class="fa fa-close"></i>
+        </div>
+        <div class="canvas-search search-switch">
+            <i class="fa fa-search"></i>
+        </div>
+        <nav class="canvas-menu mobile-menu">
+            <ul>
+                <li><a href="/customer/home">Home</a></li>
+                <li><a href="/customer/home/nutrition-plan">Kế hoạch dinh dưỡng</a></li>
+                <li><a href="/customer/home/workout-plan">Kế hoạch luyện tập</a></li>
+                <li><a href="/customer/home/Progress">Tiến độ luyện tập</a></li>
+                <li><a href="/customer/home/shop">Shop</a></li>
+                <li><a href="/customer/home/users/notification">Thông báo</a></li>
+                <li><a href="/customer/home/chat">Chăm sóc khách hàng</a></li>
+            </ul>
+        </nav>
+        <div id="mobile-menu-wrap"></div>
+
+    </div>
+    <!-- Offcanvas Menu Section End -->
+
+    <!-- Header Section Begin -->
+    <header class="header-section">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="logo">
+                        <a href="/customer/home">
+                            <img th:src="@{/img/logo.png}" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <nav class="nav-menu">
+                        <ul>
+                            <li><a href="/customer/home">Home</a></li>
+                            <li><a href="/customer/home/nutrition-plan">Kế hoạch dinh dưỡng</a></li>
+                            <li><a href="/customer/home/workout-plan">Kế hoạch luyện tập</a></li>
+                            <li><a href="/customer/home/Progress">Tiến độ luyện tập</a></li>
+                            <li><a href="/customer/home/shop">Shop</a></li>
+                            <li><a href="/customer/home/users/notification">Thông báo</a></li>
+                            <li class="active"><a href="/customer/home/chat">Chăm sóc khách hàng</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-lg-3">
+                    <!-- User Icon and Login/Signup Links -->
+                    <div class="d-flex justify-content-end align-items-center">
+                        <a href="/customer/home/users" class="user-icon" id="user-icon">
+                            <i class="fa fa-user"></i>
+                        </a>
+                        <div class="auth-links ml-3" id="auth-links">
+                            <a href="/req/login" class="login-btn" id="login-btn">Login</a> |
+                            <a href="/req/signup" class="signup-btn">Signup</a>
+                        </div>
+                        <div class="user-info text-white" id="user-info" style="display: none;">
+                            <span>Welcome, <span id="username"></span>!</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="canvas-open">
+                <i class="fa fa-bars"></i>
+            </div>
+        </div>
+    </header>
+    <!-- Header End -->
+
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" th:data-setbg="@{/img/breadcrumb-bg.jpg}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb-text">
+                        <h2>Contact Us</h2>
+                        <div class="bt-option">
+                            <a href="/customer/home">Home</a>
+                            <a href="#">Pages</a>
+                            <span>Contact us</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Contact Section Begin -->
+    <section class="contact-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="section-title contact-title">
+                        <span>Contact Us</span>
+                        <h2>GET IN TOUCH</h2>
+                    </div>
+                    <div class="contact-widget">
+                        <div class="cw-text">
+                            <i class="fa fa-map-marker"></i>
+                            <p>Học Viện Kĩ Thuật Mật Mã<br/> 141 Chiến Thắng, Tân Triều, Thanh Trì, Hà Nội</p>
+                        </div>
+                        <div class="cw-text">
+                            <i class="fa fa-mobile"></i>
+                            <ul>
+                                <li>0364506439</li>
+                                <li>0364506439</li>
+                            </ul>
+                        </div>
+                        <div class="cw-text email">
+                            <i class="fa fa-envelope"></i>
+                            <p>Support.gymcenter@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="leave-comment">
+                        <div class="col-sm-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading text-white bg-dark"><strong>Direct Chat</strong></div>
+                                <div id="messages" class="chat-box" style="padding: 15px; max-height: 500px; overflow-y: auto; border: 1px solid #ccc;">
+                                    <!-- Messages will load here -->
+                                </div>
+                                <div class="panel-footer">
+                                    <div class="input-group">
+                                        <input type="text" id="messageInput" class="form-control" placeholder="Type Message ..." onkeypress="checkEnter(event)">
+                                        <span class="input-group-btn">
+                            <button class="btn btn-primary" onclick="sendMessage()">Send</button>
+                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- Contact Section End -->
+
+    <!-- Get In Touch Section Begin -->
+    <div class="gettouch-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="gt-text">
+                        <i class="fa fa-map-marker"></i>
+                        <p>Học Viện Kĩ Thuật Mật Mã<br/> 141 Chiến Thắng, Tân Triều, Thanh Trì, Hà Nội</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="gt-text">
+                        <i class="fa fa-mobile"></i>
+                        <ul>
+                            <li>125-711-811</li>
+                            <li>125-668-886</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="gt-text email">
+                        <i class="fa fa-envelope"></i>
+                        <p>Support.gymcenter@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Get In Touch Section End -->
+
+    <!-- Footer Section Begin -->
+    <section class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="fs-about">
+                        <div class="fa-logo">
+                            <a href="#"><img th:src="@{/img/logo.png}" alt=""></a>
+                        </div>
+                        <p>“Con đường dẫn đến thành công được làm nên từ những viên gạch của sự kiên trì. Hãy là chính mình, vượt qua mọi chướng ngại và theo đuổi ước mơ của bản thân.”</p>
+                        <div class="fa-social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-youtube-play"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa  fa-envelope-o"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-6">
+                    <div class="fs-widget">
+                        <h4>Useful links</h4>
+                        <ul>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Classes</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-6">
+                    <div class="fs-widget">
+                        <h4>Support</h4>
+                        <ul>
+                            <li><a href="#">Login</a></li>
+                            <li><a href="#">My account</a></li>
+                            <li><a href="#">Subscribe</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="fs-widget">
+                        <h4>Tips & Guides</h4>
+                        <div class="fw-recent">
+                            <h6><a href="#">Physical fitness may help prevent depression, anxiety</a></h6>
+                            <ul>
+                                <li>3 min read</li>
+                                <li>20 Comment</li>
+                            </ul>
+                        </div>
+                        <div class="fw-recent">
+                            <h6><a href="#">Fitness: The best exercise to lose belly fat and tone up...</a></h6>
+                            <ul>
+                                <li>3 min read</li>
+                                <li>20 Comment</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="copyright-text">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer Section End -->
+
+    <!-- Search model Begin -->
+    <div class="search-model">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-switch">+</div>
+            <form class="search-model-form">
+                <input type="text" id="search-input" placeholder="Search here.....">
+            </form>
+        </div>
+    </div>
+    <!-- Search model end -->
+
+<!-- Js Plugins -->
+<script th:src="@{/js2/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/js2/bootstrap.min.js}"></script>
+<script th:src="@{/js2/jquery.magnific-popup.min.js}"></script>
+<script th:src="@{/js2/masonry.pkgd.min.js}"></script>
+<script th:src="@{/js2/jquery.barfiller.js}"></script>
+<script th:src="@{/js2/jquery.slicknav.js}"></script>
+<script th:src="@{/js2/owl.carousel.min.js}"></script>
+<script th:src="@{/js2/main.js}"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Hàm lấy và hiển thị tên người dùng
+            async function fetchAndDisplayUsernames() {
+                try {
+                    // Gửi yêu cầu GET tới API
+                    const response = await fetch('http://localhost:8080/customer/home/users/user-info1', {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        credentials: 'include' // Đảm bảo gửi cookie session
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json(); // Lấy dữ liệu JSON từ phản hồi
+                        const username = data.username;
+
+                        // Hiển thị tên người dùng và ẩn các liên kết login/signup
+                        document.getElementById("auth-links").style.display = 'none'; // Ẩn "Login" và "Signup"
+                        document.getElementById("user-info").style.display = 'block'; // Hiển thị tên người dùng
+                        document.getElementById("username").innerText = username; // Cập nhật tên người dùng
+                    } else {
+                        console.error("Error fetching username:", response.statusText);
+                    }
+                } catch (error) {
+                    console.error("Error fetching username:", error);
+                }
+            }
+
+            // Kiểm tra khi tải trang và gọi API
+            fetchAndDisplayUsernames();
+        });
+
+    </script>
+
+    <script>
+        let customerUsername = ""; // Sẽ được gán giá trị từ API
+        const adminUsername = "admin"; // Username của admin
+        let conversationId = ""; // Sẽ được thiết lập sau khi lấy được username
+
+        const socket = new SockJS('/ws');
+        const stompClient = Stomp.over(socket);
+
+        // Kết nối WebSocket
+        stompClient.connect({}, function (frame) {
+            console.log('Connected as: ' + frame);
+
+            // Subscribe sau khi thiết lập conversationId
+            if (conversationId) {
+                stompClient.subscribe('/topic/messages/' + conversationId, function (message) {
+                    showMessage(JSON.parse(message.body));
+                });
+            }
+        });
+
+        // Tạo Conversation và lưu vào database
+        async function createConversation() {
+            const conversation = {
+                conversationId: conversationId,
+                adminUsername: adminUsername,
+                customerUsername: customerUsername
+            };
+
+            try {
+                const response = await fetch('http://localhost:8080/customer/home/users/conversations/create', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(conversation)
+                });
+
+                if (!response.ok) {
+                    console.error("Failed to create conversation:", response.statusText);
+                } else {
+                    console.log("Conversation created successfully");
+                }
+            } catch (error) {
+                console.error("Error creating conversation:", error);
+            }
+        }
+
+        // Fetch API để lấy username và thiết lập conversationId
+        async function fetchAndDisplayUsernames() {
+            try {
+                // Gửi yêu cầu GET tới API
+                const response = await fetch('http://localhost:8080/customer/home/users/user-info1', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include' // Đảm bảo gửi cookie session
+                });
+
+
+                if (response.ok) {
+                    const data = await response.json(); // Lấy dữ liệu JSON từ phản hồi
+
+                    // Kiểm tra xem dữ liệu có chứa username không
+                    if (data && data.username) {
+                        customerUsername = data.username; // Gán giá trị username
+
+                        // Thiết lập conversationId
+                        conversationId = adminUsername + "-" + customerUsername;
+
+                        // Gọi API để tạo Conversation
+                        await createConversation();
+
+
+                        // Đăng ký subscribe chỉ một lần nếu chưa đăng ký
+                        if (!isSubscribed && conversationId) {
+                            stompClient.subscribe('/topic/messages/' + conversationId, function (message) {
+                                showMessage(JSON.parse(message.body));
+                            });
+                            isSubscribed = true; // Đánh dấu là đã đăng ký
+                        }
+                    } else {
+                        console.error("Username not found in the response");
+                    }
+                } else {
+                    console.error("Error fetching username:", response.statusText);
+                }
+            } catch (error) {
+                console.error("Error fetching username:", error);
+            }
+        }
+
+        // Gọi hàm khi trang được tải
+        window.onload = fetchAndDisplayUsernames;
+
+        function sendMessage() {
+            const messageContent = document.getElementById('messageInput').value;
+            if (messageContent && conversationId && customerUsername && adminUsername) {
+                if (stompClient.connected) {
+                    const message = {
+                        senderUsername: customerUsername,
+                        receiverUsername: adminUsername,
+                        conversationId: conversationId,
+                        message: messageContent
+                    };
+                    stompClient.send("/app/chat/" + conversationId, {}, JSON.stringify(message));
+                    document.getElementById('messageInput').value = '';
+                } else {
+                    console.error("WebSocket connection is not established.");
+                }
+            }
+        }
+
+        function showMessage(message) {
+            const messagesBox = document.getElementById('messages');
+            const messageElement = document.createElement('div');
+
+            // Kiểm tra nếu người gửi là admin thì hiển thị tin nhắn bên phải
+            const alignClass = message.senderUsername === adminUsername ? 'message-left' : 'message-right';
+
+            messageElement.className = `message ${alignClass}`;
+            messageElement.innerHTML = `
+        <div class="message-content">
+            <strong>${message.senderUsername}</strong><br>
+            ${message.message}<br>
+            <small>${new Date().toLocaleTimeString()}</small>
+        </div>
+    `;
+            messagesBox.appendChild(messageElement);
+            messagesBox.scrollTop = messagesBox.scrollHeight;
+        }
+
+        // Kiểm tra phím Enter để gửi tin nhắn
+        function checkEnter(event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        }
+    </script>
+</body>
+
+</html>

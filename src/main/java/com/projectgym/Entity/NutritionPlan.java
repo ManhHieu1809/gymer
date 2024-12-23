@@ -19,7 +19,8 @@ public class NutritionPlan {
     private String descriptions;
     @Column(name = "calo")
     private double calo;
-
+    @Column(name = "image_url")
+    private String imageUrl;
     @ManyToOne
     @JoinColumn(name = "userID",nullable = false)
     private User user;

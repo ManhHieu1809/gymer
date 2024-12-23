@@ -44,6 +44,7 @@ function fetchUsers1() {
 document.addEventListener("DOMContentLoaded", function () {
     fetchUsers1();    // Populate user table (from previous implementation)
     // Gọi hàm fetchPlans để tải dữ liệu khi trang được tải
+
 });
 
 // Hàm tạo thông báo cho người dùng
@@ -237,4 +238,75 @@ function viewTopicDetails(topicID, userID) {
         });
 }
 
+async function fetchAndDisplayUsernames() {
+    try {
+        // Gửi yêu cầu GET tới API
+        const response = await fetch('http://localhost:8080/trainer/home/users/user-info', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include' // Đảm bảo gửi cookie session
+        });
 
+        if (response.ok) {
+            const data = await response.json(); // Lấy dữ liệu JSON từ phản hồi
+
+            // Danh sách các ID của thẻ cần cập nhật
+            const usernameElements = ["username1", "username2", "username3"];
+
+            // Cập nhật nội dung cho tất cả các thẻ
+            usernameElements.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.innerText = data.username; // Cập nhật tên người dùng
+                }
+            });
+        } else {
+            console.error("Error fetching username:", response.statusText);
+        }
+    } catch (error) {
+        console.error("Error fetching username:", error);
+    }
+}
+
+// Gọi hàm khi trang được tải
+window.onload = fetchAndDisplayUsernames;
+
+// async function fetchAndDisplayUsernames() {
+//     try {
+//         // Gửi yêu cầu GET tới API
+//         const response = await fetch('http://localhost:8080/trainer/home/users/user-info', {
+//             method: 'GET',
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             },
+//             credentials: 'include' // Đảm bảo gửi cookie session
+//         });
+//
+//         if (response.ok) {
+//             const data = await response.json(); // Lấy dữ liệu JSON từ phản hồi
+//
+//             // Kiểm tra xem dữ liệu có chứa username không
+//             if (data && data.username) {
+//                 const username = data.username;
+//
+//                 // Cập nhật username cho thẻ mong muốn
+//                 const usernameElement = document.getElementById('username');  // Giả sử bạn có thẻ có id="username"
+//                 if (usernameElement) {
+//                     usernameElement.innerText = username; // Cập nhật tên người dùng
+//                 }
+//             } else {
+//                 console.error("Username not found in the response");
+//             }
+//         } else {
+//             console.error("Error fetching username:", response.statusText);
+//         }
+//     } catch (error) {
+//         console.error("Error fetching username:", error);
+//     }
+// }
+//
+// // Gọi hàm khi trang được tải
+// window.onload = fetchAndDisplayUsernames;
+//

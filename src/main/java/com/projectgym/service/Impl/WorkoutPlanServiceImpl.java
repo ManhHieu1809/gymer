@@ -2,6 +2,7 @@ package com.projectgym.service.Impl;
 
 import com.projectgym.Entity.User;
 import com.projectgym.Entity.WorkoutPlan;
+import com.projectgym.dto.WorkoutDTO;
 import com.projectgym.dto.WorkoutPlanDTO;
 import com.projectgym.repository.MyAppUserRepository;
 import com.projectgym.repository.WorkoutPlanRepository;
@@ -19,30 +20,36 @@ public class WorkoutPlanServiceImpl implements WorkoutPlanService {
     @Autowired
     private MyAppUserRepository userRepository;
 
-    @Override
-    public WorkoutPlanDTO createWorkoutPlan(WorkoutPlanDTO workoutPlanDTO) {
-        WorkoutPlan plan = new WorkoutPlan();
-        plan.setPlanName(workoutPlanDTO.getPlanName());
-        plan.setDescriptions(workoutPlanDTO.getDescriptions());
-        plan.setDuration(workoutPlanDTO.getDuration());
+   @Override
+public WorkoutPlanDTO createWorkoutPlan(WorkoutPlanDTO workoutPlanDTO) {
+    WorkoutPlan plan = new WorkoutPlan();
+    plan.setPlanName(workoutPlanDTO.getPlanName());
+    plan.setDescriptions(workoutPlanDTO.getDescriptions());
+    plan.setDuration(workoutPlanDTO.getDuration());
 
-        // Gán kế hoạch nếu có userID
-        if (workoutPlanDTO.getUserID() != 0) {
-            User user = userRepository.findById((long) workoutPlanDTO.getUserID())
-                    .orElseThrow(() -> new RuntimeException("User not found"));
-            plan.setUser(user);
-        }
-
-        WorkoutPlan savedPlan = workoutPlanRepository.save(plan);
-
-        return new WorkoutPlanDTO(
-                savedPlan.getPlanID(),
-                savedPlan.getPlanName(),
-                savedPlan.getDescriptions(),
-                savedPlan.getDuration(),
-                savedPlan.getUser() != null ? savedPlan.getUser().getUserID() : 0
-        );
+    // Gán kế hoạch nếu có userID
+    if (workoutPlanDTO.getUserID() != 0) {
+        User user = userRepository.findById((long) workoutPlanDTO.getUserID())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        plan.setUser(user);
     }
+
+    WorkoutPlan savedPlan = workoutPlanRepository.save(plan);
+
+    List<WorkoutDTO> workoutDTOs = savedPlan.getWorkouts().stream()
+            .map(workout -> new WorkoutDTO(workout.getWorkoutID(),workout.getWorkoutName(), workout.getCategory(), workout.getInstructions(),workout.getImageUrl(),workout.getVideoUrl()))
+            .collect(Collectors.toList());
+
+    return new WorkoutPlanDTO(
+            savedPlan.getPlanID(),
+            savedPlan.getPlanName(),
+            savedPlan.getDescriptions(),
+            savedPlan.getDuration(),
+            savedPlan.getImageUrl(),
+            savedPlan.getUser() != null ? savedPlan.getUser().getUserID() : 0,
+            workoutDTOs
+    );
+}
 
     @Override
     public WorkoutPlanDTO updateWorkoutPlan(Long planID, WorkoutPlanDTO workoutPlanDTO) {
@@ -55,12 +62,19 @@ public class WorkoutPlanServiceImpl implements WorkoutPlanService {
 
         WorkoutPlan updatedPlan = workoutPlanRepository.save(plan);
 
+        List<WorkoutDTO> workoutDTOs = updatedPlan.getWorkouts().stream()
+                .map(workout -> new WorkoutDTO(workout.getWorkoutID(),workout.getWorkoutName(), workout.getCategory(), workout.getInstructions(),workout.getImageUrl(),workout.getVideoUrl()))
+                .collect(Collectors.toList());
+
         return new WorkoutPlanDTO(
                 updatedPlan.getPlanID(),
                 updatedPlan.getPlanName(),
                 updatedPlan.getDescriptions(),
                 updatedPlan.getDuration(),
-                updatedPlan.getUser() != null ? updatedPlan.getUser().getUserID() : null
+                updatedPlan.getImageUrl(),
+                updatedPlan.getUser() != null ? updatedPlan.getUser().getUserID() : null,
+                workoutDTOs
+
         );
     }
 
@@ -80,7 +94,11 @@ public class WorkoutPlanServiceImpl implements WorkoutPlanService {
                         plan.getPlanName(),
                         plan.getDescriptions(),
                         plan.getDuration(),
-                        plan.getUser().getUserID()
+                        plan.getImageUrl(),
+                        plan.getUser().getUserID(),
+                        plan.getWorkouts().stream()
+                                .map(workout -> new WorkoutDTO(workout.getWorkoutID(),workout.getWorkoutName(), workout.getCategory(), workout.getInstructions(), workout.getImageUrl(), workout.getVideoUrl()))
+                                .collect(Collectors.toList())
                 ))
                 .collect(Collectors.toList());
     }
@@ -95,13 +113,17 @@ public class WorkoutPlanServiceImpl implements WorkoutPlanService {
 
         plan.setUser(user);
         WorkoutPlan updatedPlan = workoutPlanRepository.save(plan);
-
+        List<WorkoutDTO> workoutDTOS = updatedPlan.getWorkouts().stream()
+                .map(workout -> new WorkoutDTO(workout.getWorkoutID(),workout.getWorkoutName(), workout.getCategory(), workout.getInstructions(),workout.getImageUrl(),workout.getVideoUrl()))
+                .collect(Collectors.toList());
         return new WorkoutPlanDTO(
                 updatedPlan.getPlanID(),
                 updatedPlan.getPlanName(),
                 updatedPlan.getDescriptions(),
                 updatedPlan.getDuration(),
-                updatedPlan.getUser().getUserID()
+                updatedPlan.getImageUrl(),
+                updatedPlan.getUser().getUserID(),
+                workoutDTOS
         );
     }
 
@@ -115,7 +137,11 @@ public class WorkoutPlanServiceImpl implements WorkoutPlanService {
                 plan.getPlanName(),
                 plan.getDescriptions(),
                 plan.getDuration(),
-                plan.getUser() != null ? plan.getUser().getUserID() : null
+                plan.getImageUrl(),
+                plan.getUser() != null ? plan.getUser().getUserID() : null,
+                plan.getWorkouts().stream()
+                        .map(workout -> new WorkoutDTO(workout.getWorkoutID(),workout.getWorkoutName(), workout.getCategory(), workout.getInstructions(), workout.getImageUrl(), workout.getVideoUrl()))
+                        .collect(Collectors.toList())
         );
     }
 
@@ -127,7 +153,11 @@ public class WorkoutPlanServiceImpl implements WorkoutPlanService {
                         plan.getPlanName(),
                         plan.getDescriptions(),
                         plan.getDuration(),
-                        plan.getUser() != null ? plan.getUser().getUserID() : null
+                        plan.getImageUrl(),
+                        plan.getUser() != null ? plan.getUser().getUserID() : null,
+                        plan.getWorkouts().stream()
+                                .map(workout -> new WorkoutDTO(workout.getWorkoutID(),workout.getWorkoutName(), workout.getCategory(), workout.getInstructions(), workout.getImageUrl(), workout.getVideoUrl()))
+                                .collect(Collectors.toList())
                 ))
                 .collect(Collectors.toList());
     }

@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Gym Template">
+    <meta name="keywords" content="Gym, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Gym | Template</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
+
+<!-- Css Styles -->
+<link th:href="@{/css2/bootstrap.min.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css2/font-awesome.min.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css2/flaticon.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css2/owl.carousel.min.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css2/barfiller.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css2/magnific-popup.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css2/slicknav.min.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css2/style.css}" rel="stylesheet" type="text/css">
+    <style>
+        .form-control {
+            background-color: #fff;
+            color: #333;
+
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #updateUserForm {
+            color: #333;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 0px;
+            box-shadow: 0 0 10px rgba(30, 22, 22, 0.1);
+            width: 50%;
+            align-items: center;
+            margin: auto;
+        }
+
+        #updateUserForm .form-group {
+            margin-bottom: 15px;
+        }
+
+        #updateUserForm .form-control {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #updateUserForm .form-control:focus {
+            border-color: #f36100;
+            box-shadow: 0 0 5px rgba(243, 97, 0, 0.5);
+        }
+
+        #updateUserForm label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .primary-btn {
+            background-color: #f36100;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        .primary-btn:hover {
+            background-color: #e05500;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: flex-start;
+        }
+    </style>
+</head>
+
+<body>
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<!-- Offcanvas Menu Section Begin -->
+<div class="offcanvas-menu-overlay"></div>
+<div class="offcanvas-menu-wrapper">
+    <div class="canvas-close">
+        <i class="fa fa-close"></i>
+    </div>
+    <div class="canvas-search search-switch">
+        <i class="fa fa-search"></i>
+    </div>
+    <nav class="canvas-menu mobile-menu">
+        <ul>
+            <li><a href="/customer/home">Home</a></li>
+            <li><a href="/customer/home/nutrition-plan">Kế hoạch dinh dưỡng</a></li>
+            <li><a href="/customer/home/workout-plan">Kế hoạch luyện tập</a></li>
+            <li><a href="/customer/home/progress">Tiến độ luyện tập</a></li>
+            <li><a href="/customer/home/shop">Shop</a></li>
+            <li><a href="/customer/home/users/notification">Thông báo</a></li>
+            <li><a href="/customer/home/chat">Chăm sóc khách hàng</a></li>
+        </ul>
+    </nav>
+    <div id="mobile-menu-wrap"></div>
+    <div class="canvas-social">
+        <a href="#"><i class="fa fa-facebook"></i></a>
+        <a href="#"><i class="fa fa-twitter"></i></a>
+        <a href="#"><i class="fa fa-youtube-play"></i></a>
+        <a href="#"><i class="fa fa-instagram"></i></a>
+    </div>
+</div>
+<!-- Offcanvas Menu Section End -->
+
+<!-- Header Section Begin -->
+<header class="header-section">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="logo">
+                    <a href="/customer/home">
+                        <img th:src="@{/img/logo.png}" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <nav class="nav-menu">
+                    <ul>
+                        <li><a href="/customer/home">Home</a></li>
+                        <li><a href="/customer/home/nutrition-plan">Kế hoạch dinh dưỡng</a></li>
+                        <li><a href="/customer/home/workout-plan">Kế hoạch luyện tập</a></li>
+                        <li><a href="/customer/home/progress">Tiến độ luyện tập</a></li>
+                        <li><a href="/customer/home/shop">Shop</a></li>
+                        <li><a href="/customer/home/users/notification">Thông báo</a></li>
+                        <li><a href="/customer/home/chat">Chăm sóc khách hàng</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-lg-3">
+                <!-- User Icon and Login/Signup Links -->
+                <div class="d-flex justify-content-end align-items-center">
+                    <a href="/customer/home/users" class="user-icon" id="user-icon">
+                        <i class="fa fa-user"></i>
+                    </a>
+                    <div class="auth-links ml-3" id="auth-links">
+                        <a href="/req/login" class="login-btn" id="login-btn">Login</a> |
+                        <a href="/req/signup" class="signup-btn">Signup</a>
+                    </div>
+                    <div class="user-info text-white" id="user-info" style="display: none;">
+                        <span>Welcome, <span id="username"></span>!</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="canvas-open">
+            <i class="fa fa-bars"></i>
+        </div>
+    </div>
+</header>
+<!-- Header End -->
+
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg" th:data-setbg="@{/img/breadcrumb-bg.jpg}">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb-text">
+                    <h2>User</h2>
+                    <div class="bt-option">
+                        <a href="./index.html">Home</a>
+                        <span>User</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
+
+<!-- Update profile -->
+<section class="team-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="team-title">
+                    <div class="section-title">
+                        <span>Edit your</span>
+                        <h2>Profile</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form id="updateUserForm" style="color: #f36100; background-color: #151515;">
+        <!-- Tên đăng nhập -->
+
+        <div class="form-group">
+            <label for="new-username">Username:</label>
+            <input type="text" id="new-username" class="form-control" placeholder="Nhập username">
+        </div>
+
+        <div class="form-group">
+            <label for="new-name">Tên:</label>
+            <input type="text" id="new-name" class="form-control" placeholder="Nhập họ tên">
+        </div>
+        <div class="form-group">
+            <label for="new-email">Email:</label>
+            <input type="email" id="new-email" class="form-control" placeholder="Nhập email" required>
+        </div>
+        <div class="form-group">
+            <label for="new-gender">Giới tính:</label>
+            <select id="new-gender" class="form-control" required>
+                <option value="" disabled selected>Chọn giới tính</option>
+                <option value="nam">Nam</option>
+                <option value="nu">Nữ</option>
+                <option value="other">Khác</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="new-age">Tuổi:</label>
+            <input type="number" id="new-age" class="form-control" placeholder="Nhập tuổi" required>
+        </div>
+        <div class="form-group">
+            <label for="new-height">Chiều cao (cm):</label>
+            <input type="number" id="new-height" class="form-control" placeholder="Nhập chiều cao" required>
+        </div>
+        <div class="form-group">
+            <label for="new-weight">Cân nặng (kg):</label>
+            <input type="number" id="new-weight" class="form-control" placeholder="Nhập cân nặng" required>
+        </div>
+        <div class="form-group">
+            <label for="new-goal">Mục tiêu:</label>
+            <select id="new-goal" class="form-control" required>
+                <option value="" disabled selected>Chọn mục tiêu</option>
+                <option value="Tăng cân">Tăng cân</option>
+                <option value="Giữ dáng">Giữ dáng</option>
+                <option value="Giảm cân">Giảm cân</option>
+            </select>
+        </div>
+        <!-- Submit Button -->
+
+        <div class="btn-group">
+            <button type="submit" class="primary-btn btn-normal appoinment-btn">Lưu lại</button>
+            <button type="button" class="primary-btn btn-normal appoinment-btn"
+                    onclick="window.location.href='/customer/home/users'">Thoát</button>
+        </div>
+    </form>
+    </div>
+</section>
+
+
+
+<!-- Footer Section Begin -->
+<section class="footer-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="fs-about">
+                    <div class="fa-logo">
+                        <a href="#"><img th:src="@{/img/logo.png}" alt=""></a>
+                    </div>
+                    <p>“Con đường dẫn đến thành công được làm nên từ những viên gạch của sự kiên trì. Hãy là chính mình, vượt qua mọi chướng ngại và theo đuổi ước mơ của bản thân.”</p>
+                    <div class="fa-social">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-youtube-play"></i></a>
+                        <a href="#"><i class="fa fa-instagram"></i></a>
+                        <a href="#"><i class="fa  fa-envelope-o"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-6">
+                <div class="fs-widget">
+                    <h4>Useful links</h4>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Classes</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-6">
+                <div class="fs-widget">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Login</a></li>
+                        <li><a href="#">My account</a></li>
+                        <li><a href="#">Subscribe</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="fs-widget">
+                    <h4>Tips & Guides</h4>
+                    <div class="fw-recent">
+                        <h6><a href="#">Physical fitness may help prevent depression, anxiety</a></h6>
+                        <ul>
+                            <li>3 min read</li>
+                            <li>20 Comment</li>
+                        </ul>
+                    </div>
+                    <div class="fw-recent">
+                        <h6><a href="#">Fitness: The best exercise to lose belly fat and tone up...</a></h6>
+                        <ul>
+                            <li>3 min read</li>
+                            <li>20 Comment</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="copyright-text">
+                    <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;
+                        <script>document.write(new Date().getFullYear());</script> All rights reserved | This
+                        template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a
+                                href="https://colorlib.com" target="_blank">Colorlib</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Footer Section End -->
+<script>
+    document.getElementById('updateUserForm').addEventListener('submit', async function (event) {
+        event.preventDefault();
+
+        // Fetch user profile data to get userID
+        async function fetchUserID() {
+            try {
+                const response = await fetch('/customer/home/users/user-info');
+                if (response.ok) {
+                    const userData = await response.json();
+                    console.log('User Data:', userData);
+                    return userData.userID;
+                } else {
+                    console.error('Failed to fetch user info:', response.statusText);
+                    throw new Error('Unable to fetch user info');
+                }
+            } catch (error) {
+                console.error('Error fetching user profile data:', error);
+                alert('Error fetching user data. Please try again.');
+                return null;
+            }
+        }
+
+        const userID = await fetchUserID();
+        if (!userID) {
+            alert('User ID could not be retrieved. Update process aborted.');
+            return;
+        }
+
+        // Collect form data
+        const userData = {
+            username: document.getElementById('new-username').value,
+            fullName: document.getElementById('new-name').value,
+            email: document.getElementById('new-email').value,
+            gender: document.getElementById('new-gender').value,
+            age: document.getElementById('new-age').value,
+            weight: document.getElementById('new-weight').value,
+            height: document.getElementById('new-height').value,
+            goal: document.getElementById('new-goal').value
+        };
+
+        try {
+            // Send update request
+            const response = await fetch(`/customer/home/users/${userID}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userData)
+            });
+
+            if (response.ok) {
+                alert('Profile updated successfully!');
+                window.location.href = '/req/login'; // Redirect to user profile page
+            } else {
+                console.error('Failed to update profile:', response.statusText);
+                alert('Failed to update profile. Please try again.');
+            }
+        } catch (error) {
+            console.error('Error updating profile:', error);
+            alert('An error occurred. Please try again.');
+        }
+    });
+</script>
+
+<!-- Search model Begin -->
+<div class="search-model">
+    <div class="h-100 d-flex align-items-center justify-content-center">
+        <div class="search-close-switch">+</div>
+        <form class="search-model-form">
+            <input type="text" id="search-input" placeholder="Search here.....">
+        </form>
+    </div>
+</div>
+<!-- Search model end -->
+<!-- Js Plugins -->
+<script th:src="@{/js2/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/js2/bootstrap.min.js}"></script>
+<script th:src="@{/js2/jquery.magnific-popup.min.js}"></script>
+<script th:src="@{/js2/masonry.pkgd.min.js}"></script>
+<script th:src="@{/js2/jquery.barfiller.js}"></script>
+<script th:src="@{/js2/jquery.slicknav.js}"></script>
+<script th:src="@{/js2/owl.carousel.min.js}"></script>
+<script th:src="@{/js2/main.js}"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta lang="vi">
+    <title>The Gym | Blank Page</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/css/AdminLTE.css}">
+    <link rel="stylesheet" th:href="@{/css/_all-skins.min.css}">
+    <link rel="stylesheet" th:href="@{/css/jquery-ui.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <script th:src="@{/js/angular.min.js}"></script>
+    <script th:src="@{/js/app.js}"></script>
+    <script th:src="@{/js/admin-api.js}"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <style>
+        body {
+            background-color: #f4f6f9;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        .conversation-list {
+            border-right: 1px solid #ddd;
+            height: 500px;
+            overflow-y: auto;
+            background-color: #fff;
+            padding: 0; /* Xóa padding mặc định */
+        }
+        .conversation-item {
+            padding: 8px; /* Giảm padding */
+            font-size: 12px; /* Giảm cỡ chữ */
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+        }
+        .conversation-item:hover {
+            background-color: #f0f8ff;
+        }
+        .conversation-item.active {
+            background-color: #d9edf7;
+        }
+        .chat-box {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            height: 400px;
+            overflow-y: scroll;
+            background-color: #f9f9f9;
+            padding: 10px;
+        }
+        .message {
+            margin-bottom: 10px;
+        }
+        .message-left {
+            text-align: left;
+        }
+        .message-right {
+            text-align: right;
+        }
+        .message-content {
+            display: inline-block;
+            padding: 8px 12px;
+            border-radius: 15px;
+            max-width: 80%;
+        }
+        .message-left .message-content {
+            background-color: #d2d6de;
+            color: #444;
+        }
+        .message-right .message-content {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .chat-footer {
+            display: flex;
+            margin-top: 10px;
+        }
+    </style>
+   </head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+<!-- Site wrapper -->
+<div class="wrapper">
+
+    <header class="main-header">
+        <!-- Logo -->
+        <a href="/admin/home" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini"><b>GYM</b></span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg">THE GYM</span>
+        </a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <!-- Notifications-->
+                    <li class="dropdown notifications-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-bell-o"></i>
+                            <span class="label label-warning">10</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="header">Bạn có 10 thông báo</li>
+                            <li>
+                                <!-- inner menu: contains the actual data -->
+                                <ul class="menu">
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-users text-aqua"></i> 5 thành viên mới hôm nay
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="footer"><a href="#">Xem tất cả</a></li>
+                        </ul>
+                    </li>
+                    <!-- User Account-->
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img th:src="@{/images/user2-160x160.jpg}" class="user-image" alt="User Image">
+                            <span class="hidden-xs" id="username1">Alexander Pierce</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- User image -->
+                            <li class="user-header">
+                                <img th:src="@{/images/user2-160x160.jpg}" class="img-circle" alt="User Image">
+                                <p id="username2">
+                                    Alexander Pierce <br> Administrator
+                                </p>
+                            </li>
+                            <!-- Menu Footer-->
+                            <li class="user-footer">
+                                <div class="pull-left">
+                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                </div>
+                                <div class="pull-right">
+                                    <a href="/req/login" class="btn btn-default btn-flat">Đăng xuất</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- =============================================== -->
+
+    <!-- Left side column. contains the sidebar -->
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <!-- Sidebar user panel -->
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img th:src="@{/images/user2-160x160.jpg}" class="img-circle" alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <p id="username3">Alexander Pierce</p>
+                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                </div>
+            </div>
+            <!-- search form -->
+            <form action="#" method="get" class="sidebar-form">
+                <div class="input-group">
+                    <input type="text" name="q" class="form-control" placeholder="Tìm kiếm...">
+                    <span class="input-group-btn">
+              <button type="submit" name="search" class="btn btn-flat"><i class="fa fa-search"></i>
+              </button>
+            </span>
+                </div>
+            </form>
+            <!-- /.search form -->
+            <!-- sidebar menu: : style can be found in sidebar.less -->
+            <ul class="sidebar-menu" data-widget="tree">
+                <li>
+                    <a href="/admin/home/user">
+                        <i class="fa fa-th"></i> <span>Quản lý tài khoản</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/admin/home/product">
+                        <i class="fa fa-th"></i> <span>Quản lý sản phẩm</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/home/order">
+                        <i class="fa fa-th"></i> <span>Quản lý đơn hàng</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/home/notification">
+                        <i class="fa fa-th"></i> <span>Quản lý thông báo</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/admin/home">
+                        <i class="fa fa-th"></i> <span>Thống kê doanh thu</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/home/chat">
+                        <i class="fa fa-th"></i> <span>Chăm sóc khách hàng</span>
+                    </a>
+                </li>
+
+            </ul>
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+    <!-- -------------------------------------------------------- -->
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Chăm sóc khách hàng
+            </h1>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+            <div class="container">
+                <div class="row">
+                    <!-- Conversations Sidebar -->
+                    <div class="col-sm-3 conversation-list">
+                        <div class="conversation-item active" onclick="loadConversation('conversation1', this)">
+                            <strong>CT6 - Lập trình nhúng ...</strong>
+                            <br><small>Le Duc Thuan: Các em chú ý...</small>
+                        </div>
+                        <div class="conversation-item" onclick="loadConversation('conversation2', this)">
+                            <strong>Thiết kế hệ thống nhúng ...</strong>
+                            <br><small>Trần Văn Thị: thưa thầy em...</small>
+                        </div>
+                        <div class="conversation-item" onclick="loadConversation('conversation3', this)">
+                            <strong>TKHT Nhúng Nhóm 15</strong>
+                            <br><small>Đỗ Đức Hoàng: Ở nhà có sẵn...</small>
+                        </div>
+                        <div class="conversation-item" onclick="loadConversation('conversation4', this)">
+                            <strong>THỰC TẬP CƠ SỞ-N44</strong>
+                            <br><small>Thanh Vũ: tối nay làm lab3...</small>
+                        </div>
+                    </div>
+
+                    <!-- Chat Section -->
+                    <div class="col-sm-7">
+                        <div class="panel panel-default">
+                            <div class="panel-heading"><strong>Direct Chat</strong></div>
+                            <div id="messages" class="chat-box">
+                                <!-- Messages will load here -->
+                            </div>
+                            <div class="panel-footer">
+                                <div class="input-group">
+                                    <input type="text" id="messageInput" class="form-control" placeholder="Type Message ..." onkeypress="checkEnter(event)">
+                                    <span class="input-group-btn">
+                            <button class="btn btn-primary" onclick="sendMessage()">Send</button>
+                        </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <!-- -------------------------------------------------------- -->
+    <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+
+        </div>
+        <strong> <a ></a>.</strong>
+    </footer>
+
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 3 -->
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/jquery-ui.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/adminlte.min.js}"></script>
+<script th:src="@{/js/dashboard.js}"></script>
+<script th:src="@{/tinymce/tinymce.min.js}"></script>
+<script th:src="@{/tinymce/config.js}"></script>
+<script th:src="@{/js/function.js}"></script>
+<script th:src="@{/js/api/admin-api.js}"></script>
+<script>
+    const adminUsername = "admin"; // Username của admin
+    let conversationId = ""; // Conversation ID hiện tại
+
+    const socket = new SockJS('/ws');
+    const stompClient = Stomp.over(socket);
+
+    stompClient.connect({}, function (frame) {
+        console.log('Connected as: ' + frame);
+        fetchConversations();
+    });
+
+    async function fetchConversations() {
+        const response = await fetch('http://localhost:8080/admin/home/users/conversations');
+        if (response.ok) {
+            const conversations = await response.json();
+            const conversationList = document.querySelector('.conversation-list');
+
+            // Clear existing items
+            conversationList.innerHTML = '';
+
+            // Add new conversation items
+            conversations.forEach(convo => {
+                const convoItem = document.createElement('div');
+                convoItem.className = 'conversation-item';
+                convoItem.onclick = () => loadConversation(convo, convoItem);
+                convoItem.innerHTML = `
+                    <strong>${convo.split('-')[0]}</strong><br>
+                    <small>${convo.split('-')[1]}</small>
+                `;
+                conversationList.appendChild(convoItem);
+            });
+        } else {
+            console.error('Failed to fetch conversations');
+        }
+    }
+
+    let currentSubscription = null; // Track the current subscription
+
+    async function loadConversation(conversationKey, element) {
+        const messagesBox = document.getElementById('messages');
+        const items = document.querySelectorAll('.conversation-item');
+        items.forEach(item => item.classList.remove('active'));
+        element.classList.add('active');
+        messagesBox.innerHTML = ''; // Xóa tin nhắn cũ
+
+        conversationId = conversationKey; // Lưu lại conversation ID hiện tại
+
+        // Unsubscribe từ subscription cũ nếu có
+        if (currentSubscription !== null) {
+            currentSubscription.unsubscribe();
+        }
+
+        try {
+            // Gọi API để lấy lịch sử tin nhắn
+            const response = await fetch(`http://localhost:8080/admin/home/messages/${conversationId}`);
+            if (response.ok) {
+                const messages = await response.json();
+                messages.forEach(msg => {
+                    showMessage(msg); // Hiển thị từng tin nhắn
+                });
+            } else {
+                console.error('Failed to load messages for conversation:', conversationId);
+            }
+        } catch (error) {
+            console.error('Error fetching conversation messages:', error);
+        }
+
+        // Sau khi tải xong tin nhắn cũ, subscribe để nhận tin nhắn mới
+        currentSubscription = stompClient.subscribe('/topic/messages/' + conversationId, function (message) {
+            const msgData = JSON.parse(message.body);
+            showMessage(msgData);
+        });
+    }
+
+
+
+    function sendMessage() {
+        const messageContent = document.getElementById('messageInput').value.trim();
+
+        if (messageContent && conversationId) {
+            const message = {
+                senderUsername: adminUsername,
+                receiverUsername: conversationId.split('-')[1], // Extract customer username from conversationId
+                conversationId: conversationId,
+                message: messageContent
+            };
+
+            // Gửi tin nhắn qua STOMP client
+            stompClient.send("/app/chat/" + conversationId, {}, JSON.stringify(message));
+            // Xóa nội dung trong input
+            document.getElementById('messageInput').value = '';
+        }
+    }
+    function showMessage(message) {
+        const messagesBox = document.getElementById('messages');
+        const messageElement = document.createElement('div');
+
+        // Kiểm tra nếu người gửi là admin thì hiển thị tin nhắn bên phải
+        const alignClass = message.senderUsername === adminUsername ? 'message-right' : 'message-left';
+
+        messageElement.className = `message ${alignClass}`;
+        messageElement.innerHTML = `
+        <div class="message-content">
+            <strong>${message.senderUsername}</strong><br>
+            ${message.message}<br>
+            <small>${new Date().toLocaleTimeString()}</small>
+        </div>
+    `;
+        messagesBox.appendChild(messageElement);
+        messagesBox.scrollTop = messagesBox.scrollHeight;
+    }
+
+
+    function checkEnter(event) {
+        if (event.key === "Enter") {
+            sendMessage();
+        }
+    }
+</script>
+
+
+</body>
+
+</html>

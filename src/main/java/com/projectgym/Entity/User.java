@@ -15,7 +15,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "userID")
     private int userID;
-    @Column(name = "user_name")
+    @Column(unique = true,name = "user_name")
     private String userName;
     @Column(name = "user_password")
     private String userPassword;
@@ -75,5 +75,14 @@ public class User {
     // Quan hệ một-nhiều với Progress
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Progress> progresses;
+
+    // Quan hệ OneToMany với Message (gửi đi)
+    @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL)
+    private List<Message> sentMessages;
+
+    // Quan hệ OneToMany với Message (nhận được)
+    @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL)
+    private List<Message> receivedMessages;
+
 
 }

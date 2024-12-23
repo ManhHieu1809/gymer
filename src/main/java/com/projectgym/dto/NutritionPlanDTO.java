@@ -14,5 +14,6 @@ public class NutritionPlanDTO {
     private String nameNutritionPlan;
     private String descriptions;
     private double calo;
+    private String imageUrl;
     private int userID;
 }

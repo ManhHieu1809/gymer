@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Gym Template">
+    <meta name="keywords" content="Gym, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Gym | Template</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
+
+ <!-- Css Styles -->
+<link th:href="@{/css2/bootstrap.min.css}" type="text/css" rel="stylesheet">
+<link th:href="@{/css2/font-awesome.min.css}" type="text/css" rel="stylesheet">
+<link th:href="@{/css2/flaticon.css}" type="text/css" rel="stylesheet">
+<link th:href="@{/css2/owl.carousel.min.css}" type="text/css" rel="stylesheet">
+<link th:href="@{/css2/barfiller.css}" type="text/css" rel="stylesheet">
+<link th:href="@{/css2/magnific-popup.css}" type="text/css" rel="stylesheet">
+<link th:href="@{/css2/slicknav.min.css}" type="text/css" rel="stylesheet">
+<link th:href="@{/css2/style.css}" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Offcanvas Menu Section Begin -->
+    <div class="offcanvas-menu-overlay"></div>
+    <div class="offcanvas-menu-wrapper">
+        <div class="canvas-close">
+            <i class="fa fa-close"></i>
+        </div>
+        <div class="canvas-search search-switch">
+            <i class="fa fa-search"></i>
+        </div>
+        <nav class="canvas-menu mobile-menu">
+            <ul>
+                <li><a href="/customer/home">Home</a></li>
+                <li><a href="/customer/home/nutrition-plan">Kế hoạch dinh dưỡng</a></li>
+                <li><a href="/customer/home/workout-plan">Kế hoạch luyện tập</a></li>
+                <li><a href="/customer/home/Progress">Tiến độ luyện tập</a></li>
+                <li><a href="/customer/home/shop">Shop</a></li>
+                <li><a href="/customer/home/users/notification">Thông báo</a></li>
+                <li><a href="/customer/home/chat">Chăm sóc khách hàng</a></li>
+            </ul>
+        </nav>
+
+    </div>
+    <!-- Offcanvas Menu Section End -->
+
+    <!-- Header Section Begin -->
+    <header class="header-section">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="logo">
+                        <a href="/customer/home">
+                            <img th:src="@{/img/logo.png}" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <nav class="nav-menu">
+                        <ul>
+                            <li><a href="/customer/home">Home</a></li>
+                            <li><a href="/customer/home/nutrition-plan">Kế hoạch dinh dưỡng</a></li>
+                            <li><a href="/customer/home/workout-plan">Kế hoạch luyện tập</a></li>
+                            <li><a href="/customer/home/Progress">Tiến độ luyện tập</a></li>
+                            <li><a href="/customer/home/shop">Shop</a></li>
+                            <li><a href="/customer/home/users/notification">Thông báo</a></li>
+                            <li><a href="/customer/home/chat">Chăm sóc khách hàng</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-lg-3">
+                    <div class="top-option">
+                        <div class="to-search search-switch">
+                            <i class="fa fa-search"></i>
+                        </div>
+                        <div class="to-social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-youtube-play"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="canvas-open">
+                <i class="fa fa-bars"></i>
+            </div>
+        </div>
+    </header>
+    <!-- Header End -->
+
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" th:data-setbg="@{/img/breadcrumb-bg.jpg}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb-text">
+                        <h2>SHOP GYM</h2>
+                        <div class="bt-option">
+                            <a href="/customer/home">Home</a>
+                            <span>Xác nhận đơn hàng</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Services Section Begin -->
+    <section class="services-section spad">
+        <div class="container">
+            <div class="row">
+            </div>
+            <div class="row bg-light">
+                <div class="container py-5">
+                    <h1 class="text-center mb-4">Xác nhận Đơn hàng</h1>
+                    <div id="user-info" class="mb-4">
+                        <h3>Thông tin Người dùng</h3>
+                        <p><strong>ID Người dùng:</strong> <span id="user-id">N/A</span></p>
+                    </div>
+
+                    <div id="product-list" class="mb-4">
+                        <h3>Danh sách Sản phẩm</h3>
+                        <table class="table table-bordered" th:action="@{/submitOrder}" method="post">
+                            <thead>
+                            <tr>
+                                <th id="orderInfo">Tên sản phẩm</th>
+                                <th>Số lượng</th>
+                                <th>Giá mỗi sản phẩm</th>
+                                <th id ="amount">Tổng</th>
+                            </tr>
+                            </thead>
+                            <tbody id="product-rows">
+                            <tr>
+                                <td colspan="4" class="text-center">Không có sản phẩm nào được chọn.</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="payment-method" class="mb-4">
+                        <h3>Phương thức Thanh toán</h3>
+                        <form>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="payment" id="vnpay" value="vnpay" checked>
+                                <label class="form-check-label" for="vnpay">VNPay</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="payment" id="cod" value="cod">
+                                <label class="form-check-label" for="cod">Thanh toán khi nhận hàng (COD)</label>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="confirm-button" class="">
+                        <form id="checkout-form" action="/submitOrder" method="post">
+                            <input type="hidden" name="amount" id="amount-input">
+                            <input type="hidden" name="orderInfo" id="order-info-input">
+                            <button type="submit" class="btn btn-primary">Xác nhận và Thanh toán</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Services Section End -->
+
+
+
+    <!-- Get In Touch Section Begin -->
+    <div class="gettouch-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="gt-text">
+                        <i class="fa fa-map-marker"></i>
+                        <p>Học Viện Kĩ Thuật Mật Mã<br/> 141 Chiến Thắng, Tân Triều, Thanh Trì, Hà Nội</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="gt-text">
+                        <i class="fa fa-mobile"></i>
+                        <ul>
+                            <li>0364506439</li>
+                            <li>0364506439</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="gt-text email">
+                        <i class="fa fa-envelope"></i>
+                        <p>Support.gymcenter@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Get In Touch Section End -->
+
+    <!-- Footer Section Begin -->
+    <section class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="fs-about">
+                        <div class="fa-logo">
+                            <a href="#"><img th:src="@{/img/logo.png}" alt=""></a>
+                        </div>
+                        <p>“Con đường dẫn đến thành công được làm nên từ những viên gạch của sự kiên trì. Hãy là chính mình, vượt qua mọi chướng ngại và theo đuổi ước mơ của bản thân.”</p>
+                        <div class="fa-social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-youtube-play"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa  fa-envelope-o"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-6">
+                    <div class="fs-widget">
+                        <h4>Useful links</h4>
+                        <ul>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Classes</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-6">
+                    <div class="fs-widget">
+                        <h4>Support</h4>
+                        <ul>
+                            <li><a href="#">Login</a></li>
+                            <li><a href="#">My account</a></li>
+                            <li><a href="#">Subscribe</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="fs-widget">
+                        <h4>Tips & Guides</h4>
+                        <div class="fw-recent">
+                            <h6><a href="#">Physical fitness may help prevent depression, anxiety</a></h6>
+                            <ul>
+                                <li>3 min read</li>
+                                <li>20 Comment</li>
+                            </ul>
+                        </div>
+                        <div class="fw-recent">
+                            <h6><a href="#">Fitness: The best exercise to lose belly fat and tone up...</a></h6>
+                            <ul>
+                                <li>3 min read</li>
+                                <li>20 Comment</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="copyright-text">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer Section End -->
+
+    <!-- Search model Begin -->
+    <div class="search-model">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-switch">+</div>
+            <form class="search-model-form">
+                <input type="text" id="search-input" placeholder="Search here.....">
+            </form>
+        </div>
+    </div>
+    <!-- Search model end -->
+
+    <!-- Js Plugins -->
+<script th:src="@{/js2/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/js2/bootstrap.min.js}"></script>
+<script th:src="@{/js2/jquery.magnific-popup.min.js}"></script>
+<script th:src="@{/js2/masonry.pkgd.min.js}"></script>
+<script th:src="@{/js2/jquery.barfiller.js}"></script>
+<script th:src="@{/js2/jquery.slicknav.js}"></script>
+<script th:src="@{/js2/owl.carousel.min.js}"></script>
+<script th:src="@{/js2/main.js}"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const checkoutInfo = JSON.parse(localStorage.getItem("checkoutInfo"));
+
+            if (!checkoutInfo) {
+                alert("Không có thông tin đặt hàng. Vui lòng quay lại giỏ hàng.");
+                location.replace("/customer/home/shop/cart");
+                return;
+            }
+
+            // Hiển thị thông tin người dùng
+            document.getElementById("user-id").textContent = checkoutInfo.userID;
+
+            // Hiển thị danh sách sản phẩm
+            const productRows = document.getElementById("product-rows");
+            productRows.innerHTML = ""; // Xóa hàng mặc định
+
+            let totalAmount = 0;
+            checkoutInfo.products.forEach(product => {
+                const row = document.createElement("tr");
+
+                const totalPrice = product.price * product.quantity;
+                totalAmount += totalPrice;
+
+                row.innerHTML = `
+      <td>${product.name}</td>
+      <td>${product.quantity}</td>
+      <td>${new Intl.NumberFormat('vi-VN').format(product.price)} VNĐ</td>
+      <td>${new Intl.NumberFormat('vi-VN').format(totalPrice)} VNĐ</td>
+    `;
+
+                productRows.appendChild(row);
+            });
+
+            const totalRow = document.createElement("tr");
+            totalRow.innerHTML = `
+    <td colspan="3" class="text-end"><strong>Tổng cộng:</strong></td>
+    <td><strong>${new Intl.NumberFormat('vi-VN').format(totalAmount)} VNĐ</strong></td>
+  `;
+            productRows.appendChild(totalRow);
+
+            document.getElementById("confirm-button").addEventListener("click", async (e) => {
+                e.preventDefault(); // Ngăn form tự động submit
+
+                const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+
+                if (paymentMethod !== 'vnpay') {
+                    alert("Chỉ hỗ trợ thanh toán qua VNPay lúc này.");
+                    return;
+                }
+
+                try {
+                    // Chuẩn bị dữ liệu để gửi API lưu đơn hàng
+                    const orderDetails = checkoutInfo.products.map(product => ({
+                        product: {
+                            productID: product.id, // Giả sử productID có trong dữ liệu checkoutInfo.products
+                        },
+                        quantity: product.quantity,
+                    }));
+
+                    const requestBody = {
+                        user: {
+                            userID: checkoutInfo.userID,
+                        },
+                        orderDetails: orderDetails,
+                    };
+
+                    // Gửi dữ liệu đến API
+                    const response = await fetch("/customer/home/users/orders", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(requestBody),
+                    });
+
+                    if (response.ok) {
+                        const result = await response.json();
+                        console.log("Đặt hàng thành công:", result);
+
+                        // Gửi dữ liệu vào form thanh toán VNPay
+                        document.getElementById("amount-input").value = totalAmount; // Tổng tiền
+                        document.getElementById("order-info-input").value = `Thanh toán đơn hàng của ${checkoutInfo.userID}`;
+
+                        // Submit form để thực hiện thanh toán VNPay
+                        document.getElementById("checkout-form").submit();
+                    } else {
+                        alert("Đặt hàng không thành công. Vui lòng thử lại.");
+                    }
+                } catch (error) {
+                    console.error("Lỗi khi gửi dữ liệu đơn hàng:", error);
+                    alert("Có lỗi xảy ra khi xử lý đơn hàng. Vui lòng thử lại.");
+                }
+            });
+        });
+
+    </script>
+
+</body>
+
+</html>

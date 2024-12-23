@@ -21,7 +21,8 @@ public class ProgressDTO {
     private String planName;
 
     // Constructor
-    public ProgressDTO(Date progressDate, Progress.Achievement achievement, String userFullName) {
+    public ProgressDTO(int progressID, Date progressDate, Progress.Achievement achievement, String userFullName) {
+        this.progressID = progressID;
         this.progressDate = progressDate;
         this.achievement = achievement;
         this.userName = userFullName;
