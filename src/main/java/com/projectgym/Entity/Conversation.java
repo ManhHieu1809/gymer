@@ -20,6 +20,8 @@ public class Conversation {
 
     private String customerUsername;
 
+    private String avatar;
+
     @OneToMany(mappedBy = "conversation", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Message> messages; // Liên kết 1-nhiều với Message
 

@@ -83,7 +83,32 @@
             margin-top: 10px;
         }
     </style>
-   </head>
+    <style>
+        /* Định dạng ảnh đại diện */
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%; /* Tạo hình tròn */
+            object-fit: cover; /* Đảm bảo ảnh hiển thị đầy đủ */
+            border: 1px solid #ccc; /* Tùy chọn: viền cho avatar */
+        }
+
+        .conversation-item {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+        }
+
+        .conversation-item:hover {
+            background-color: #f9f9f9; /* Màu nền khi hover */
+        }
+
+        .conversation-item.active {
+            background-color: #eef; /* Màu nền khi đang được chọn */
+        }
+    </style>
+
+</head>
 
 <body class="hold-transition skin-blue sidebar-mini">
 <!-- Site wrapper -->
@@ -241,25 +266,14 @@
 
             <div class="container">
                 <div class="row">
+
                     <!-- Conversations Sidebar -->
                     <div class="col-sm-3 conversation-list">
                         <div class="conversation-item active" onclick="loadConversation('conversation1', this)">
-                            <strong>CT6 - Lập trình nhúng ...</strong>
-                            <br><small>Le Duc Thuan: Các em chú ý...</small>
-                        </div>
-                        <div class="conversation-item" onclick="loadConversation('conversation2', this)">
-                            <strong>Thiết kế hệ thống nhúng ...</strong>
-                            <br><small>Trần Văn Thị: thưa thầy em...</small>
-                        </div>
-                        <div class="conversation-item" onclick="loadConversation('conversation3', this)">
-                            <strong>TKHT Nhúng Nhóm 15</strong>
-                            <br><small>Đỗ Đức Hoàng: Ở nhà có sẵn...</small>
-                        </div>
-                        <div class="conversation-item" onclick="loadConversation('conversation4', this)">
-                            <strong>THỰC TẬP CƠ SỞ-N44</strong>
-                            <br><small>Thanh Vũ: tối nay làm lab3...</small>
+
                         </div>
                     </div>
+
 
                     <!-- Chat Section -->
                     <div class="col-sm-7">
@@ -322,8 +336,14 @@
     });
 
     async function fetchConversations() {
-        const response = await fetch('http://localhost:8080/admin/home/users/conversations');
-        if (response.ok) {
+        try {
+            const response = await fetch('http://localhost:8080/admin/home/users/conversations/all');
+
+            if (!response.ok) {
+                console.error('Failed to fetch conversations');
+                return;
+            }
+
             const conversations = await response.json();
             const conversationList = document.querySelector('.conversation-list');
 
@@ -335,14 +355,24 @@
                 const convoItem = document.createElement('div');
                 convoItem.className = 'conversation-item';
                 convoItem.onclick = () => loadConversation(convo, convoItem);
+
+                const [name, type] = convo.conversationID.split('-');
                 convoItem.innerHTML = `
-                    <strong>${convo.split('-')[0]}</strong><br>
-                    <small>${convo.split('-')[1]}</small>
-                `;
+                <div style="display: flex; align-items: center; padding: 10px; border-bottom: 1px solid #ccc;">
+                    <!-- Avatar -->
+                    <img src="${convo.avatar}" alt="Avatar" class="avatar" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;" />
+                    <!-- Text Content -->
+                    <div style="margin-left: 10px;">
+                        <strong>${type}</strong><br>
+                        
+                    </div>
+                </div>
+            `;
+
                 conversationList.appendChild(convoItem);
             });
-        } else {
-            console.error('Failed to fetch conversations');
+        } catch (error) {
+            console.error('Error fetching conversations:', error);
         }
     }
 
@@ -355,7 +385,7 @@
         element.classList.add('active');
         messagesBox.innerHTML = ''; // Xóa tin nhắn cũ
 
-        conversationId = conversationKey; // Lưu lại conversation ID hiện tại
+        conversationId = conversationKey.conversationID;
 
         // Unsubscribe từ subscription cũ nếu có
         if (currentSubscription !== null) {

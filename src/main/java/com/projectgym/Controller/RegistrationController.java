@@ -38,6 +38,7 @@ public class RegistrationController {
         user.setUserName(username);
         user.setUserPassword(encodedPassword);
         user.setEmail(email);
+        user.setRole(User.Role.CUSTOMER);
 
         // Lưu vào database
         myAppUserRepository.save(user);
@@ -62,7 +63,7 @@ public class RegistrationController {
         user.setUserName(userDTO.getUsername());
         user.setUserPassword(userDTO.getPassword());
         user.setEmail(userDTO.getEmail());
-
+        user.setRole(User.Role.CUSTOMER);
         // Lưu vào database
         User savedUser = myAppUserRepository.save(user);
 

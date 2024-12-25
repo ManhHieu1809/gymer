@@ -2,6 +2,7 @@ package com.projectgym.Controller;
 
 import com.projectgym.Entity.Conversation;
 import com.projectgym.Entity.User;
+import com.projectgym.dto.ConversationDTO;
 import com.projectgym.dto.UserDTO;
 import com.projectgym.service.ConversationService;
 import com.projectgym.service.UserService;
@@ -103,5 +104,11 @@ public class AdminController {
     public ResponseEntity<List<String>> getAllConversationIds() {
         List<String> conversationIds = conversationService.getAllConversationIds();
         return ResponseEntity.ok(conversationIds);
+    }
+
+    @GetMapping("/conversations/all")
+    public ResponseEntity<List<ConversationDTO>> getAllConversations() {
+        List<ConversationDTO> conversations = conversationService.getAllConversations();
+        return ResponseEntity.ok(conversations);
     }
 }

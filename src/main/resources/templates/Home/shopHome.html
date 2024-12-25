@@ -25,90 +25,79 @@
     <link th:href="@{/css2/style.css}" rel="stylesheet" type="text/css">
     <!-- Favicon-->
     <link th:href="@{/assets3/favicon.ico}" rel="icon" type="image/x-icon">
-     <!-- Bootstrap icons-->
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-     <!-- Core theme CSS (includes Bootstrap)-->
-     <link th:href="@{css3/styles.css}" rel="stylesheet" />
-     <style>
-       /* Căn chỉnh phần User icon và Login/Signup trong header */
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link th:href="@{css3/styles.css}" rel="stylesheet" />
+    <style>
+        /* Căn chỉnh phần User icon và Login/Signup trong header */
 
-/* Căn chỉnh biểu tượng người dùng */
-.user-icon {
-    font-size: 2rem;
-    color: white; /* Màu trắng cho icon */
-    text-decoration: none;
-    margin-right: 10px; /* Khoảng cách giữa icon và login/signup */
-}
+        /* Căn chỉnh biểu tượng người dùng */
+        .user-icon {
+            font-size: 2rem;
+            color: white; /* Màu trắng cho icon */
+            text-decoration: none;
+            margin-right: 10px; /* Khoảng cách giữa icon và login/signup */
+        }
 
-.user-icon:hover {
-    color: #007bff; /* Màu khi hover */
-}
+        .user-icon:hover {
+            color: #007bff; /* Màu khi hover */
+        }
 
-/* Căn chỉnh các liên kết login/signup */
-.auth-links a {
-    text-decoration: none;
-    color: white; /* Màu trắng */
-    font-weight: bold;
-    margin-left: 0px;
-}
+        /* Căn chỉnh các liên kết login/signup */
+        .auth-links a {
+            text-decoration: none;
+            color: white; /* Màu trắng */
+            font-weight: bold;
+            margin-left: 0px;
+        }
 
-.auth-links a:hover {
-    color: #007bff; /* Màu khi hover */
-}
+        .auth-links a:hover {
+            color: #007bff; /* Màu khi hover */
+        }
 
-/* Thêm hiệu ứng cho các liên kết */
-.login-btn, .signup-btn {
-    text-transform: uppercase; /* Viết hoa cho các liên kết */
-}
-     </style>
+        /* Thêm hiệu ứng cho các liên kết */
+        .login-btn, .signup-btn {
+            text-transform: uppercase; /* Viết hoa cho các liên kết */
+        }
+    </style>
 
 </head>
 
 <body>
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<!-- Offcanvas Menu Section Begin -->
+<div class="offcanvas-menu-overlay"></div>
+<div class="offcanvas-menu-wrapper">
+    <div class="canvas-close">
+        <i class="fa fa-close"></i>
     </div>
 
-    <!-- Offcanvas Menu Section Begin -->
-    <div class="offcanvas-menu-overlay"></div>
-    <div class="offcanvas-menu-wrapper">
-        <div class="canvas-close">
-            <i class="fa fa-close"></i>
-        </div>
-       
-        <nav class="canvas-menu mobile-menu">
-            <ul>
-                <li><a href="/gym/home">Home</a></li>
-                <li><a href="./about-us.html">About Us</a></li>
-                <li><a href="./classes.html">Classes</a></li>
-                <li><a href="./services.html">Services</a></li>
-                <li><a href="./team.html">Our Team</a></li>
-                <li><a href="/gym/home/shop">Shop</a></li>
-                <li><a href="#">Pages</a>
-                    <ul class="dropdown">
-                        <li><a href="./about-us.html">About us</a></li>
-                        <li><a href="./class-timetable.html">Classes timetable</a></li>
-                        <li><a href="/gym/home/shop/cart">Bmi calculate</a></li>
-                        <li><a href="./team.html">Our team</a></li>
-                        <li><a href="./gallery.html">Gallery</a></li>
-                        <li><a href="./blog.html">Our blog</a></li>
-                        <li><a href="./404.html">404</a></li>
-                    </ul>
-                </li>
-                <li><a href="./contact.html">Contact</a></li>
-            </ul>
-        </nav>
-    </div>
-    <!-- Offcanvas Menu Section End -->
+    <nav class="canvas-menu mobile-menu">
+        <ul>
+            <li><a href="/gym/home">Home</a></li>
+            <li><a href="/gym/home/nutrition-plan">Kế hoạch dinh dưỡng</a></li>
+            <li><a href="/gym/home/workout-plan">Kế hoạch luyện tập</a></li>
+            <li><a href="/gym/home/Progress">Tiến độ luyện tập</a></li>
+            <li><a href="/gym/home/shop">Shop</a></li>
+            <li><a href="/gym/home/users/notification">Thông báo</a></li>
+            <li><a href="/gym/home/chat">Chăm sóc khách hàng</a></li>
+        </ul>
+    </nav>
+</div>
+<!-- Offcanvas Menu Section End -->
 
-   <!-- Header Section Begin -->
+<!-- Header Section Begin -->
 <header class="header-section">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-3">
                 <div class="logo">
-                    <a href="/gym/home">
+                    <a href="/customer/home">
                         <img th:src="@{/img/logo.png}" alt="">
                     </a>
                 </div>
@@ -117,28 +106,16 @@
                 <nav class="nav-menu">
                     <ul>
                         <li><a href="/gym/home">Home</a></li>
-                        <li><a href="./about-us.html">About Us</a></li>
-                        <li><a href="./class-details.html">Classes</a></li>
-                        <li><a href="./services.html">Services</a></li>
-                        <li><a href="./team.html">Our Team</a></li>
+                        <li><a href="/gym/home/customer/home/nutrition-plan">Kế hoạch dinh dưỡng</a></li>
+                        <li><a href="/gym/home/workout-plan">Kế hoạch luyện tập</a></li>
+                        <li><a href="/gym/home/Progress">Tiến độ luyện tập</a></li>
                         <li class="active"><a href="/gym/home/shop">Shop</a></li>
-                        <li><a href="#">Pages</a>
-                            <ul class="dropdown">
-                                <li><a href="./about-us.html">About us</a></li>
-                                <li><a href="./class-timetable.html">Classes timetable</a></li>
-                                <li><a href="/gym/home/shop/cart">Bmi calculate</a></li>
-                                <li><a href="./team.html">Our team</a></li>
-                                <li><a href="./gallery.html">Gallery</a></li>
-                                <li><a href="./blog.html">Our blog</a></li>
-                                <li><a href="./404.html">404</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="./contact.html">Contact</a></li>
+                        <li><a href="/gym/home/users/notification">Thông báo</a></li>
+                        <li><a href="/gym/home/chat">Chăm sóc khách hàng</a></li>
                     </ul>
                 </nav>
-                
-            </div>
 
+            </div>
             <!-- User Icon and Login/Signup Links -->
             <div class="col-lg-3 d-flex justify-content-end align-items-center">
                 <a href="/req/login" class="user-icon">
@@ -158,183 +135,179 @@
 </header>
 <!-- Header End -->
 
-    <!-- Hero Section Begin -->
-    <section class="hero-section">
-        <div class="hs-slider owl-carousel">
-            <div class="hs-item set-bg" th:data-setbg="@{/img/hero/hero-1.jpg}">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-6 offset-lg-6">
-                            <!-- Nội dung hoặc các phần tử khác ở đây -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="hs-item set-bg" th:data-setbg="@{/img/hero/hero-2.jpg}">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-6 offset-lg-6">
-                            <!-- Nội dung hoặc các phần tử khác ở đây -->
-                        </div>
+<!-- Hero Section Begin -->
+<section class="hero-section">
+    <div class="hs-slider owl-carousel">
+        <div class="hs-item set-bg" th:data-setbg="@{/img/hero/hero-1.jpg}">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 offset-lg-6">
+                        <!-- Nội dung hoặc các phần tử khác ở đây -->
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- Hero Section End -->
-
-    <!-- Classes Section Begin -->
-    <section class="classes-section spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title">
-                        <span>Our Classes</span>
-                        <h2>WHAT WE CAN OFFER</h2>
+        <div class="hs-item set-bg" th:data-setbg="@{/img/hero/hero-2.jpg}">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 offset-lg-6">
+                        <!-- Nội dung hoặc các phần tử khác ở đây -->
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Hero Section End -->
+
+<!-- Classes Section Begin -->
+<section class="classes-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title">
+                    <h2>SHOP GYM</h2>
+                </div>
+            </div>
+            <!-- Container chứa thanh tìm kiếm và nút giỏ hàng -->
+            <div class="d-flex justify-content-end align-items-center position-absolute top-50 translate-middle-y" style="right: 10px; z-index: 1050;">
+                <!-- Thanh tìm kiếm -->
+                <form class="d-flex me-3" id="search-form">
+                    <input class="form-control me-2" type="search" placeholder="Search for products" aria-label="Search" id="search-input">
+                    <button class="btn btn-outline-secondary" type="submit">Search</button>
+                </form>
                 <!-- Nút giỏ hàng -->
-                <form class="cart-form d-flex position-absolute top-50 translate-middle-y" style="z-index: 1050; right: 10px;">
-                    <button class="btn btn-light shadow position-relative" type="button" id="cart-icon">
+                <form>
+                    <button class="btn btn-light shadow position-relative me-3" type="button" id="cart-icon">
                         <i class="bi-cart-fill me-1"></i> Cart
                         <span id="cart-count" class="badge bg-dark text-white ms-1 rounded-pill">0</span>
                     </button>
                 </form>
-
-
-
-
             </div>
 
 
-            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center" id="product-container">
-
-            </div>
         </div>
-    </section>
-    <!-- ChoseUs Section End -->
 
 
-    <!-- Footer Section Begin -->
-    <section class="footer-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="fs-about">
-                        <div class="fa-logo">
-                            <a href="#"><img th:src="@{/img/logo.png}" alt=""></a>
-                        </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore dolore magna aliqua endisse ultrices gravida lorem.</p>
-                        <div class="fa-social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-youtube-play"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa  fa-envelope-o"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-6">
-                    <div class="fs-widget">
-                        <h4>Useful links</h4>
-                        <ul>
-                            <li><a href="#">About</a></li>
-                            <li><a href="#">Blog</a></li>
-                            <li><a href="#">Classes</a></li>
-                            <li><a href="#">Contact</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-6">
-                    <div class="fs-widget">
-                        <h4>Support</h4>
-                        <ul>
-                            <li><a href="#">Login</a></li>
-                            <li><a href="#">My account</a></li>
-                            <li><a href="#">Subscribe</a></li>
-                            <li><a href="#">Contact</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="fs-widget">
-                        <h4>Tips & Guides</h4>
-                        <div class="fw-recent">
-                            <h6><a href="#">Physical fitness may help prevent depression, anxiety</a></h6>
-                            <ul>
-                                <li>3 min read</li>
-                                <li>20 Comment</li>
-                            </ul>
-                        </div>
-                        <div class="fw-recent">
-                            <h6><a href="#">Fitness: The best exercise to lose belly fat and tone up...</a></h6>
-                            <ul>
-                                <li>3 min read</li>
-                                <li>20 Comment</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Footer Section End -->
 
-    <!-- Search model Begin -->
-    <div class="search-model">
-        <div class="h-100 d-flex align-items-center justify-content-center">
-            <div class="search-close-switch">+</div>
-            <form class="search-model-form">
-                <input type="text" id="search-input" placeholder="Search here.....">
-            </form>
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center" id="product-container">
+
         </div>
     </div>
-    <!-- Search model end -->
+</section>
+<!-- ChoseUs Section End -->
 
-    <!-- Js Plugins -->
-    <script th:src="@{/js2/jquery-3.3.1.min.js}"></script>
-    <script th:src="@{/js2/bootstrap.min.js}"></script>
-    <script th:src="@{/js2/jquery.magnific-popup.min.js}"></script>
-    <script th:src="@{/js2/masonry.pkgd.min.js}"></script>
-    <script th:src="@{/js2/jquery.barfiller.js}"></script>
-    <script th:src="@{/js2/jquery.slicknav.js}"></script>
-    <script th:src="@{/js2/owl.carousel.min.js}"></script>
-    <script th:src="@{/js2/main.js}"></script>
-    <!-- Core theme JS-->
-    <script th:src="@{/js3/scripts.js}"></script>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const productContainer = document.getElementById("product-container");
-            const cartIcon = document.getElementById("cart-icon");
-            const cartCount = document.getElementById("cart-count");
+<!-- Footer Section Begin -->
+<section class="footer-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="fs-about">
+                    <div class="fa-logo">
+                        <a href="#"><img th:src="@{/img/logo.png}" alt=""></a>
+                    </div>
+                    <p>“Con đường dẫn đến thành công được làm nên từ những viên gạch của sự kiên trì. Hãy là chính mình, vượt qua mọi chướng ngại và theo đuổi ước mơ của bản thân.”</p>
+                    <div class="fa-social">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-youtube-play"></i></a>
+                        <a href="#"><i class="fa fa-instagram"></i></a>
+                        <a href="#"><i class="fa  fa-envelope-o"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-6">
+                <div class="fs-widget">
+                    <h4>Useful links</h4>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Classes</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-6">
+                <div class="fs-widget">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Login</a></li>
+                        <li><a href="#">My account</a></li>
+                        <li><a href="#">Subscribe</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="fs-widget">
+                    <h4>Tips & Guides</h4>
+                    <div class="fw-recent">
+                        <h6><a href="#">Physical fitness may help prevent depression, anxiety</a></h6>
+                        <ul>
+                            <li>3 min read</li>
+                            <li>20 Comment</li>
+                        </ul>
+                    </div>
+                    <div class="fw-recent">
+                        <h6><a href="#">Fitness: The best exercise to lose belly fat and tone up...</a></h6>
+                        <ul>
+                            <li>3 min read</li>
+                            <li>20 Comment</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
 
-            // Lấy giỏ hàng từ localStorage hoặc khởi tạo mảng trống
-            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Footer Section End -->
 
-            // Cập nhật số lượng sản phẩm trên biểu tượng giỏ hàng
-            const updateCartCount = () => {
-                const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-                cartCount.textContent = totalItems;
-            };
 
-            // Hàm định dạng giá tiền
-            const formatPrice = (price) => {
-                return new Intl.NumberFormat('vi-VN').format(price) + ' VNĐ';
-            };
 
-            // Hàm fetch API lấy dữ liệu sản phẩm
-            fetch("/gym/home/products") // Thay URL API tại đây
-                .then(response => response.json())
-                .then(products => {
-                    products.forEach(product => {
-                        const productHTML = `
+<!-- Js Plugins -->
+<script th:src="@{/js2/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/js2/bootstrap.min.js}"></script>
+<script th:src="@{/js2/jquery.magnific-popup.min.js}"></script>
+<script th:src="@{/js2/masonry.pkgd.min.js}"></script>
+<script th:src="@{/js2/jquery.barfiller.js}"></script>
+<script th:src="@{/js2/jquery.slicknav.js}"></script>
+<script th:src="@{/js2/owl.carousel.min.js}"></script>
+<script th:src="@{/js2/main.js}"></script>
+<!-- Core theme JS-->
+<script th:src="@{/js3/scripts.js}"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const productContainer = document.getElementById("product-container");
+        const cartIcon = document.getElementById("cart-icon");
+        const cartCount = document.getElementById("cart-count");
+
+        // Lấy giỏ hàng từ localStorage hoặc khởi tạo mảng trống
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        // Cập nhật số lượng sản phẩm trên biểu tượng giỏ hàng
+        const updateCartCount = () => {
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCount.textContent = totalItems;
+        };
+
+        // Hàm định dạng giá tiền
+        const formatPrice = (price) => {
+            return new Intl.NumberFormat('vi-VN').format(price) + ' VNĐ';
+        };
+
+        // Hàm fetch API lấy dữ liệu sản phẩm
+        fetch("/gym/home/products") // Thay URL API tại đây
+            .then(response => response.json())
+            .then(products => {
+                products.forEach(product => {
+                    const productHTML = `
                 <div class="col mb-5">
                     <div class="card h-100 bg-dark text-white">
                         <img class="card-img-top" src="${product.imageUrl || 'https://via.placeholder.com/450x300'}" alt="${product.productName}" />
@@ -346,7 +319,7 @@
                         </div>
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                             <div class="text-center d-flex justify-content-between">
-                                <a class="btn btn-outline-success mt-auto" href="/gym/home/shop/product-detail?id=${product.productID}">View Details</a>
+                                <a class="btn btn-outline-success mt-auto" href="/gym/home/shop/productDetail?id=${product.productID}">View Details</a>
                                 <button class="btn btn-outline-success mt-auto ms-2 add-to-cart-btn"
                                     data-id="${product.productID}"
                                     data-name="${product.productName}"
@@ -358,66 +331,100 @@
                     </div>
                 </div>
                 `;
-                        productContainer.innerHTML += productHTML;
-                    });
+                    productContainer.innerHTML += productHTML;
+                });
 // Gán sự kiện "click" cho các nút "Add to Cart"
-                    document.querySelectorAll(".add-to-cart-btn").forEach(button => {
-                        button.addEventListener("click", () => {
-                            const productID = button.getAttribute("data-id");
-                            const productName = button.getAttribute("data-name");
-                            const productPrice = button.getAttribute("data-price");
+                document.querySelectorAll(".add-to-cart-btn").forEach(button => {
+                    button.addEventListener("click", () => {
+                        const productID = button.getAttribute("data-id");
+                        const productName = button.getAttribute("data-name");
+                        const productPrice = button.getAttribute("data-price");
 
-                            // Kiểm tra nếu sản phẩm đã có trong giỏ hàng
-                            const existingProduct = cart.find(item => item.id === productID);
-                            if (existingProduct) {
-                                existingProduct.quantity++;
-                            } else {
-                                // Thêm sản phẩm mới
-                                cart.push({
-                                    id: productID,
-                                    name: productName,
-                                    price: parseFloat(productPrice),
-                                    quantity: 1,
-                                });
-                            }
-
-                            // Lưu giỏ hàng vào localStorage
-                            localStorage.setItem("cart", JSON.stringify(cart));
-
-                            // Cập nhật số lượng giỏ hàng
-                            updateCartCount();
-
-                            // Sử dụng SweetAlert2 để thông báo
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Sản phẩm đã được thêm vào giỏ hàng!',
-                                text: `Đã thêm sản phẩm "${productName}" vào giỏ hàng.`,
-                                confirmButtonText: 'OK',
-                                confirmButtonColor: '#3085d6',
-                                timer: 3000 // Thời gian tự động đóng sau 3 giây
+                        // Kiểm tra nếu sản phẩm đã có trong giỏ hàng
+                        const existingProduct = cart.find(item => item.id === productID);
+                        if (existingProduct) {
+                            existingProduct.quantity++;
+                        } else {
+                            // Thêm sản phẩm mới
+                            cart.push({
+                                id: productID,
+                                name: productName,
+                                price: parseFloat(productPrice),
+                                quantity: 1,
                             });
+                        }
+
+                        // Lưu giỏ hàng vào localStorage
+                        localStorage.setItem("cart", JSON.stringify(cart));
+
+                        // Cập nhật số lượng giỏ hàng
+                        updateCartCount();
+
+                        // Sử dụng SweetAlert2 để thông báo
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Sản phẩm đã được thêm vào giỏ hàng!',
+                            text: `Đã thêm sản phẩm "${productName}" vào giỏ hàng.`,
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#3085d6',
+                            timer: 3000 // Thời gian tự động đóng sau 3 giây
                         });
                     });
+                });
 
-                    // Cập nhật số lượng giỏ hàng khi tải trang
-                    updateCartCount();
-                })
-                .catch(error => console.error("Error fetching products:", error));
+                // Cập nhật số lượng giỏ hàng khi tải trang
+                updateCartCount();
+            })
+            .catch(error => console.error("Error fetching products:", error));
 
-            // Sự kiện click vào biểu tượng giỏ hàng
-            cartIcon.addEventListener("click", () => {
-                // Chuyển hướng đến trang giỏ hàng
-                window.location.href = "/gym/home/shop/cart";
-            });
-
-            // Cập nhật số lượng giỏ hàng khi tải trang
-            updateCartCount();
+        // Sự kiện click vào biểu tượng giỏ hàng
+        cartIcon.addEventListener("click", () => {
+            // Chuyển hướng đến trang giỏ hàng
+            window.location.href = "/customer/home/shop/cart";
         });
 
-    </script>
+        // Cập nhật số lượng giỏ hàng khi tải trang
+        updateCartCount();
+    });
+
+</script>
 
 
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Hàm lấy và hiển thị tên người dùng
+        async function fetchAndDisplayUsernames() {
+            try {
+                // Gửi yêu cầu GET tới API
+                const response = await fetch('http://localhost:8080/customer/home/users/user-info1', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include' // Đảm bảo gửi cookie session
+                });
 
+                if (response.ok) {
+                    const data = await response.json(); // Lấy dữ liệu JSON từ phản hồi
+                    const username = data.username;
+
+                    // Hiển thị tên người dùng và ẩn các liên kết login/signup
+                    document.getElementById("auth-links").style.display = 'none'; // Ẩn "Login" và "Signup"
+                    document.getElementById("user-info").style.display = 'block'; // Hiển thị tên người dùng
+                    document.getElementById("username").innerText = username; // Cập nhật tên người dùng
+                } else {
+                    console.error("Error fetching username:", response.statusText);
+                }
+            } catch (error) {
+                console.error("Error fetching username:", error);
+            }
+        }
+
+        // Kiểm tra khi tải trang và gọi API
+        fetchAndDisplayUsernames();
+    });
+
+</script>
 
 
 </body>

@@ -1,8 +1,11 @@
 package com.projectgym.service;
 
 import com.projectgym.Entity.Conversation;
+import com.projectgym.dto.ConversationDTO;
 import com.projectgym.repository.ConversationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +17,7 @@ public class ConversationService {
 
     @Autowired
     private ConversationRepository conversationRepository;
+
 
     public Conversation createConversation(String customerUsername, String adminUsername) {
         String conversationId = adminUsername + "-" + customerUsername;
@@ -40,9 +44,13 @@ public class ConversationService {
                 .collect(Collectors.toList());
     }
 
-    public Conversation getConversationByConversationId(String conversationId) {
-        return conversationRepository.findByConversationId(conversationId)
-                .orElse(null); // Hoặc ném ngoại lệ nếu không tìm thấy
+    public List<ConversationDTO> getAllConversations() {
+        return conversationRepository.findAll()
+                .stream()
+                .map(conversation -> new ConversationDTO(conversation.getConversationId(), conversation.getAvatar()))
+                .collect(Collectors.toList());
     }
+
+
 }
 

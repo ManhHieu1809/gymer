@@ -41,7 +41,7 @@ public class ContentController {
 
     @GetMapping("gym/home/shop/cart")
     public String cart(){
-        return "/Home/cart2";
+        return "cart";
     }
 
     @GetMapping("/gym/home/workout-plan")
