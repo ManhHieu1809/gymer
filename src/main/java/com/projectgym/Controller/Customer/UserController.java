@@ -5,6 +5,7 @@ import com.projectgym.dto.*;
 import com.projectgym.repository.NotificationRepository;
 import com.projectgym.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -174,4 +175,25 @@ public class UserController {
         return new ResponseEntity<>(progresses, HttpStatus.OK);
     }
 
+    // Lấy danh sách sản phẩm theo trang
+    @GetMapping("/page")
+    public ResponseEntity<Page<ProductDTO>> getAllProduct(@RequestParam(defaultValue = "0") int page,
+                                                          @RequestParam(defaultValue = "8") int size) {
+        Page<ProductDTO> products = productService.getAllProduct(page, size);
+        return ResponseEntity.ok(products);
+    }
+
+
+    @GetMapping("/page/nutrition")
+    public ResponseEntity<Page<NutritionPlanDTO>> getAllNutritionPlan(@RequestParam(defaultValue = "0") int page,
+                                                          @RequestParam(defaultValue = "3") int size) {
+        Page<NutritionPlanDTO> nutritionPlan = nutritionPlanService.getAllNutritionPlan(page, size);
+        return ResponseEntity.ok(nutritionPlan);
+    }
+
+    @GetMapping("/search/{productName}")
+    public ResponseEntity<List<ProductDTO>> searchByProductName(@PathVariable String productName) {
+        List<ProductDTO> results = productService.searchByProductName(productName);
+        return ResponseEntity.ok(results);
+    }
 }

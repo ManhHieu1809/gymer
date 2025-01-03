@@ -1,6 +1,8 @@
 package com.projectgym.repository;
 
 import com.projectgym.Entity.Product;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -13,4 +15,5 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     List<Product> searchByProductName(@Param("productName") String productName);
     List<Product> findByPriceBetween(double minPrice, double maxPrice); // Tìm kiếm sản phẩm theo khoảng giá
+    Page<Product> findAll(Pageable pageable);
 }

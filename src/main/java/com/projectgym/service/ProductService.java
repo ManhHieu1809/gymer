@@ -4,6 +4,7 @@ import com.projectgym.Entity.Product;
 import com.projectgym.Entity.User;
 import com.projectgym.dto.ProductDTO;
 import com.projectgym.dto.UserDTO;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -23,4 +24,6 @@ public interface ProductService {
     List<ProductDTO> searchByProductName(String productName);
 
     List<ProductDTO> searchProductsByPriceRange(double minPrice, double maxPrice); // Tìm kiếm sản phẩm theo khoảng giá
+
+    Page<ProductDTO> getAllProduct(int page, int size);
 }

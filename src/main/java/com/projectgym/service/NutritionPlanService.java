@@ -1,6 +1,8 @@
 package com.projectgym.service;
 
 import com.projectgym.dto.NutritionPlanDTO;
+import com.projectgym.dto.ProductDTO;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -18,4 +20,6 @@ public interface NutritionPlanService {
     List<NutritionPlanDTO> suggestNutritionPlans(Long userID);
 
     NutritionPlanDTO getNutritionPlanById(Long nutritionID);
+
+    Page<NutritionPlanDTO> getAllNutritionPlan(int page, int size);
 }
