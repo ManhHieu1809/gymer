@@ -22,6 +22,7 @@
 <link rel="stylesheet" th:href="@{/css2/magnific-popup.css}" type="text/css">
 <link rel="stylesheet" th:href="@{/css2/slicknav.min.css}" type="text/css">
 <link rel="stylesheet" th:href="@{/css2/style.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/cart.css}" type="text/css">
     <style>
         .user-icon {
             font-size: 2rem;
@@ -156,25 +157,43 @@
     <!-- Breadcrumb Section End -->
 
     <!-- BMI Calculator Section Begin -->
-    <section class="bmi-calculator-section spad">
-        <div class="container mt-4">
-            <h1 class="text-center mb-4 text-white">Giỏ hàng</h1>
+    <div class="container">
+        <table id="cart" class="table table-hover table-condensed">
+            <thead>
+            <tr>
+                <th style="width:5%">
+                    <input type="checkbox" id="select-all"> <!-- Nút chọn tất cả -->
+                </th>
+                <th style="width:45%">Sản phẩm</th>
+                <th style="width:15%">Giá tiền</th>
+                <th style="width:10%">Số lượng</th>
+                <th style="width:20%" class="text-center">Tổng giá</th>
+                <th style="width:5%"></th>
+            </tr>
+            </thead>
+            <tbody id="cart-items">
+            <!-- Danh sách sản phẩm sẽ được render ở đây -->
 
-            <!-- Phần nút chọn -->
-            <div class="d-flex justify-content-between mb-3">
-                <button id="select-all" class="btn btn-primary">Chọn tất cả</button>
-                <button id="deselect-all" class="btn btn-secondary">Bỏ chọn tất cả</button>
-            </div>
+            </tbody>
+            <tfoot>
 
-            <!-- Danh sách sản phẩm -->
-            <div id="cart-items" class="list-group bg-dark"></div>
-
-            <!-- Nút mua sản phẩm -->
-            <div class="d-flex justify-content-end mt-4">
-                <button id="purchase" class="btn btn-success">Mua sản phẩm</button>
-            </div>
-        </div>
-    </section>
+            <tr>
+                <td>
+                    <a href="/customer/home/shop" class="btn btn-warning">
+                        <i class="fa fa-angle-left"></i>Thoát
+                    </a>
+                </td>
+                <td colspan="2" class="hidden-xs"></td>
+                <td class="hidden-xs text-center"><strong></strong></td>
+                <td>
+                    <a href="#" class="btn btn-success btn-block" id="purchase">
+                        Checkout <i class="fa fa-angle-right"></i>
+                    </a>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
     <!-- BMI Calculator Section End -->
 
     <!-- Get In Touch Section Begin -->
@@ -302,8 +321,8 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const cartItemsContainer = document.getElementById("cart-items");
-            const selectAllButton = document.getElementById("select-all");
-            const deselectAllButton = document.getElementById("deselect-all");
+            const selectAllCheckbox = document.getElementById("select-all");
+
             const purchaseButton = document.getElementById("purchase");
 
             let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -319,55 +338,91 @@
 
                 cart.forEach((item, index) => {
                     const itemHTML = `
-                <div class="list-group-item d-flex justify-content-between bg-dark align-items-center">
-                    <div class="form-check">
-                        <input class="form-check-input select-product" type="checkbox" data-index="${index}" />
-                        <label class="form-check-label text-white">
-                            <strong>${item.name}</strong> <br>
-                            Giá mỗi sản phẩm: ${new Intl.NumberFormat('vi-VN').format(item.price)} VNĐ <br>
-                            <span class="text-danger total-price">Tổng: ${new Intl.NumberFormat('vi-VN').format(item.price * item.quantity)} VNĐ</span>
-                            <div class="d-flex align-items-center mt-2">
-                                <button class="btn btn-outline-secondary btn-sm me-2 decrease-btn" data-index="${index}">-</button>
-                                <span class="quantity">${item.quantity}</span>
-                                <button class="btn btn-outline-secondary btn-sm ms-2 increase-btn" data-index="${index}">+</button>
-                            </div>
-                        </label>
+                <tr>
+                 <td data-th="Select">
+                  <input type="checkbox" class="product-checkbox">
+                </td>
+                <td data-th="Product">
+                    <div class="row">
+                        <div class="col-sm-2 hidden-xs">
+                            <img src=${item.url} alt="..." class="img-responsive" />
+                        </div>
+                        <div class="col-sm-10">
+                            <h4 class="nomargin" style="color: #FFFFFF">${item.name}</h4>
+                            <p>${item.description}</p>
+                        </div>
                     </div>
-                    <button class="btn btn-danger btn-sm delete-btn" data-index="${index}">Xóa</button>
-                </div>
+                </td>
+                <td data-th="Price"> ${new Intl.NumberFormat('vi-VN').format(item.price)} VNĐ</td>
+                 <td data-th="Quantity">
+                <input type="number" class="form-control text-center quantity-input" value="${item.quantity}" data-index="${index}">
+            </td>
+                <td data-th="Subtotal" class="text-center subtotal">${new Intl.NumberFormat('vi-VN').format(item.price * item.quantity)} VNĐ</td>
+                <td class="actions" data-th="">
+
+                    <button class="btn btn-danger btn-sm delete-btn" data-index="${index}"><i class="fa fa-trash-o"></i></button>
+
+                </td>
+            </tr>
             `;
                     cartItemsContainer.innerHTML += itemHTML;
                 });
 
-                // Gán sự kiện click cho các nút tăng/giảm/xóa
-                document.querySelectorAll(".decrease-btn").forEach(button => {
-                    button.addEventListener("click", (e) => {
-                        const index = e.target.getAttribute("data-index");
-                        updateQuantity(index, -1);
-                    });
+                // Gắn sự kiện cho ô số lượng
+                document.querySelectorAll(".quantity-input").forEach(input => {
+                    input.addEventListener("input", handleQuantityChange);
                 });
 
-                document.querySelectorAll(".increase-btn").forEach(button => {
-                    button.addEventListener("click", (e) => {
-                        const index = e.target.getAttribute("data-index");
-                        updateQuantity(index, 1);
-                    });
-                });
-
+                // Gắn sự kiện xóa sản phẩm
                 document.querySelectorAll(".delete-btn").forEach(button => {
                     button.addEventListener("click", (e) => {
                         const index = e.target.getAttribute("data-index");
                         deleteProduct(index);
                     });
                 });
+
+                // Gắn sự kiện cho các checkbox sản phẩm
+                const productCheckboxes = document.querySelectorAll(".product-checkbox");
+
+                // Xử lý "Chọn tất cả"
+                selectAllCheckbox.addEventListener("change", () => {
+                    const isChecked = selectAllCheckbox.checked;
+                    productCheckboxes.forEach(checkbox => {
+                        checkbox.checked = isChecked;
+                    });
+                    updateActionButtons();
+                });
+
+                // Xử lý checkbox từng sản phẩm
+                productCheckboxes.forEach(checkbox => {
+                    checkbox.addEventListener("change", () => {
+                        const allChecked = Array.from(productCheckboxes).every(cb => cb.checked);
+                        selectAllCheckbox.checked = allChecked;
+                        updateActionButtons();
+                    });
+                });
             };
 
-            // Hàm cập nhật số lượng sản phẩm
-            const updateQuantity = (index, delta) => {
-                const product = cart[index];
-                product.quantity = Math.max(1, product.quantity + delta);
-                localStorage.setItem("cart", JSON.stringify(cart));
-                renderCart();
+            // Hàm xử lý thay đổi số lượng
+            const handleQuantityChange = (e) => {
+                const input = e.target;
+                const index = input.getAttribute("data-index");
+                const newQuantity = parseInt(input.value, 10);
+
+                if (newQuantity >= 1) {
+                    cart[index].quantity = newQuantity;
+
+                    // Cập nhật subtotal
+                    const subtotalElement = input.closest("tr").querySelector(".subtotal");
+                    const newSubtotal = cart[index].price * newQuantity;
+                    subtotalElement.textContent = `${new Intl.NumberFormat('vi-VN').format(newSubtotal)} VNĐ`;
+
+                    // Cập nhật localStorage
+                    localStorage.setItem("cart", JSON.stringify(cart));
+                } else {
+                    alert("Số lượng không được nhỏ hơn 1.");
+                    input.value = cart[index].quantity; // Reset về giá trị trước đó
+                }
             };
 
             // Hàm xóa sản phẩm
@@ -377,19 +432,30 @@
                 renderCart();
             };
 
-            // Sự kiện chọn tất cả sản phẩm
-            selectAllButton.addEventListener("click", () => {
-                document.querySelectorAll(".select-product").forEach(checkbox => {
-                    checkbox.checked = true;
-                });
-            });
 
-            // Sự kiện bỏ chọn tất cả sản phẩm
-            deselectAllButton.addEventListener("click", () => {
-                document.querySelectorAll(".select-product").forEach(checkbox => {
-                    checkbox.checked = false;
+
+            // Hàm cập nhật số lượng sản phẩm
+            const updateQuantity = (index, delta) => {
+                const product = cart[index];
+                product.quantity = Math.max(1, product.quantity + delta);
+                localStorage.setItem("cart", JSON.stringify(cart));
+                renderCart();
+            };
+
+
+
+        // Hàm cập nhật trạng thái nút theo checkbox
+        const updateActionButtons = () => {
+            const productCheckboxes = document.querySelectorAll(".product-checkbox");
+            productCheckboxes.forEach((checkbox) => {
+                const buttons = checkbox.closest("tr").querySelectorAll(".actions button");
+                buttons.forEach(button => {
+                    button.disabled = !checkbox.checked;
                 });
             });
+        };
+            // Render giỏ hàng khi tải trang
+            renderCart();
 
             // Hàm lấy userID từ server
             const getUserID = async () => {
@@ -424,7 +490,7 @@
                 }
 
                 const selectedProducts = [];
-                document.querySelectorAll(".select-product").forEach((checkbox, index) => {
+                document.querySelectorAll(".product-checkbox").forEach((checkbox, index) => {
                     if (checkbox.checked) {
                         const product = cart[index];
                         selectedProducts.push({

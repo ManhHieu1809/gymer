@@ -1,12 +1,17 @@
 package com.projectgym.service.Impl;
 
+import com.projectgym.Entity.Product;
 import com.projectgym.dto.NutritionPlanDTO;
 import com.projectgym.Entity.NutritionPlan;
 import com.projectgym.Entity.User;
+import com.projectgym.dto.ProductDTO;
 import com.projectgym.repository.NutritionPlanRepository;
 import com.projectgym.repository.MyAppUserRepository;
 import com.projectgym.service.NutritionPlanService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -165,4 +170,20 @@ public class NutritionPlanServiceImpl implements NutritionPlanService {
                 nutritionPlan.getUser().getUserID()
         );
     }
+
+    @Override
+    public Page<NutritionPlanDTO> getAllNutritionPlan(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<NutritionPlan> nutritionPlans = nutritionPlanRepository.findAll(pageable);
+        return nutritionPlans.map(plan -> new NutritionPlanDTO(
+                plan.getNutritionID(),
+                plan.getNameNutritionPlan(),
+                plan.getDescriptions(),
+                plan.getCalo(),
+                plan.getImageUrl(),
+                plan.getUser().getUserID()
+        ));
+    }
+
+
 }

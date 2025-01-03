@@ -7,6 +7,9 @@ import com.projectgym.dto.UserDTO;
 import com.projectgym.repository.ProductRepository;
 import com.projectgym.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -125,5 +128,18 @@ public class ProductServiceImpl implements ProductService {
                         product.getQuantity(),
                         product.getImageUrl()))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Page<ProductDTO> getAllProduct(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Product> products = repository.findAll(pageable);
+        return products.map(product -> new ProductDTO(
+                product.getProductID(),
+                product.getProductName(),
+                product.getDescriptions(),
+                product.getPrice(),
+                product.getQuantity(),
+                product.getImageUrl()));
     }
 }

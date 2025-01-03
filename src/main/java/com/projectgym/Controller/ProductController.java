@@ -71,4 +71,11 @@ public class ProductController {
     public ResponseEntity<List<ProductDTO>> searchProductsByPriceRange(@RequestParam double minPrice, @RequestParam double maxPrice) {
         return ResponseEntity.ok(productService.searchProductsByPriceRange(minPrice, maxPrice));
     }
+
+    // Lấy danh sách sản phẩm theo trang
+    @GetMapping("/page")
+    public ResponseEntity<List<ProductDTO>> getAllProduct(@RequestParam(defaultValue = "1") int page,
+                                                          @RequestParam(defaultValue = "8") int size) {
+        return ResponseEntity.ok(productService.getAllProduct(page, size).getContent());
+    }
 }

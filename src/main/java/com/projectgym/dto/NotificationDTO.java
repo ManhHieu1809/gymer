@@ -15,10 +15,12 @@ public class NotificationDTO {
     private int NotificationID;
     private String content;
     private int userID;
+    private String userName;
 
     public NotificationDTO(Notification notification) {
         this.NotificationID = notification.getNotificationID();
         this.content = notification.getContent();
         this.userID = notification.getUser().getUserID();
+        this.userName=notification.getUser().getUserName();
     }
 }

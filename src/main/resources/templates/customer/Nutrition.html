@@ -136,11 +136,10 @@
         <div class="row">
             <div class="col-lg-12 text-center">
                 <div class="breadcrumb-text">
-                    <h2>Nutrition Blog</h2>
+                    <h2>Kế hoạch dinh dưỡng</h2>
                     <div class="bt-option">
                         <a href="/customer/home">Home</a>
-                        <a href="#">Pages</a>
-                        <span>Nutrition Blog</span>
+                        <span>Kế hoạch dinh dưỡng</span>
                     </div>
                 </div>
             </div>
@@ -155,15 +154,17 @@
         <div class="row">
             <div class="col-lg-8 p-0">
                 <div id="nutrition-container">
-
+                    <!-- Nội dung dinh dưỡng sẽ được thêm động -->
                 </div>
-                <div class="blog-pagination">
-                    <a href="#">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#">Next</a>
+                <div class="blog-pagination d-flex justify-content-center mt-4" id="pagination-container">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            <!-- Các nút phân trang sẽ được thêm động -->
+                        </ul>
+                    </nav>
                 </div>
             </div>
+
             <div class="col-lg-4 col-md-8 p-0">
                 <div class="sidebar-option">
                     <div class="so-categories">
@@ -179,15 +180,7 @@
                     </div>
                     <div class="so-latest">
                         <h5 class="title">Feature posts</h5>
-                        <!-- <div class="latest-large set-bg" data-setbg="img/letest-blog/latest-1.jpg">
-                        <div class="ll-text">
-                            <h5><a href="./blog-details.html">This Japanese Way of Making Iced Coffee Is a Game...</a></h5>
-                            <ul>
-                                <li>Aug 20, 2019</li>
-                                <li>20 Comment</li>
-                            </ul>
-                        </div>
-                    </div> -->
+
                         <div class="latest-item">
                             <div class="li-pic">
                                 <img th:src="@{/img/letest-blog/latest-2.jpg}" alt="">
@@ -197,45 +190,8 @@
                                 <span class="li-time">Aug 15, 2019</span>
                             </div>
                         </div>
-                        <!-- <div class="latest-item">
-                        <div class="li-pic">
-                            <img src="img/letest-blog/latest-3.jpg" alt="">
-                        </div>
-                        <div class="li-text">
-                            <h6><a href="./blog-details.html">The $8 French Rosé I Buy in Bulk Every Summer</a></h6>
-                            <span class="li-time">Aug 15, 2019</span>
-                        </div>
+
                     </div>
-                    <div class="latest-item">
-                        <div class="li-pic">
-                            <img src="img/letest-blog/latest-4.jpg" alt="">
-                        </div>
-                        <div class="li-text">
-                            <h6><a href="./blog-details.html">Ina Garten's Skillet-Roasted Lemon Chicken</a></h6>
-                            <span class="li-time">Aug 15, 2019</span>
-                        </div>
-                    </div>
-                    <div class="latest-item">
-                        <div class="li-pic">
-                            <img src="img/letest-blog/latest-5.jpg" alt="">
-                        </div>
-                        <div class="li-text">
-                            <h6><a href="./blog-details.html">The Best Weeknight Baked Potatoes, 3 Creative Ways</a></h6>
-                            <span class="li-time">Aug 15, 2019</span>
-                        </div>
-                    </div> -->
-                    </div>
-                    <!-- <div class="so-tags">
-                    <h5 class="title">Popular tags</h5>
-                    <a href="#">Gyming</a>
-                    <a href="#">Body buidling</a>
-                    <a href="#">Yoga</a>
-                    <a href="#">Weightloss</a>
-                    <a href="#">Proffeponal</a>
-                    <a href="#">Streching</a>
-                    <a href="#">Cardio</a>
-                    <a href="#">Karate</a>
-                </div> -->
                 </div>
             </div>
         </div>
@@ -336,55 +292,113 @@
 <!-- JS nhận dữ liệu bài viết -->
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        const userID = 3; // ID người dùng cần lấy dữ liệu
-        const apiUrl = `/customer/home/users/nutrition/${userID}`; // Thay đổi URL cho phù hợp với API của bạn
+        const apiUrl = `/customer/home/users/page/nutrition`; // URL API phân trang
+        let currentPage = 0; // Trang hiện tại
+        const pageSize = 3; // Số mục trên mỗi trang
 
-        fetch(apiUrl)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                displayNutritionPlans(data);
-            })
-            .catch(error => {
-                console.error("Fetch error:", error);
-            });
-    });
+        // Hàm lấy danh sách Nutrition Plan theo trang
+        const fetchNutritionPlans = (page) => {
+            fetch(`${apiUrl}?page=${page}&size=${pageSize}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    displayNutritionPlans(data.content); // Hiển thị danh sách
+                    renderPagination(data.totalPages); // Hiển thị phân trang
+                })
+                .catch(error => {
+                    console.error("Fetch error:", error);
+                });
+        };
 
-    function displayNutritionPlans(data) {
-        const container = document.getElementById("nutrition-container");
+        // Hàm hiển thị Nutrition Plans
+        function displayNutritionPlans(plans) {
+            const container = document.getElementById("nutrition-container");
+            container.innerHTML = ""; // Xóa nội dung cũ
 
-        if (data.length === 0) {
-            container.innerHTML = "<p>Không có dữ liệu chế độ dinh dưỡng.</p>";
-            return;
-        }
+            if (plans.length === 0) {
+                container.innerHTML = "<p>Không có dữ liệu chế độ dinh dưỡng.</p>";
+                return;
+            }
 
-        data.forEach(plan => {
-            const nutritionItem = document.createElement("div");
-            nutritionItem.className = "nutrition-item";
+            plans.forEach(plan => {
+                const nutritionItem = document.createElement("div");
+                nutritionItem.className = "nutrition-item";
 
-            nutritionItem.innerHTML = `
+                nutritionItem.innerHTML = `
             <div class="blog-item">
-                     <div class="bi-pic">
-                        <img src=${plan.imageUrl} alt="">
-                     </div>
-                     <div class="bi-text">
-                         <h5><a href="./blog-details.html">${plan.nameNutritionPlan}</a></h5>
-                         <ul>
-                             <li><strong>Calo:</strong>${plan.calo} kcal</li>
-                         </ul>
-                        <p>${plan.descriptions}</p>
-                     </div>
+                <div class="bi-pic">
+                    <img src="${plan.imageUrl}" alt="">
+                </div>
+                <div class="bi-text">
+                    <h5><a href="./blog-details.html">${plan.nameNutritionPlan}</a></h5>
+                    <ul>
+                        <li><strong>Calo:</strong> ${plan.calo} kcal</li>
+                    </ul>
+                    <p>${plan.descriptions}</p>
+                </div>
             </div>
-
         `;
 
-            container.appendChild(nutritionItem);
-        });
-    }
+                container.appendChild(nutritionItem);
+            });
+        }
+
+        // Hàm hiển thị phân trang
+        function renderPagination(totalPages) {
+            const paginationContainer = document.querySelector(".blog-pagination");
+            paginationContainer.innerHTML = ""; // Xóa nội dung cũ
+
+            // Nút "Previous"
+            const prevButton = document.createElement("a");
+            prevButton.href = "#";
+            prevButton.textContent = "Previous";
+            prevButton.className = currentPage === 0 ? "disabled" : "";
+            prevButton.addEventListener("click", (e) => {
+                e.preventDefault();
+                if (currentPage > 0) {
+                    currentPage--;
+                    fetchNutritionPlans(currentPage);
+                }
+            });
+            paginationContainer.appendChild(prevButton);
+
+            // Các nút số trang
+            for (let i = 0; i < totalPages; i++) {
+                const pageButton = document.createElement("a");
+                pageButton.href = "#";
+                pageButton.textContent = (i + 1).toString();
+                pageButton.className = i === currentPage ? "active" : "";
+                pageButton.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    currentPage = i;
+                    fetchNutritionPlans(currentPage);
+                });
+                paginationContainer.appendChild(pageButton);
+            }
+
+            // Nút "Next"
+            const nextButton = document.createElement("a");
+            nextButton.href = "#";
+            nextButton.textContent = "Next";
+            nextButton.className = currentPage === totalPages - 1 ? "disabled" : "";
+            nextButton.addEventListener("click", (e) => {
+                e.preventDefault();
+                if (currentPage < totalPages - 1) {
+                    currentPage++;
+                    fetchNutritionPlans(currentPage);
+                }
+            });
+            paginationContainer.appendChild(nextButton);
+        }
+
+        // Fetch Nutrition Plans lần đầu tiên
+        fetchNutritionPlans(currentPage);
+    });
+
 
 </script>
 

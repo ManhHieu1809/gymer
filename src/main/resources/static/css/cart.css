@@ -1,0 +1,148 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #151515; /* Nền ngoài đen đậm */
+    color: #fff; /* Chữ trắng */
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    padding: 20px;
+}
+
+#cart {
+    background-color: #333; /* Nền bảng đen nhạt */
+    color: #fff; /* Chữ trắng */
+}
+
+#cart th {
+    background-color: #444; /* Nền tiêu đề bảng đậm hơn */
+    color: #f36100; /* Chữ màu cam */
+}
+
+#cart td {
+    vertical-align: middle;
+}
+
+#cart img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.btn {
+    color: #fff; /* Chữ trắng */
+    border: none;
+}
+
+.btn-warning {
+    background-color: #f36100; /* Màu cam */
+}
+
+.btn-warning:hover {
+    background-color: #e35400; /* Cam đậm hơn khi hover */
+}
+
+.btn-success {
+    background-color: #4CAF50; /* Xanh lá cây */
+}
+
+.btn-success:hover {
+    background-color: #45a049; /* Xanh lá cây đậm hơn khi hover */
+}
+
+.btn-info {
+    background-color: #29B6F6; /* Màu xanh dương */
+}
+
+.btn-info:hover {
+    background-color: #1e88e5; /* Xanh dương đậm hơn khi hover */
+}
+
+.btn-danger {
+    background-color: #f44336; /* Đỏ */
+}
+
+.btn-danger:hover {
+    background-color: #d32f2f; /* Đỏ đậm hơn khi hover */
+}
+/* Đảm bảo sản phẩm không bị mờ */
+#cart tbody tr:hover {
+    background-color: #444; /* Đổi màu nền sản phẩm khi hover */
+    color: #fff; /* Chữ vẫn trắng */
+}
+
+/* Xóa bất kỳ hiệu ứng mờ nào không mong muốn */
+#cart tbody tr {
+    opacity: 1; /* Đảm bảo độ rõ ràng 100% */
+    transition: background-color 0.3s ease; /* Thêm hiệu ứng chuyển đổi mượt */
+}
+
+/* Viền gạch cạm cho phần tổng kết giá tiền */
+#cart tfoot tr {
+    border-top: 2px dashed #f36100; /* Viền gạch cạm trên tổng kết giá tiền */
+}
+
+#cart tfoot td {
+    border-bottom: 2px dashed #f36100; /* Viền gạch cạm dưới tổng kết giá tiền */
+}
+
+/* Đảm bảo các ô không có viền khác */
+#cart th, #cart td {
+    border: none; /* Xóa viền mặc định giữa các ô */
+}
+
+/* Giữ nền và thiết kế cho bảng */
+#cart {
+    background-color: #151515; /* Nền ngoài đen */
+}
+
+#cart th {
+    background-color: #333; /* Nền header đen nhạt */
+    color: #f36100; /* Chữ header màu cam */
+    text-align: center;
+}
+
+/* Đường viền ngang giữa các sản phẩm (hàng) màu cam */
+#cart tbody tr {
+    border-bottom: 2px solid #f36100; /* Viền màu cam giữa các sản phẩm */
+}
+
+/* Viền cam trên sản phẩm đầu tiên */
+#cart tbody tr:first-child {
+    border-top: 2px solid #f36100; /* Viền cam ở trên sản phẩm đầu tiên */
+}
+
+/* Viền cam dưới sản phẩm cuối cùng */
+#cart tbody tr:last-child {
+    border-bottom: 2px solid #f36100; /* Viền cam dưới sản phẩm cuối cùng */
+}
+
+/* Hover row để dễ nhìn */
+#cart tbody tr:hover {
+    background-color: #444; /* Nền xám nhạt khi hover */
+    color: #fff; /* Chữ trắng khi hover */
+}
+
+/* Đảm bảo checkbox và nội dung thẳng hàng */
+table input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin: 0 auto;
+    display: block;
+    vertical-align: middle;
+}
+
+/* Canh giữa nội dung trong cột checkbox */
+table th:first-child,
+table td:first-child {
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Căn chỉnh nội dung sản phẩm */
+table td {
+    vertical-align: middle;
+}
+
