@@ -40,9 +40,9 @@ public class ChatController {
 
         // Lấy username từ phiên đăng nhập
         String senderUsername = principal.getName();
-
+        System.out.println("Message received: " + messageDTO.getMessage());
         // Gọi service để lưu tin nhắn và nhận lại MessageDTO
-        MessageDTO savedMessageDTO = messageService.saveMessage(senderUsername, "admin", messageDTO.getMessage());
+        MessageDTO savedMessageDTO = messageService.saveMessage(senderUsername, "admin", messageDTO.getMessage(),messageDTO.getType());
 
         return savedMessageDTO; // Trả về DTO đã lưu để gửi lại qua WebSocket
     }

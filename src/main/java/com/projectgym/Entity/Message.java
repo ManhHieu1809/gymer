@@ -16,13 +16,17 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT")
     private String message;
 
     @Column(name = "sender_username")
     private String senderUsername;
+
     @Column(name = "receiver_username")
     private String receiverUsername;
+
+    @Column(name = "type")
+    private String type;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sender_id", referencedColumnName = "userID", nullable = false)

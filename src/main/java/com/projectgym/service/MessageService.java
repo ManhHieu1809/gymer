@@ -32,7 +32,7 @@ public class MessageService {
     @Autowired
     private ConversationRepository conversationRepository;
 
-    /**
+     /**
      * Lưu tin nhắn vào cơ sở dữ liệu.
      * @param senderUsername username của người gửi
      * @param receiverUsername username của người nhận
@@ -40,7 +40,7 @@ public class MessageService {
      * @return Tin nhắn đã được lưu
      */
     @Transactional
-    public MessageDTO saveMessage(String senderUsername, String receiverUsername, String messageContent) {
+    public MessageDTO saveMessage(String senderUsername, String receiverUsername, String messageContent, String type) {
         Optional<User> sender = userRepository.findByUserName(senderUsername);
         Optional<User> receiver = userRepository.findByUserName(receiverUsername);
 
@@ -65,12 +65,14 @@ public class MessageService {
         message.setSender(sender.get());
         message.setReceiver(receiver.get());
         message.setMessage(messageContent);
+        message.setType(type);
         message.setConversation(conversation);
         log.info("receiver: " + message.getReceiver());
         log.info("sender: " + message.getSender().getUserName());
+        log.info("type: " + message.getType());
         Message savedMessage = messageRepository.save(message);
-        log.info("Saved Message: senderUsername={}, receiverUsername={}",
-                savedMessage.getSender().getUserName(), savedMessage.getReceiver().getUserName());
+        log.info("Saved Message: senderUsername={}, receiverUsername={}, type={}",
+                savedMessage.getSender().getUserName(), savedMessage.getReceiver().getUserName(),savedMessage.getType());
 
 
 
@@ -79,6 +81,7 @@ public class MessageService {
                 savedMessage.getSender().getUserName(),
                 savedMessage.getReceiver().getUserName(),
                 savedMessage.getMessage(),
+                savedMessage.getType(),
                 savedMessage.getConversation().getConversationId()
         );
     }
@@ -100,6 +103,7 @@ public class MessageService {
                         msg.getSender().getUserName(), // Username của người gửi
                         msg.getReceiver().getUserName(), // Username của người nhận
                         msg.getMessage(), // Nội dung tin nhắn
+                        msg.getType(), // Loại tin nhắn
                         msg.getConversation().getConversationId()
                 ))
                 .collect(Collectors.toList());

@@ -15,6 +15,8 @@
     <link rel="stylesheet" th:href="@{/css/_all-skins.min.css}">
     <link rel="stylesheet" th:href="@{/css/jquery-ui.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
     <script th:src="@{/js/angular.min.js}"></script>
     <script th:src="@{/js/app.js}"></script>
     <script th:src="@{/js/admin-api.js}"></script>
@@ -105,6 +107,34 @@
 
         .conversation-item.active {
             background-color: #eef; /* Màu nền khi đang được chọn */
+        }
+    </style>
+
+    <style>
+        .chat-box {
+            border-radius: 10px;
+        }
+
+        #messageInput::placeholder {
+            font-style: italic;
+            color: #adb5bd;
+        }
+
+        .btn:hover {
+            box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #emojiPicker {
+            position: absolute;
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 5px;
+            border-radius: 5px;
+            z-index: 1000;
+        }
+
+        #emojiPicker.d-none {
+            display: none;
         }
     </style>
 
@@ -277,19 +307,47 @@
 
                     <!-- Chat Section -->
                     <div class="col-sm-7">
-                        <div class="panel panel-default">
-                            <div class="panel-heading"><strong>Direct Chat</strong></div>
-                            <div id="messages" class="chat-box">
+                        <div class="card shadow-sm">
+                            <div class="card-header bg-primary text-white">
+                                <h5 class="mb-0"><i class="fas fa-comments"></i> Direct Chat</h5>
+                            </div>
+                            <div id="messages" class="chat-box p-3" style="height: 400px; overflow-y: auto; background-color: #f8f9fa; border-bottom: 1px solid #ddd;">
                                 <!-- Messages will load here -->
                             </div>
-                            <div class="panel-footer">
-                                <div class="input-group">
-                                    <input type="text" id="messageInput" class="form-control" placeholder="Type Message ..." onkeypress="checkEnter(event)">
-                                    <span class="input-group-btn">
-                            <button class="btn btn-primary" onclick="sendMessage()">Send</button>
-                        </span>
+                            <div class="panel-footer" style="background-color: #f1f3f5; border-top: 1px solid #ddd; padding: 10px;">
+                                <div class="input-group align-items-center" style="display: flex; gap: 10px;">
+                                    <!-- Input tin nhắn -->
+                                    <input type="text" id="messageInput" class="form-control" placeholder="Type your message..." onkeypress="checkEnter(event)"
+                                           style="border-radius: 20px; flex-grow: 1; padding: 10px;">
+
+                                    <!-- Nút chọn file -->
+                                    <label for="imageInput" class="btn btn-outline-secondary" style="border-radius: 50%; padding: 8px 12px; display: flex; align-items: center; justify-content: center;">
+                                        <i class="fas fa-paperclip"></i>
+                                    </label>
+                                    <input type="file" id="imageInput" accept="image/*" style="display: none;">
+
+                                    <!-- Bộ chọn Emoji -->
+                                    <div id="emojiPickerWrapper" style="position: relative;">
+                                        <button class="btn btn-outline-secondary" style="border-radius: 50%; padding: 8px 12px;"
+                                                title="Open emoji picker" onclick="toggleEmojiPicker()">
+                                            <i class="fas fa-smile"></i>
+                                        </button>
+                                        <div id="emojiPicker" class="d-none" style="position: absolute; bottom: 100%; right: 0; background: white; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); padding: 10px; border-radius: 10px;">
+                                            <button type="button" class="btn btn-light btn-sm" onclick="selectEmoji('😊')">😊</button>
+                                            <button type="button" class="btn btn-light btn-sm" onclick="selectEmoji('😂')">😂</button>
+                                            <button type="button" class="btn btn-light btn-sm" onclick="selectEmoji('❤️')">❤️</button>
+                                            <button type="button" class="btn btn-light btn-sm" onclick="selectEmoji('👍')">👍</button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Nút gửi -->
+                                    <button class="btn btn-primary" onclick="sendMessage()"
+                                            style="border-radius: 20px; padding: 10px 20px; display: flex; align-items: center; justify-content: center;">
+                                        Send
+                                    </button>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -347,10 +405,10 @@
             const conversations = await response.json();
             const conversationList = document.querySelector('.conversation-list');
 
-            // Clear existing items
+
             conversationList.innerHTML = '';
 
-            // Add new conversation items
+
             conversations.forEach(convo => {
                 const convoItem = document.createElement('div');
                 convoItem.className = 'conversation-item';
@@ -376,7 +434,7 @@
         }
     }
 
-    let currentSubscription = null; // Track the current subscription
+    let currentSubscription = null;
 
     async function loadConversation(conversationKey, element) {
         const messagesBox = document.getElementById('messages');
@@ -417,22 +475,69 @@
 
 
     function sendMessage() {
-        const messageContent = document.getElementById('messageInput').value.trim();
+        const messageInputElem = document.getElementById('messageInput');
+        const imageInputElem = document.getElementById('imageInput');
 
-        if (messageContent && conversationId) {
-            const message = {
+        if (!messageInputElem || !imageInputElem) {
+            console.error("Required elements are missing in the DOM.");
+            return;
+        }
+
+        const messageInput = messageInputElem.value;
+        const imageInput = imageInputElem.files[0];
+
+        if (conversationId && adminUsername) {
+            let message = {
                 senderUsername: adminUsername,
                 receiverUsername: conversationId.split('-')[1], // Extract customer username from conversationId
                 conversationId: conversationId,
-                message: messageContent
+                message: "",
+                type: "text"
             };
 
-            // Gửi tin nhắn qua STOMP client
-            stompClient.send("/app/chat/" + conversationId, {}, JSON.stringify(message));
-            // Xóa nội dung trong input
-            document.getElementById('messageInput').value = '';
+            if (imageInput) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const img = new Image();
+                    img.src = e.target.result;
+                    img.onload = function () {
+                        // Tạo một canvas để thay đổi kích thước ảnh
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+
+                        const maxWidth = 800; // Kích thước ảnh tối đa (ví dụ: 800px chiều rộng)
+                        const maxHeight = 600; // Kích thước tối đa theo chiều cao
+                        const scaleFactor = Math.min(maxWidth / img.width, maxHeight / img.height);
+
+                        canvas.width = img.width * scaleFactor;
+                        canvas.height = img.height * scaleFactor;
+
+                        // Vẽ ảnh vào canvas với kích thước mới
+                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+                        // Chuyển ảnh từ canvas thành chuỗi base64 với chất lượng giảm (ví dụ: 0.7 chất lượng)
+                        const resizedImage = canvas.toDataURL('image/jpeg', 0.7);
+                        message.message = resizedImage;
+                        message.type = "image";
+                        stompClient.send("/app/chat/" + conversationId, {}, JSON.stringify(message));
+                    };
+                };
+                reader.readAsDataURL(imageInput);
+            } else if (messageInput.trim()) {
+                message.message = messageInput;
+                message.type = "text";
+                stompClient.send("/app/chat/" + conversationId, {}, JSON.stringify(message));
+            }
+
+            // Reset inputs sau khi gửi
+            messageInputElem.value = '';
+            imageInputElem.value = '';
+        } else {
+            console.error("WebSocket connection is not established or missing data.");
         }
     }
+
+
     function showMessage(message) {
         const messagesBox = document.getElementById('messages');
         const messageElement = document.createElement('div');
@@ -441,16 +546,77 @@
         const alignClass = message.senderUsername === adminUsername ? 'message-right' : 'message-left';
 
         messageElement.className = `message ${alignClass}`;
-        messageElement.innerHTML = `
-        <div class="message-content">
-            <strong>${message.senderUsername}</strong><br>
-            ${message.message}<br>
-            <small>${new Date().toLocaleTimeString()}</small>
-        </div>
-    `;
-        messagesBox.appendChild(messageElement);
-        messagesBox.scrollTop = messagesBox.scrollHeight;
+
+        if (message.type === "text") {
+            messageElement.innerHTML = `
+            <div class="message-content">
+                <strong>${message.senderUsername}</strong><br>
+                ${message.message}<br>
+                <small>${new Date().toLocaleTimeString()}</small>
+            </div>
+        `;
+            messagesBox.appendChild(messageElement);
+            messagesBox.scrollTop = messagesBox.scrollHeight;
+
+        } else if (message.type === "image") {
+            const img = new Image();
+            img.src = message.message; // Dữ liệu ảnh base64
+
+            img.onload = function () {
+                // Tạo một canvas để thay đổi kích thước ảnh
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+
+                const maxWidth = 800; // Kích thước ảnh tối đa (ví dụ: 800px chiều rộng)
+                const maxHeight = 600; // Kích thước tối đa theo chiều cao
+                const scaleFactor = Math.min(maxWidth / img.width, maxHeight / img.height);
+
+                canvas.width = img.width * scaleFactor;
+                canvas.height = img.height * scaleFactor;
+
+                // Vẽ ảnh vào canvas với kích thước mới
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+                // Chuyển ảnh từ canvas thành chuỗi base64 với chất lượng giảm (ví dụ: 0.7 chất lượng)
+                const resizedImage = canvas.toDataURL('image/jpeg', 0.7);
+
+                // Hiển thị ảnh sau khi thay đổi kích thước
+                messageElement.innerHTML = `
+                <div class="message-content">
+                    <strong>${message.senderUsername}</strong><br>
+                    <img src="${resizedImage}" alt="Image" style="max-width: 200px;"><br>
+                    <small>${new Date().toLocaleTimeString()}</small>
+                </div>
+            `;
+                messagesBox.appendChild(messageElement);
+                messagesBox.scrollTop = messagesBox.scrollHeight; // Cuộn đến cuối khi ảnh đã được thêm
+            };
+
+            // Nếu ảnh không thể tải được
+            img.onerror = function() {
+                messageElement.innerHTML = `
+                <div class="message-content">
+                    <strong>${message.senderUsername}</strong><br>
+                    <span style="color:red;">Không thể tải ảnh.</span><br>
+                    <small>${new Date().toLocaleTimeString()}</small>
+                </div>
+            `;
+                messagesBox.appendChild(messageElement);
+                messagesBox.scrollTop = messagesBox.scrollHeight; // Cuộn đến cuối khi có lỗi
+            };
+        } else if (message.type === "emoji") {
+            messageElement.innerHTML = `
+            <div class="message-content">
+                <strong>${message.senderUsername}</strong><br>
+                <span style="font-size: 24px;">${message.message}</span><br>
+                <small>${new Date().toLocaleTimeString()}</small>
+            </div>
+        `;
+            messagesBox.appendChild(messageElement);
+            messagesBox.scrollTop = messagesBox.scrollHeight;
+        }
     }
+
 
 
     function checkEnter(event) {
@@ -458,6 +624,20 @@
             sendMessage();
         }
     }
+    function toggleEmojiPicker() {
+        const emojiPicker = document.getElementById('emojiPicker');
+        if (emojiPicker.classList.contains('d-none')) {
+            emojiPicker.classList.remove('d-none'); // Hiển thị bộ chọn emoji
+        } else {
+            emojiPicker.classList.add('d-none'); // Ẩn bộ chọn emoji
+        }
+    }
+
+    function selectEmoji(emoji) {
+        const messageInput = document.getElementById('messageInput');
+        messageInput.value += emoji; // Thêm emoji vào nội dung tin nhắn
+    }
+
 </script>
 
 

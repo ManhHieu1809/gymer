@@ -41,7 +41,8 @@ public class MessageController {
         MessageDTO savedMessageDTO = messageService.saveMessage(
                 messageDTO.getSenderUsername(),
                 messageDTO.getReceiverUsername(),
-                messageDTO.getMessage()
+                messageDTO.getMessage(),
+                messageDTO.getType()
         );
 
         // Gửi tin nhắn tới người nhận qua WebSocket

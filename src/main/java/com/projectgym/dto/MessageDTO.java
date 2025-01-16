@@ -16,6 +16,7 @@ public class MessageDTO {
     private String senderUsername;
     private String receiverUsername;
     private String message;
+    private String type;
     private String conversationId;
     // Constructor, Getters and Setters
 }
