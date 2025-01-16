@@ -20,8 +20,7 @@ import java.util.List;
 public class ChatController {
 
 
-    @Autowired
-    private ConversationService conversationService;
+
 
     @Autowired
     private MessageService messageService;
